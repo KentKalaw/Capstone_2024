@@ -33,7 +33,7 @@ while($row1 = $result1->fetch_assoc()) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/profile.css" />
+  <link rel="stylesheet" href="../css/gts.css" />
 </head>
 
 <body>
@@ -46,7 +46,7 @@ while($row1 = $result1->fetch_assoc()) {
       <div class="d-flex align-items-center justify-content-between w-100">
         <div class="d-flex align-items-center">
           <i class="fa fa-bars primary-text fs-4 me-3" id="menu-toggle" aria-hidden="true"></i>
-          <h2 class="fs-4 m-0" style="color:#752738">Dashboard</h2>
+          <h2 class="fs-4 m-0" style="color:#752738">Graduate Tracer Survey</h2>
         </div>
         <li class="d-flex align-items-center">
           <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -189,7 +189,7 @@ while($row1 = $result1->fetch_assoc()) {
 				?>
   
   <div class="container mt-5 mb-5">
-  <ul class="nav nav-tabs" id="myForm" role="tablist">
+  <ul class="nav nav-pills nav-tabs" id="myForm" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="general-info-tab" data-bs-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="true">A. GENERAL INFORMATION</a>
   </li>

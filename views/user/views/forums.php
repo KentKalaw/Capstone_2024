@@ -19,7 +19,6 @@ while ($row1 = $result1->fetch_assoc()) {
         $file = '../images/ub-logo.png';  // Default image if no profile picture
     }
 }
-
 // Pagination Logic
 $limit = 5; // Number of threads to display per page
 $page = isset($_GET['page']) ? $_GET['page'] : 1; // Current page
@@ -63,7 +62,7 @@ $result = mysqli_query($conn, "SELECT t.id, t.title, t.created_at, a.fname, a.ln
       <div class="d-flex align-items-center justify-content-between w-100">
         <div class="d-flex align-items-center">
           <i class="fa fa-bars primary-text fs-4 me-3" id="menu-toggle" aria-hidden="true"></i>
-          <h2 class="fs-4 m-0" style="color:#752738">Dashboard</h2>
+          <h2 class="fs-4 m-0" style="color:#752738">Forums</h2>
         </div>
         <li class="d-flex align-items-center">
           <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

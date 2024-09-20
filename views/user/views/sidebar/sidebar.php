@@ -44,8 +44,13 @@
     <i class="fa fa-file me-3"  aria-hidden="true"></i>GTS
   </a> </li>
 
-  <li><a href="#" class="list-group-item list-group-item-action">
-    <i class="fa fa-comments me-3"  aria-hidden="true"></i>Messages [0]
+  <?php
+                        $username = $_SESSION['username'];
+                        $r = mysqli_query($conn,"SELECT * FROM message WHERE user2 = '$username' AND status = ''");
+                        $c = mysqli_num_rows($r);
+                        ?>
+  <li><a href="message.php" class="list-group-item list-group-item-action">
+    <i class="fa fa-comments me-3"  aria-hidden="true"></i>Messages [<?php echo $c ?>]
   </a></li>
 
   <li><a href="../../logout.php" class="list-group-item list-group-item-action text-danger fw-bold" >

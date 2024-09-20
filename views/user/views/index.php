@@ -35,7 +35,7 @@ $c = mysqli_num_rows($r);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/users.css" />
+  <link rel="stylesheet" href="../css/user.css" />
 </head>
 
 <body>
@@ -127,7 +127,7 @@ $c = mysqli_num_rows($r);
     <h3 class="text-center mb-4" style="color:#752738;">Announcement</h3>
 
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
+        <div class="col-lg-11 col-md-10">
             <?php
             // Fetch pinned posts first
             $result = mysqli_query($conn, "SELECT * FROM post WHERE pin = '1' ORDER BY ID DESC");

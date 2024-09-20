@@ -64,7 +64,7 @@ nav#top-bar .d-flex span {
 }
 
 .card {
-    border-radius: 5px;
+    border-radius: 8px;
 }
 .card .btn {
     font-size: 0.85rem;
@@ -83,7 +83,7 @@ nav#top-bar .d-flex span {
 }
 
 .card-body {
-    max-height: 250px; /* Limit the overall height of the card's body */
+    max-height: 200px; /* Limit the overall height of the card's body */
     overflow-y: auto; /* Allow scrolling if content is too long */
 }
 
