@@ -1,0 +1,83 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EBDFD7;
+}
+
+nav#top-bar {
+    border-bottom: 1px solid #DDD3CD !important;
+    margin-bottom: -2px !important; /* Negative margin to pull the top bar up */
+    padding-bottom: 12px !important;
+}
+
+nav#top-bar .d-flex img {
+    width: 40px;
+    height: 40px;
+}
+
+nav#top-bar .d-flex span {
+    font-size: 16px;
+    color: #000000;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.nav-pills .nav-link {
+    background-color: white; /* White background */
+    color: #6B1500; /* Default text color */
+    border: 1px solid #993d37; /* Border color */
+    border-radius: 0.25rem;
+    margin: 0.2rem;
+    padding: 0.5rem 1rem; /* Add padding for better appearance */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #e9ecef; /* Light gray background on hover */
+    color: #270b06; /* Darker text color on hover */
+}
+
+.nav-pills .nav-link.active {
+    background-color: #962723; /* Active link color */
+    color: white; /* Active link text color */
+    border-color: #993d37; /* Keep the border color consistent */
+    outline:none;
+}
+
+.pagination-maroon .page-link {
+    background-color: white; /* White background */
+    color: #6B1500; /* Default text color */
+    border: 1px solid #b3b3b3 !important; /* Border color */
+    border-radius: 0.25rem;
+
+}
+
+.pagination-maroon .page-item.active .page-link {
+    background-color: #962723; /* For the active page */
+    color: white;
+}
+
+.pagination-maroon .page-item.disabled .page-link {
+    background-color: lightgray; /* For disabled pages */
+    color: white;
+}
+
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 767px) {
+    .alumni-text {
+        display: none;
+    }
+   
+    
+}
+
+/* Adjustments for larger screens */
+@media (min-width: 768px) {
+
+}

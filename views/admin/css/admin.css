@@ -1,0 +1,126 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EBDFD7;
+}
+
+nav#top-bar {
+    border-bottom: 1px solid #DDD3CD !important;
+    margin-bottom: -2px !important; /* Negative margin to pull the top bar up */
+    padding-bottom: 12px !important;
+}
+
+nav#top-bar .d-flex img {
+    width: 40px;
+    height: 40px;
+}
+
+nav#top-bar .d-flex span {
+    font-size: 16px;
+    color: #000000;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+#example {
+    background-color: #fff; /* Table background is white */
+    border-radius: 10px;
+  }
+
+  #example tbody tr {
+    background-color: #fff;
+  }
+
+  div.dataTables_wrapper div.dataTables_length {
+    margin-right: 20px; /* Space between Show Entries dropdown and Search box */
+  }
+  
+  div.dataTables_wrapper div.dataTables_filter {
+    margin-bottom: 20px; /* Space below Search box */
+  }
+  
+  div.dataTables_wrapper div.dataTables_filter input {
+    width: 200px; /* Set a fixed width for the Search box */
+    outline: none;
+  }
+
+  .table {
+    width: 100% !important;
+}
+
+.form-select {
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+  }
+
+
+
+@media (max-width: 767px) {
+    .admin-text {
+        display: none;
+    }
+
+    .form-select {
+        max-width: 100%; /* Ensure it doesn't exceed the container's width */
+      }
+
+    .button-group {
+        margin-top: 1rem; /* Less margin for smaller screens */
+        flex-wrap: wrap;
+      }
+
+    .button-group .btn {
+        font-size: 0.8rem; /* Smaller font size */
+        padding: 0.25rem 0.5rem; /* Smaller padding */
+        margin-bottom: 0.5rem;
+      }
+
+      div.dataTables_wrapper div.dataTables_length, 
+      div.dataTables_wrapper div.dataTables_filter {
+        display: block; /* Make each element full-width */
+        width: 100%;    /* Full-width */
+        margin-bottom: 10px; /* Margin between dropdown and search on smaller screens */
+      }
+    
+      div.dataTables_wrapper div.dataTables_filter input {
+        width: 100%; /* Make search box full-width on smaller screens */
+        outline: none;
+      }
+}
+
+  /* Adjust margin for larger screens */
+  @media (min-width: 768px) {
+    .button-group {
+      margin-top: 2rem; /* More margin for larger screens */
+      flex-wrap: wrap;
+    }
+
+    .form-select {
+        max-width: 100%; /* Ensure it doesn't exceed the container's width */
+      }
+
+    .button-group .btn {
+        font-size: 1rem; /* Regular font size */
+        padding: 0.5rem 1rem; /* Regular padding */
+    }
+  }
+
+  @media (min-width: 769px) {
+    .button-group {
+      margin-top: 2rem; /* More margin for larger screens */
+      flex-wrap: wrap;
+    }
+
+    .form-select {
+        max-width: 100%; /* Ensure it doesn't exceed the container's width */
+      }
+
+    .button-group .btn {
+        font-size: 1rem; /* Regular font size */
+        padding: 0.5rem 1rem; /* Regular padding */
+    }
+  }
