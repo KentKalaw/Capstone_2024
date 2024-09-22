@@ -28,7 +28,7 @@
     <i class="fa fa-users me-3"  aria-hidden="true"></i>Forums
   </a> </li>
 
-  <li> <a href="#" class="list-group-item list-group-item-action">
+  <li> <a href="alumni_card.php" class="list-group-item list-group-item-action">
     <i class="fa fa-id-card me-3"  aria-hidden="true"></i>Alumni Card
   </a> </li>
   

@@ -17,8 +17,18 @@ $limit = 5; // Number of threads to display per page
 $page = isset($_GET['page']) ? $_GET['page'] : 1; // Current page
 $offset = ($page - 1) * $limit; // Offset for SQL query
 
+$category_id = isset($_GET['category']) ? intval($_GET['category']) : 0;
+
+$search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
+
+$total_threads_query = "SELECT COUNT(*) AS total FROM threads";
+if ($category_id > 0) {
+    $total_threads_query .= " WHERE category_id = $category_id"; // Filter by category
+}
+
+
 // Fetch total number of threads
-$total_threads_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM threads");
+$total_threads_result = mysqli_query($conn, $total_threads_query);
 $total_threads_row = mysqli_fetch_assoc($total_threads_result);
 $total_threads = $total_threads_row['total'];
 
@@ -26,12 +36,29 @@ $total_threads = $total_threads_row['total'];
 $total_pages = ceil($total_threads / $limit);
 
 // Fetch threads for the current page with limit and offset
-$result = mysqli_query($conn, "SELECT t.id, t.title, t.created_at, a.fname, a.lname, a.profile 
-                               FROM threads t
-                               JOIN alumni a ON t.author_id = a.id
-                               ORDER BY t.created_at DESC
-                               LIMIT $limit OFFSET $offset");
+$query = "SELECT t.id, t.title, t.created_at, a.fname, a.lname, a.profile, c.name AS category_name 
+          FROM threads t
+          JOIN alumni a ON t.author_id = a.id
+          JOIN threads_categories c ON t.category_id = c.id";
+
+$conditions = [];
+
+if ($category_id > 0) {
+    $conditions[] = "t.category_id = $category_id";// Filter by category
+}
+
+if (!empty($search)) {
+  $conditions[] = "(t.title LIKE '%$search%' OR a.fname LIKE '%$search%' OR a.lname LIKE '%$search%')";
+}
+
+if (count($conditions) > 0) {
+  $query .= " WHERE " . implode(' AND ', $conditions);
+}
+
+$query .= " ORDER BY t.created_at DESC LIMIT $limit OFFSET $offset";
+$result = mysqli_query($conn, $query);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,21 +104,11 @@ $result = mysqli_query($conn, "SELECT t.id, t.title, t.created_at, a.fname, a.ln
     </div>
 </div>
 
-      <?php
-        $category_id = isset($_GET['category']) ? intval($_GET['category']) : 0;
-
-        $query = "SELECT t.id, t.title, t.created_at, a.fname, a.lname, a.profile, c.name AS category_name 
-                FROM threads t
-                JOIN alumni a ON t.author_id = a.id
-                JOIN threads_categories c ON t.category_id = c.id";
-
-        if ($category_id > 0) {
-            $query .= " WHERE t.category_id = $category_id"; // Filter by category
-        }
-
-        $query .= " ORDER BY t.created_at DESC LIMIT $limit OFFSET $offset";
-        $result = mysqli_query($conn, $query);
-      ?>
+<!-- Search function -->
+<form class="d-flex mb-4" action="forums.php" method="GET">
+    <input class="form-control me-2" type="search" name="search" placeholder="Search threads..." aria-label="Search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+    <button class="btn btn-outline-secondary" type="submit">Search</button>
+</form>
 
     <!-- Display categories as filters -->
 
@@ -116,68 +133,65 @@ $result = mysqli_query($conn, "SELECT t.id, t.title, t.created_at, a.fname, a.ln
 </div>
 
 <div class="mb-4">
-    <ul class="nav nav-pills flex-wrap">
-        <li class="nav-item">
+        <ul class="nav nav-pills flex-wrap">
+          <li class="nav-item">
             <a class="nav-link <?php if($category_id == 0) echo 'active'; ?>" href="forums.php">All</a>
-        </li>
-        <?php 
-        $categories_result = mysqli_query($conn, "SELECT * FROM threads_categories");
-        while ($category = mysqli_fetch_assoc($categories_result)): 
-        ?>
+          </li>
+          <?php 
+          $categories_result = mysqli_query($conn, "SELECT * FROM threads_categories");
+          while ($category = mysqli_fetch_assoc($categories_result)): 
+          ?>
             <li class="nav-item">
-                <a class="nav-link <?php if($category_id == $category['id']) echo 'active'; ?>" 
-                   href="forums.php?category=<?php echo $category['id']; ?>">
-                   <?php echo $category['name']; ?>
-                </a>
+              <a class="nav-link <?php if($category_id == $category['id']) echo 'active'; ?>" 
+                 href="forums.php?category=<?php echo $category['id']; ?>">
+                 <?php echo $category['name']; ?>
+              </a>
             </li>
-        <?php endwhile; ?>
-    </ul>
-</div>
+          <?php endwhile; ?>
+        </ul>
+      </div>
 
 <!-- List threads -->
 <div class="list-group">
-    <?php if (mysqli_num_rows($result) > 0): ?>
-        <!-- Loop through threads if there are any -->
-        <?php while ($thread = mysqli_fetch_assoc($result)): ?>
-            <a href="thread_details.php?id=<?php echo $thread['id']; ?>" class="list-group-item list-group-item-action" style="background-color:white;">
+        <?php if (mysqli_num_rows($result) > 0): ?>
+            <?php while ($thread = mysqli_fetch_assoc($result)): ?>
+              <a href="thread_details.php?id=<?php echo $thread['id']; ?>" class="list-group-item list-group-item-action" style="background-color:white;">
                 <div class="d-flex align-items-center text-secondary">
-                    <img src="<?php echo $thread['profile'] ? : '../images/ub-logo.png'; ?>" alt="Profile Picture" class="rounded-circle me-3" style="width: 50px; height: 50px;">
-                    <div class="flex-grow-1">
-                        <h5 class="mb-0"><?php echo $thread['title']; ?></h5>
-                        <p class="mb-0 text-muted">Posted by <?php echo $thread['fname'] . ' ' . $thread['lname']; ?> in <?php echo $thread['category_name']; ?></p>
-                    </div>
+                  <img src="<?php echo $thread['profile'] ? : '../images/ub-logo.png'; ?>" alt="Profile Picture" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                  <div class="flex-grow-1">
+                    <h5 class="mb-0"><?php echo $thread['title']; ?></h5>
+                    <p class="mb-0 text-muted">Posted by <?php echo $thread['fname'] . ' ' . $thread['lname']; ?> in <?php echo $thread['category_name']; ?></p>
+                  </div>
                 </div>
                 <small class="text-muted ms-auto"><?php echo date('F d, Y', strtotime($thread['created_at'])); ?></small>
-            </a>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <!-- No threads message -->
-        <p class="text-center text-muted">No threads on this category yet.</p>
-    <?php endif; ?>
-</div>
+              </a>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p class="text-center text-muted">There are no threads in this category yet.</p>
+        <?php endif; ?>
+      </div>
 
 
    <!-- Pagination Links -->
-   <nav aria-label="Page navigation example" class="mt-4">
-    <ul class="pagination justify-content-center pagination-maroon">
-        <!-- Previous Page Link -->
-        <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-            <a class="page-link" href="<?php if($page > 1){ echo "?page=" . ($page - 1); } else { echo '#'; } ?>">Previous</a>
-        </li>
-        
-        <!-- Page Number Links -->
-        <?php for($i = 1; $i <= $total_pages; $i++): ?>
-            <li class="page-item <?php if($i == $page){ echo 'active'; } ?>">
-                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+   <?php if ($total_threads > 0): ?>
+        <nav aria-label="Page navigation example" class="mt-4">
+          <ul class="pagination justify-content-center pagination-maroon">
+            <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
+              <a class="page-link" href="<?php if($page > 1){ echo "?page=" . ($page - 1) . ($category_id > 0 ? "&category=$category_id" : ""); } else { echo '#'; } ?>">Previous</a>
             </li>
-        <?php endfor; ?>
+            
+            <?php for($i = 1; $i <= $total_pages; $i++): ?>
+              <li class="page-item <?php if($i == $page){ echo 'active'; } ?>">
+                <a class="page-link" href="?page=<?php echo $i; echo $category_id > 0 ? "&category=$category_id" : ""; ?>"><?php echo $i; ?></a>
+              </li>
+            <?php endfor; ?>
 
-        <!-- Next Page Link -->
-        <li class="page-item <?php if($page >= $total_pages){ echo 'disabled'; } ?>">
-            <a class="page-link" href="<?php if($page < $total_pages){ echo "?page=" . ($page + 1); } else { echo '#'; } ?>">Next</a>
-        </li>
-    </ul>
-</nav>
+            <li class="page-item <?php if($page >= $total_pages){ echo 'disabled'; } ?>">
+              <a class="page-link" href="<?php if($page < $total_pages){ echo "?page=" . ($page + 1) . ($category_id > 0 ? "&category=$category_id" : ""); } else { echo '#'; } ?>">Next</a>
+            </li>
+          </ul>
+        </nav>
+      <?php endif; ?>
   </div> <!-- End of page-content-wrapper -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

@@ -17,7 +17,7 @@ while($row = $result->fetch_assoc()) {
 
     if ($user1 == $username1) {
         // Right-aligned messages (for current user)
-        echo '<div class="row mb-3 justify-content-end">';
+        echo '<div class="row mb-5 justify-content-end">';
         echo '<div class="col-auto bg-primary text-dark p-3 rounded-3 shadow" style="max-width: 75%; word-wrap: break-word;">';
         echo '<p class="mb-1 fw-bold text-dark">' . nl2br(htmlspecialchars($message)) . '</p>';
         if ($file != '') {

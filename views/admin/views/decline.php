@@ -106,7 +106,7 @@ Should you have any questions or need further assistance, please feel free to co
 <br>
 Thank you for your understanding and cooperation.<br>
 Best regards,<br>
-UB Link
+Alumnite
 </div>
  
 </body>

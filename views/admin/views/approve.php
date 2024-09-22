@@ -99,7 +99,7 @@ $email = $_GET['email'];
 Your registration for Alumnite has been approved! Log in now with your credentials.<br>
 Thank you once again for being a part of the University of Batangas alumni network. We're excited to have you on board and look forward to seeing your active participation on UB Link!<br>
 Best regards,<br><br>
-UB Link
+Alumnite
 </div>
  
 </body>
