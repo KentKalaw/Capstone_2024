@@ -80,7 +80,7 @@ while($row1 = $result1->fetch_assoc()) {
     <!-- Page Title and Profile Section -->
     <div class="row align-items-center mb-4 bg-transparent p-3 rounded">
         <div class="col-md-1 text-center">
-            <img src="<?php echo $file1 ?>" class="rounded-circle img-fluid" style="width: 110px; height: 100px;" alt="Profile Picture">
+            <img src="<?php echo $file1?>" class="rounded-circle img-fluid" style="width: 110px; height: 100px;" alt="Profile Picture">
         </div>
         <div class="col-md-10">
             <h3 class="text-dark"><?php echo $name1; ?></h3>
