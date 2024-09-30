@@ -16,5 +16,5 @@ while($row1 = $result1->fetch_assoc()) {
 }
 ?>
 <h2>Attachment</h2>
-<hr style="width:500px">
-<img src="<?php echo $file ?>" style="width:100%">
+<hr style="width:300px">
+<img src="<?php echo $file ?>" style="width:50%;margin-left:470px;">

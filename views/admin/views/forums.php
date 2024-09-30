@@ -72,6 +72,14 @@ $result = mysqli_query($conn, $query);
   <link rel="stylesheet" href="../css/forums.css" />
 </head>
 
+<style>
+  @media (max-width: 767px) {
+    .admin-text {
+        display: none !important;
+    }
+  }
+</style>
+
 <body>
 
   <?php include_once('./sidebar/sidebar.php'); ?>

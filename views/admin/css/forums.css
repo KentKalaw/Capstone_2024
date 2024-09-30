@@ -70,8 +70,8 @@ nav#top-bar .d-flex span {
 
 /* Adjustments for smaller screens */
 @media (max-width: 767px) {
-    .alumni-text {
-        display: none;
+    .admin-text {
+        display: none !important;
     }
    
     

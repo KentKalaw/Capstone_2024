@@ -33,7 +33,7 @@
     </ul>
 </li>
 
-  <li><a href="#" class="list-group-item list-group-item-action">
+  <li><a href="events.php" class="list-group-item list-group-item-action">
     <i class="fa fa-calendar me-3"  aria-hidden="true"></i>Event Management
   </a></li>
 
