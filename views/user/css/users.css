@@ -26,6 +26,16 @@ nav#top-bar .d-flex span {
     font-weight: bold;
 }
 
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">>";
+    font-weight: bold;
+    color: #6c757d;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+}
+
+
 /* Carousel styles */
 #featuredAlumniCarousel {
     max-width: 1200px !important; /* Adjust the width */
@@ -35,7 +45,7 @@ nav#top-bar .d-flex span {
 .carousel-item img {
     width: 100% !important;
     height: 380px !important; /* Set a fixed height */
-    object-fit: contain !important; /* Make the image cover the entire container */
+    object-fit: cover !important; /* Make the image cover the entire container */
     object-position: center !important; /* Ensure the central part of the image is focused */
 }
 
@@ -64,7 +74,7 @@ nav#top-bar .d-flex span {
 }
 
 .card {
-    border-radius: 5px;
+    border-radius: 8px;
 }
 .card .btn {
     font-size: 0.85rem;
@@ -83,7 +93,7 @@ nav#top-bar .d-flex span {
 }
 
 .card-body {
-    max-height: 250px; /* Limit the overall height of the card's body */
+    max-height: 200px; /* Limit the overall height of the card's body */
     overflow-y: auto; /* Allow scrolling if content is too long */
 }
 

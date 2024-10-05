@@ -9,6 +9,7 @@ $result1 = $conn->query($sql1);
 while($row1 = $result1->fetch_assoc()) {
     $fname = $row1['fname'];
     $lname = $row1['lname'];
+    $birthday = $row1['birthday'];
     $occupation = $row1['occupation'];
     $company = $row1['company'];
     $city = $row1['city'];
@@ -20,8 +21,6 @@ while($row1 = $result1->fetch_assoc()) {
     }
 }
 
-$r = mysqli_query($conn, "SELECT * FROM audit WHERE username = '$username' AND action = 'Alumni account logged in'");
-$c = mysqli_num_rows($r);
 ?>
 
 <!DOCTYPE html>
@@ -35,14 +34,15 @@ $c = mysqli_num_rows($r);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/profile.css" />
+  <link rel="stylesheet" href="../css/profiles.css" />
 </head>
 
 <body>
-  
+<?php include_once('./loader/loader.php'); ?>
   <?php include_once('./sidebar/sidebar.php'); ?>
 
   <div id="page-content-wrapper">
+    
 
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4 border-bottom" id="top-bar">
       <div class="d-flex align-items-center justify-content-between w-100">
@@ -58,6 +58,15 @@ $c = mysqli_num_rows($r);
         </li>
       </div>
     </nav>
+
+    <ol class="breadcrumb col-md-6 d-flex align-items-center" style="margin-left: 25px; margin-top:20px;">
+    <li class="breadcrumb-item" style="color:black;">
+        <a href="javascript:void(0)">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        Profile
+    </li>
+</ol>
 
     <div class="container-fluid p-4 text-center">
             <img src="<?php echo $file ?>" id="img1" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
@@ -75,6 +84,7 @@ $c = mysqli_num_rows($r);
 					include('../../connect.php');
 					$lname =$_POST['lname'];
 					$fname =$_POST['fname'];
+          $birthday =$_POST['birthday'];
 					$occupation =$_POST['occupation'];
 					$company =$_POST['company'];
 					$region = $_POST['region'];
@@ -84,6 +94,7 @@ $c = mysqli_num_rows($r);
 					$username = $_SESSION['username'];
 		$conn->query("UPDATE alumni SET fname = '$fname' WHERE username = '$username'");
 		$conn->query("UPDATE alumni SET lname = '$lname' WHERE username = '$username'");
+    $conn->query("UPDATE alumni SET birthday = '$birthday' WHERE username = '$username'");
 		$conn->query("UPDATE alumni SET occupation = '$occupation' WHERE username = '$username'");
 		$conn->query("UPDATE alumni SET company = '$company' WHERE username = '$username'");
 		$conn->query("UPDATE alumni SET city = '$city' WHERE username = '$username'");
@@ -111,6 +122,10 @@ $c = mysqli_num_rows($r);
                 <div class="mb-3 text-start">
                     <label for="lname" class="form-label">Last Name</label>
                     <input type="text" class="form-control" name="lname" value="<?php echo $lname; ?>" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="birthday" class="form-label">Birthday</label>
+                    <input type="date" class="form-control" name="birthday" value="<?php echo $birthday; ?>" required>
                 </div>
                 <div class="mb-3 text-start">
                     <label for="occupation" class="form-label">Occupation</label>
@@ -155,8 +170,15 @@ $c = mysqli_num_rows($r);
 
 </form>
             </form>
-        </div>
+        
+  
+    
+    <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-warning mt-2" onclick="window.location='feature_profile.php';">Featured Alumni Form</button>
+      </div>
+
     </div>
+  </div>
     <script>
           const fileInput = document.getElementById('upload');
           fileInput.addEventListener('change', (e) => {

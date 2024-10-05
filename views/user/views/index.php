@@ -35,10 +35,11 @@ $c = mysqli_num_rows($r);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/user.css" />
+  <link rel="stylesheet" href="../css/users.css" />
 </head>
 
 <body>
+<?php include_once('./loader/loader.php'); ?>
   
   <?php include_once('./sidebar/sidebar.php'); ?>
 
@@ -58,6 +59,15 @@ $c = mysqli_num_rows($r);
         </li>
       </div>
     </nav>
+
+    <ol class="breadcrumb col-md-6 d-flex align-items-center" style="margin-left: 25px; margin-top:20px;">
+    <li class="breadcrumb-item" style="color:black;">
+        <a href="javascript:void(0)">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        Dashboard
+    </li>
+</ol>
 
     <!-- Featured Alumni Section -->
     <div class="container my-5">
@@ -79,37 +89,48 @@ $c = mysqli_num_rows($r);
           ?>
         </div>
 
-        <!-- Dynamic Carousel Items -->
-        <div class="carousel-inner">
-          <?php
-          $result1 = mysqli_query($conn, "SELECT * FROM profile1 WHERE status = 'Approved'");
-          $i = 0;
-          while ($row1 = mysqli_fetch_array($result1)) {
-            $profile = $row1['image'];
-            if ($profile == '') {
-              $profile = '../images/ub-logo.png';
-            }
-            $username = $row1['username'];
-            $name = $row1['name'];
-            $position = $row1['position'];
-            $company = $row1['company'];
-            $year =$row1['year'];
-			$course =$row1['course'];
+      <!-- Dynamic Carousel Items -->
+      <div class="carousel-inner">
+    <?php
+    $result1 = mysqli_query($conn, "SELECT * FROM profile1 WHERE status = 'Approved'");
+    $i = 0;
+    while ($row1 = mysqli_fetch_array($result1)) {
+        $profile = $row1['image'];
+        if ($profile == '') {
+            $profile = '../images/ub-logo.png';
+        }
+        $username = $row1['username'];
+        $name = $row1['name'];
+        $position = $row1['position'];
+        $company = $row1['company'];
+        $year = $row1['year'];
+        $course = $row1['course'];
+        $a4 = $row1['a4'];
 
-            // Set the first item as active
-            $active = $i == 0 ? 'active' : '';
-            echo '<div class="carousel-item ' . $active . '"  data-bs-interval="5000">';
-            echo '<img src="' . $profile . '" class="d-block w-100" alt="' . $name . '">';
-            echo '<div class="carousel-caption">';
-            echo '<h5>' .$name. '</h5>';
-            echo '<p class="positioncompany">' . $position . ' - ' . $company . '</p>';
-            echo '<p class="courseyear">' . $course . ', ' . $year . '</p>';
-            echo '</div>';
-            echo '</div>';
-            $i++;
-          }
-          ?>
-        </div>
+        // Set the first item as active
+        $active = $i == 0 ? 'active' : '';
+        echo '<div class="carousel-item ' . $active . '" data-bs-interval="5000" style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;">';
+        echo '<div class="row no-gutters" style="height: 100%;">'; // Flex row for full height
+
+        // Left column for image
+        echo '<div class="col-md-5 d-flex align-items-center justify-content-center" style="background-color: #F8F9FA;">';
+        echo '<img src="' . $profile . '" class="img-fluid" alt="' . $name . '" style="max-height: 100%; max-width: 100%;">'; // Responsive image
+        echo '</div>';
+
+        // Right column for information
+        echo '<div class="col-md-7 d-flex flex-column align-items-center justify-content-center p-4" style="background-color: #F8F9FA;">';
+        echo '<h1 class="text-center" style="font-weight:bold;">' . $name . '</h1>';
+        echo '<p class="text-center">' . $a4 . '</p>';
+        echo '<p class="text-center positioncompany" style="font-weight:bold;">' . $position . ' - ' . $company . '</p>';
+        echo '<p class="text-center courseyear" style="font-weight:bold;">' . $course . ', Batch ' . $year . '</p>';
+        echo '</div>';
+        
+        echo '</div>'; // End of row
+        echo '</div>'; // End of carousel-item
+        $i++;
+    }
+    ?>
+</div>
 
         <!-- Carousel Controls -->
         <button class="carousel-control-prev" type="button" data-bs-target="#featuredAlumniCarousel" data-bs-slide="prev">

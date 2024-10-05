@@ -74,10 +74,11 @@ $result2 = $conn->query($sql2);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/events.css" />
+  <link rel="stylesheet" href="../css/event.css" />
 </head>
 
 <body>
+<?php include_once('./loader/loader.php'); ?>
   <?php include_once('./sidebar/sidebar.php'); ?>
 
   <div id="page-content-wrapper">
@@ -95,6 +96,15 @@ $result2 = $conn->query($sql2);
         </li>
       </div>
     </nav>
+
+    <ol class="breadcrumb col-md-6 d-flex align-items-center" style="margin-left: 25px; margin-top:20px;">
+    <li class="breadcrumb-item" style="color:black;">
+        <a href="javascript:void(0)">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        Events
+    </li>
+</ol>
 
     <div class="container my-5">
       <div class="row justify-content-center">

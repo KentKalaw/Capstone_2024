@@ -26,6 +26,13 @@ nav#top-bar .d-flex span {
     font-weight: bold;
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">>";
+  font-weight: bold;
+  color: #6c757d;
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
+}
  .description {
     white-space: nowrap;           /* Prevents text from wrapping to a new line */
     overflow: hidden;              /* Hides any text that goes beyond the container */

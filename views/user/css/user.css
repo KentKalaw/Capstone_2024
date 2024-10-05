@@ -35,7 +35,7 @@ nav#top-bar .d-flex span {
 .carousel-item img {
     width: 100% !important;
     height: 380px !important; /* Set a fixed height */
-    object-fit: contain !important; /* Make the image cover the entire container */
+    object-fit: cover !important; /* Make the image cover the entire container */
     object-position: center !important; /* Ensure the central part of the image is focused */
 }
 

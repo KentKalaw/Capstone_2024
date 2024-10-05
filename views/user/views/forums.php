@@ -76,10 +76,12 @@ $result = mysqli_query($conn, $query);
   <title>Alumni - Alumnite</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-  <link rel="stylesheet" href="../css/forums.css" />
+  <link rel="stylesheet" href="../css/forum.css" />
 </head>
 
 <body>
+  
+  <?php include_once('./loader/loader.php'); ?>
 
   <?php include_once('./sidebar/sidebar.php'); ?>
 
@@ -99,6 +101,15 @@ $result = mysqli_query($conn, $query);
         </li>
       </div>
     </nav>
+
+    <ol class="breadcrumb col-md-6 d-flex align-items-center" style="margin-left: 25px; margin-top:20px;">
+    <li class="breadcrumb-item" style="color:black;">
+        <a href="javascript:void(0)">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        Forums
+    </li>
+</ol>
 
     <div class="container my-5">
       <h3 class="text-center mb-4" style="color:#752738;">Forums</h3>
@@ -142,7 +153,7 @@ $result = mysqli_query($conn, $query);
             <?php while ($thread = mysqli_fetch_assoc($result)): ?>
               <a href="thread_details.php?id=<?php echo $thread['id']; ?>" class="list-group-item list-group-item-action" style="background-color:white;">
                 <div class="d-flex align-items-center text-secondary">
-                  <img src="<?php echo $thread['profile'] ? : '../images/ub-logo.png'; ?>" alt="Profile Picture" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                  <img src="<?php echo $thread['profile'] ? : '../images/ub-logo.png'; ?>" alt="Profile Picture" class="rounded-circle me-3" style="width: 50px !important; height: 50px !important;">
                   <div class="flex-grow-1">
                     <h5 class="mb-0"><?php echo $thread['title']; ?></h5>
                     <p class="mb-0 text-muted">Posted by <?php echo $thread['fname'] . ' ' . $thread['lname']; ?> in <?php echo $thread['category_name']; ?></p>
