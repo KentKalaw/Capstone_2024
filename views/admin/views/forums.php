@@ -81,7 +81,7 @@ $result = mysqli_query($conn, $query);
 </style>
 
 <body>
-
+<?php include_once('./loader/loader.php'); ?>
   <?php include_once('./sidebar/sidebar.php'); ?>
 
   <div id="page-content-wrapper">

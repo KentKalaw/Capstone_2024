@@ -121,8 +121,8 @@ $c = mysqli_num_rows($r);
         echo '<div class="col-md-7 d-flex flex-column align-items-center justify-content-center p-4" style="background-color: #F8F9FA;">';
         echo '<h1 class="text-center" style="font-weight:bold;">' . $name . '</h1>';
         echo '<p class="text-center">' . $a4 . '</p>';
-        echo '<p class="text-center positioncompany" style="font-weight:bold;">' . $position . ' - ' . $company . '</p>';
-        echo '<p class="text-center courseyear" style="font-weight:bold;">' . $course . ', Batch ' . $year . '</p>';
+        echo '<h5 class="text-center positioncompany" style="font-weight:bold;">' . $position . ' - ' . $company . '</h5>';
+        echo '<h5 class="text-center courseyear" style="font-weight:bold;">' . $course . ', Batch ' . $year . '</h5>';
         echo '</div>';
         
         echo '</div>'; // End of row
