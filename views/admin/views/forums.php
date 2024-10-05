@@ -90,7 +90,7 @@ $result = mysqli_query($conn, $query);
       <div class="d-flex align-items-center justify-content-between w-100">
         <div class="d-flex align-items-center">
           <i class="fa fa-bars primary-text fs-4 me-3" id="menu-toggle"  aria-hidden="true"></i>
-          <h2 class="fs-4 m-0" style="color:#752738">Dashboard</h2>
+          <h2 class="fs-4 m-0" style="color:#752738">Forums Thread</h2>
         </div>
         <li class="d-flex align-items-center">
           <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -128,7 +128,7 @@ $result = mysqli_query($conn, $query);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addCategoryForm" action="add_category.php" method="POST">
+                <form id="addCategoryForm" action="add_forum_category.php" method="POST">
                     <div class="mb-3">
                         <label for="categoryName" class="form-label">Category Name</label>
                         <input type="text" class="form-control" id="categoryName" name="categoryName" required autocomplete="off">
@@ -161,24 +161,32 @@ $result = mysqli_query($conn, $query);
 
 <!-- List threads -->
 <div class="list-group">
-        <?php if (mysqli_num_rows($result) > 0): ?>
-            <?php while ($thread = mysqli_fetch_assoc($result)): ?>
-              <a href="thread_details.php?id=<?php echo $thread['id']; ?>" class="list-group-item list-group-item-action" style="background-color:white;">
-                <div class="d-flex align-items-center text-secondary">
-                  <img src="<?php echo $thread['profile'] ? : '../images/ub-logo.png'; ?>" alt="Profile Picture" class="rounded-circle me-3" style="width: 50px; height: 50px;">
-                  <div class="flex-grow-1">
-                    <h5 class="mb-0"><?php echo $thread['title']; ?></h5>
-                    <p class="mb-0 text-muted">Posted by <?php echo $thread['fname'] . ' ' . $thread['lname']; ?> in <?php echo $thread['category_name']; ?></p>
-                  </div>
-                </div>
-                <small class="text-muted ms-auto"><?php echo date('F d, Y', strtotime($thread['created_at'])); ?></small>
-              </a>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p class="text-center text-muted">There are no threads in this category yet.</p>
-        <?php endif; ?>
-      </div>
-
+    <?php if (mysqli_num_rows($result) > 0): ?>
+        <?php while ($thread = mysqli_fetch_assoc($result)): ?>
+            <div class="list-group-item list-group-item-action" style="background-color:white; position: relative;">
+                <a href="thread_details.php?id=<?php echo $thread['id']; ?>" class="text-decoration-none">
+                    <div class="d-flex align-items-center text-secondary">
+                        <img src="<?php echo $thread['profile'] ? : '../images/ub-logo.png'; ?>" alt="Profile Picture" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                        <div class="flex-grow-1">
+                            <h5 class="mb-0"><?php echo $thread['title']; ?></h5>
+                            <p class="mb-0 text-muted">Posted by <?php echo $thread['fname'] . ' ' . $thread['lname']; ?> in <?php echo $thread['category_name']; ?></p>
+                        </div>
+                    </div>
+                    <small class="text-muted ms-auto" style="margin-left: 65px !important;"><?php echo date('F d, Y', strtotime($thread['created_at'])); ?></small>
+                </a>
+                <!-- Delete Button -->
+                <a href="delete_thread.php?id=<?php echo $thread['id']; ?>" 
+                   class="btn btn-link text-danger" 
+                   style="position: absolute; top: 10px; right: 10px;" 
+                   onclick="return confirm('Are you sure you want to delete this thread?');">
+                   <i class="fa fa-trash-alt"></i>
+                </a>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p class="text-center text-muted">There are no threads in this category yet.</p>
+    <?php endif; ?>
+</div>
 
    <!-- Pagination Links -->
    <?php if ($total_threads > 0): ?>

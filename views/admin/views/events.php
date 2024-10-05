@@ -98,6 +98,35 @@ $result2 = $conn->query($sql2);
     <div class="container my-5">
       <div class="row justify-content-center">
       <h3 class="text-center mb-4" style="color:#752738;">Look for events</h3>
+      <div class="row mb-4">
+
+      <!-- Adding new category and new events button -->
+  <div class="col-md-12 d-flex justify-content-end">
+    <button data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="btn btn-secondary me-3">Add New Category</button>
+    <a href="add_event.php" class="btn btn-secondary">Add New Event</a>
+  </div>
+</div>
+
+<!-- Pop up modal when clicking the Add Category button -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addCategoryForm" action="add_event_category.php" method="POST">
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Category Name</label>
+                        <input type="text" class="form-control" id="categoryName" name="categoryName" required autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
       <!-- Search and select area -->
       <div class="row justify-content-end align-items-center mb-5">

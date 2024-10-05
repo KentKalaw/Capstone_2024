@@ -32,7 +32,7 @@
     <i class="fa fa-id-card me-3"  aria-hidden="true"></i>Alumni Card
   </a> </li>
   
-  <li> <a href="#" class="list-group-item list-group-item-action">
+  <li> <a href="yearbook.php" class="list-group-item list-group-item-action">
     <i class="fa fa-newspaper me-3"  aria-hidden="true"></i>Yearbook
   </a> </li>
 

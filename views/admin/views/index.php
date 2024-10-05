@@ -22,9 +22,6 @@ while($row1 = $result1->fetch_assoc()) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../css/admin.css" />
-   <!-- Facebox -->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.css" media="screen" rel="stylesheet" type="text/css"/>
-
 </head>
 
 <body>
@@ -50,8 +47,141 @@ while($row1 = $result1->fetch_assoc()) {
    <?php include_once('./dashboardcard.php'); ?>
     <!-- Dashboard Cards End -->
   
-    
-    <?php
+    <!-- Admin's announcement post here -->
+<?php
+		if(isset($_POST['post'])) {
+			$post = $_POST['post'];
+			date_default_timezone_set('Asia/Manila');
+			$date = date('Y-m-d H:i:s');
+			$username = $_SESSION['username'];
+			$a = $conn->query("INSERT INTO post (post,date,username) VALUES ('$post','$date','$username')");
+			
+					date_default_timezone_set('Asia/Manila');
+					$message = 'Admin posted a post';
+					$date = date('F d, Y h:i A');
+				$save = $conn->query("INSERT INTO audit (username,action, timestamp)VALUES ('$username','$message','$date')");
+        echo '<script>alert("Announcement has been posted."); window.location="index.php";</script>';
+
+		}
+		?>
+
+<h2 class="fs-4 my-5 b-0 pt-4 px-3" style="color:#752738">Announcements</h2>
+
+<div class="container-fluid px-3">
+  <form action="#" method="POST" class="row g-3">
+    <div class="col-12">
+      <label for="post" class="form-label">Enter announcement here:</label>
+      <textarea class="form-control" id="post" name="post" rows="3" required></textarea>
+    </div>
+    <div class="col-md-1">
+      <button type="submit" class="btn btn-primary w-100 mb-4">Post</button>
+    </div>
+  </form>
+</div>
+
+<!-- Announcement cards -->
+
+<div class="row justify-content-center"> 
+    <div class="col-lg-11 col-md-10">
+        <?php
+        // Fetch pinned posts first
+        $result = mysqli_query($conn, "SELECT * FROM post WHERE pin = '1' ORDER BY ID DESC");
+        $hasPosts = false; // Initialize a flag to track if there are any posts
+
+        while ($row = mysqli_fetch_array($result)) {
+            $hasPosts = true; // If we have at least one post, set the flag to true
+            $postId = $row['id']; // Unique post ID
+            $username = $row['username'];
+            $post = $row['post'];
+            $date = date('F d, Y h:i A', strtotime($row['date']));
+
+            // Fetch user profile data
+            $result1 = mysqli_query($conn, "SELECT * FROM alumni WHERE username = '$username'");
+            $row1 = mysqli_fetch_array($result1);
+            $profile = $row1['profile'] ?: '../images/ub-logo.png'; // default profile image
+            $name = $row1['fname'] . ' ' . $row1['lname'];
+
+            // Announcement card for pinned post
+            echo '<div class="card mb-4 shadow-sm border-warning position-relative">';
+            echo '<div class="card-body">';
+            echo '<div class="d-flex align-items-center">';
+
+            // Profile image and user details
+            echo '<img src="' . $profile . '" class="rounded-circle me-3" style="width: 60px; height: 60px;">';
+            echo '<div>';
+            echo '<h5 class="card-title mb-1">' . $name . '</h5>';
+            echo '<p class="card-text mb-2">' . $post . '</p>';
+            echo '<small class="text-muted">' . $date . '</small>';
+            echo '</div>';
+
+            // Trashcan icon for delete (top-right corner)
+            echo '<div class="position-absolute" style="top: 10px; right: 10px;">';
+            echo '<a href="delete_post.php?id=' . $postId . '" onclick="return confirm(\'Are you sure you want to delete this post?\')" class="text-danger">';
+            echo '<i class="fas fa-trash-alt"></i>';
+            echo '</a>';
+            echo '</div>'; // End of trashcan icon
+
+            echo '</div>'; // End of d-flex alignment
+            echo '</div>'; // End of card body
+            echo '</div>'; // End of card
+        }
+
+        // Fetch other posts (non-pinned)
+        $result = mysqli_query($conn, "SELECT * FROM post WHERE pin <> '1' ORDER BY ID DESC");
+        while ($row = mysqli_fetch_array($result)) {
+            $hasPosts = true; // At least one post found
+            $postId = $row['id']; // Unique post ID
+            $username = $row['username'];
+            $post = $row['post'];
+            $date = date('F d, Y h:i A', strtotime($row['date']));
+
+            // Fetch user profile data or set as admin
+            if ($username == 'admin') {
+                $name = 'Administrator';
+                $profile = '../images/ub-logo.png';
+            } else {
+                $result1 = mysqli_query($conn, "SELECT * FROM alumni WHERE username = '$username'");
+                $row1 = mysqli_fetch_array($result1);
+                $profile = $row1['profile'] ?: '../images/ub-logo.png'; // default profile image
+                $name = $row1['fname'] . ' ' . $row1['lname'];
+            }
+
+            // Announcement card for non-pinned post
+            echo '<div class="card mb-2 shadow-sm border-light position-relative">';
+            echo '<div class="card-body">';
+            echo '<div class="d-flex align-items-center">';
+
+            // Profile image and user details
+            echo '<img src="' . $profile . '" class="rounded-circle me-3" style="width: 60px; height: 60px;">';
+            echo '<div>';
+            echo '<h5 class="card-title mb-1">' . $name . '</h5>';
+            echo '<p class="card-text mb-2">' . $post . '</p>';
+            echo '<small class="text-muted">' . $date . '</small>';
+            echo '</div>';
+
+            // Trashcan icon for delete (top-right corner)
+            echo '<div class="position-absolute" style="top: 10px; right: 10px;">';
+            echo '<a href="del_post.php?id='.$row['id'].'" onclick="return confirm(\'Are you sure you want to delete this post?\')" class="text-danger">';
+            echo '<i class="fas fa-trash-alt"></i>';
+            echo '</a>';
+            echo '</div>'; // End of trashcan icon
+
+            echo '</div>'; // End of d-flex alignment
+            echo '</div>'; // End of card body
+            echo '</div>'; // End of card
+        }
+
+        // If there are no posts, display a "No announcements currently" message
+        if (!$hasPosts) {
+            echo '<div class="alert alert-warning text-center" role="alert">';
+            echo 'No announcements currently.';
+            echo '</div>';
+        }
+        ?>
+    </div>
+</div>
+
+        <?php
 				include('../../connect.php');
 					$result1aa = $conn->query("SELECT * FROM login WHERE status = 'Pending'");
 					$count1aa = $result1aa->num_rows;
@@ -143,7 +273,7 @@ while($row1 = $result1->fetch_assoc()) {
 
   </div> <!-- End of page-content-wrapper -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script>
     var el = document.getElementById("wrapper");
@@ -153,16 +283,14 @@ while($row1 = $result1->fetch_assoc()) {
       el.classList.toggle("toggled");
     };
   </script>
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
 
-  
-  <script type="text/javascript">
-    $(document).ready(function($) {
-      $('a[rel=facebox]').facebox();
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('a[rel*=facebox]').facebox();
     });
-  </script>
+</script>
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
