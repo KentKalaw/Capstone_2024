@@ -118,7 +118,9 @@ $result = mysqli_query($conn, $query);
       <!-- Create Thread Button -->
       <div class="d-flex justify-content-between mb-4">
         <h3 class="mb-0">Threads</h3>
-        <a href="thread_create.php" class="btn btn-secondary">Create New Thread</a>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createThreadModal">
+        Create New Thread
+        </button>
       </div>
 
       <!-- Search function -->
@@ -187,6 +189,48 @@ $result = mysqli_query($conn, $query);
           </ul>
         </nav>
       <?php endif; ?>
+
+      <?php $category_result = mysqli_query($conn, "SELECT * FROM threads_categories"); ?>
+      <!-- Modal -->
+<div class="modal fade" id="createThreadModal" tabindex="-1" aria-labelledby="createThreadModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createThreadModalLabel">Create New Thread</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Create Thread Form -->
+        <form method="POST" action="thread_create.php">
+          <div class="mb-3">
+            <label for="title" class="form-label">Thread Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Enter thread title" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="content" class="form-label">Thread Content</label>
+            <textarea class="form-control" id="content" name="content" rows="6" placeholder="Enter thread content" required></textarea>
+          </div>
+
+          <!-- Category Selection -->
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-control" id="category" name="category" required>
+              <option value="">Select Category</option>
+              <?php while ($category = mysqli_fetch_assoc($category_result)): ?>
+                <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+              <?php endwhile; ?>
+            </select>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" name="threadcreate" class="btn btn-warning">Create Thread</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
     </div> <!-- End of page-content-wrapper -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

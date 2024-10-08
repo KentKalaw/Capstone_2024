@@ -20,7 +20,7 @@ while($row1 = $result1->fetch_assoc()) {
     }
 }
 
-$r = mysqli_query($conn, "SELECT * FROM audit WHERE username = '$username' AND action = 'Alumni account logged in'");
+$r = mysqli_query($conn, "SELECT * FROM top_online_visitor WHERE username = '$username' AND action = 'Alumni account logged in'");
 $c = mysqli_num_rows($r);
 ?>
 

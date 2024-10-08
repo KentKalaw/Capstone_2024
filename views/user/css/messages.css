@@ -1,0 +1,53 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EBDFD7;
+}
+
+nav#top-bar {
+    border-bottom: 1px solid #DDD3CD !important;
+    margin-bottom: -2px !important; /* Negative margin to pull the top bar up */
+    padding-bottom: 12px !important;
+}
+
+nav#top-bar .d-flex img {
+    width: 40px;
+    height: 40px;
+}
+
+nav#top-bar .d-flex span {
+    font-size: 16px;
+    color: #000000;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">>";
+    font-weight: bold;
+    color: #6c757d;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 767px) {
+    .alumni-text {
+        display: none;
+    }
+   
+    
+}
+
+/* Adjustments for larger screens */
+@media (min-width: 768px) {
+    #featuredAlumniCarousel {
+        max-width: 1200px; /* Wider carousel for larger screens */
+    }
+
+    
+}

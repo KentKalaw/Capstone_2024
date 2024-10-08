@@ -55,6 +55,16 @@ while($row1 = $result1->fetch_assoc()) {
         </li>
       </div>
     </nav>
+
+    <ol class="breadcrumb col-md-6 d-flex align-items-center" style="margin-left: 25px; margin-top:20px;">
+    <li class="breadcrumb-item" style="color:black;">
+        <a href="javascript:void(0)">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        Dashboard
+    </li>
+</ol>
+
 <div class="not-container my-5">
       <h3 class="text-center mb-4" style="color:#752738; font-weight: bold;">Alumni Privilege Card Preview</h3>
 <div>

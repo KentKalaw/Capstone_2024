@@ -21,6 +21,7 @@ $total_events_result = $conn->query($total_events_sql);
 $total_events_row = $total_events_result->fetch_assoc();
 $total_events = $total_events_row['total'];
 
+
 $total_pages = ceil($total_events / $limit);
 
 $status = isset($_GET['status']) ? $_GET['status'] : ''; // Get selected status from dropdown
@@ -104,7 +105,10 @@ $result2 = $conn->query($sql2);
       <!-- Adding new category and new events button -->
   <div class="col-md-12 d-flex justify-content-end">
     <button data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="btn btn-secondary me-3">Add New Category</button>
-    <a href="add_event.php" class="btn btn-secondary">Add New Event</a>
+    
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createEventModal">
+  Add New Event
+</button>
   </div>
 </div>
 
@@ -194,26 +198,68 @@ $result2 = $conn->query($sql2);
                     
                   </div>
                 </div>
+                
+
                 <div class="col-md-2 col-12 align-self-center p-2">
                   <div class="d-md-none d-flex justify-content-center">
                     <a href="#" class="btn btn-dark px-4 py-2 me-2" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-eye"></i></a>
                     <a href="#" class="btn btn-dark px-4 py-2" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-cog"></i></a>
                   </div>
                   <div class="d-md-none d-flex justify-content-center">
-                  <a href="#" class="btn btn-warning px-4 py-2 mt-2" data-bs-toggle="modal" data-bs-target="#updateStatusModal-<?php echo $row2['event_id']; ?>"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                  <a href="#" class="btn btn-warning px-4 py-2 mt-2 me-2 open-modal"  data-event-id="<?php echo $event_id; ?>"  data-bs-toggle="modal" data-bs-target="#eventModal"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                  <a href="delete_event.php?id=<?php echo $row2['event_id']; ?>" onclick="return confirm('Are you sure you want to delete this event?');" class="btn btn-danger px-4 py-2 mt-2"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   </div>
-                  <div class="d-none d-md-block text-end">
-                    <a href="#" class="btn btn-dark px-4 py-2 me-1" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-eye"></i></a>
-                    <a href="#" class="btn btn-dark px-4 py-2 me-1" data-bs-toggle="modal" data-bs-target="#updateStatusModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-cog"></i></a>
+                  <div class="d-none d-md-block text-end d-flex justify-content-end align-items-center">
+                      <!-- First Set of Buttons (Eye & Cog) -->
+                      <a href="#" class="btn btn-dark px-4 py-2 me-1" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-eye"></i></a>
+                      <a href="#" class="btn btn-dark px-4 py-2 me-1" data-bs-toggle="modal" data-bs-target="#updateStatusModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-cog"></i></a>
                   </div>
-                  <div class="d-none d-md-block text-center">
-                  <a href="#" class="btn btn-warning px-4 py-2 ms-5 mt-2" data-bs-toggle="modal" data-bs-target="#participantsModal-<?php echo $row2['event_id']; ?>"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                  <div class="d-none d-md-block text-end d-flex justify-content-end align-items-center mt-1 ">
+                      <!-- Second Set of Buttons (User-Plus & Trash) -->
+                      <a href="#" class="btn btn-warning px-4 py-2 me-1 open-modal" data-event-id="<?php echo $event_id; ?>" data-bs-toggle="modal" data-bs-target="#eventModal">
+    <i class="fa fa-user-plus" aria-hidden="true"></i>
+</a>
+</a>
+                      <a href="delete_event.php?id=<?php echo $row2['event_id']; ?>" onclick="return confirm('Are you sure you want to delete this event?');" class="btn btn-danger px-4 py-2 me-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- Pop up modal for Participation and Volunteer Table button -->
+  <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventModalLabel">Select an Action</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Select which table you want to view:</p>
+        <div class="d-grid gap-2">
+          <!-- Events Participation Button -->
+          <button id="participationBtn" class="btn btn-primary">View Events Participation Table</button>
+          <!-- Events Volunteer Button -->
+          <button id="volunteerBtn" class="btn btn-secondary">View Events Volunteer Table</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php
+  $total_approved_sql = "SELECT COUNT(*) AS approved_count FROM events_participation WHERE event_id = $event_id AND participationStatus = 'approved'";
+  $total_approved_result = $conn->query($total_approved_sql);
+  $total_approved_row = $total_approved_result->fetch_assoc();
+  $total_approved = $total_approved_row['approved_count'];
+?>
+
+<?php
+  $total_pending_sql = "SELECT COUNT(*) AS pending_count FROM events_participation WHERE event_id = $event_id AND participationStatus = 'pending'";
+  $total_pending_result = $conn->query($total_pending_sql);
+  $total_pending_row = $total_pending_result->fetch_assoc();
+  $total_pending = $total_pending_row['pending_count'];
+?>
           <!-- Modal for each event -->
           <div class="modal fade" id="eventModal-<?php echo $row2['event_id']; ?>" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -231,7 +277,8 @@ $result2 = $conn->query($sql2);
                 <p class="modal-text mb-1"><strong>End Date: </strong><?php echo date('F j, Y, g:i A', strtotime($row2['eventEndDate'])); ?></p>
                 <p class="modal-text mb-1"><strong>Type: </strong><?php echo $row2['eventType']; ?></p>
                 <p class="modal-text mb-1" style="color: <?php echo ($row2['eventStatus'] === 'Scheduled') ? 'orange' : (($row2['eventStatus'] === 'Ongoing') ? 'green' : 'red'); ?>"><strong style="color: black;">Status: </strong><?php echo $row2['eventStatus']; ?></p>
-                <p class="card-text mb-1"><strong>Number of approved participants: </strong></p>
+                <p class="card-text mb-1"><strong>Number of Pending participants: </strong> <?php echo $total_pending; ?> </p>
+                <p class="card-text mb-1"><strong>Number of Approved participants: </strong><?php echo $total_approved; ?></p>
                 <p class="card-text mb-1"><strong>Event Volunteers: </strong>No</p>
                 <br>
       </div>
@@ -304,16 +351,16 @@ $result2 = $conn->query($sql2);
 
 
 <?php endwhile; ?>
-          <?php
+<?php
 }
 ?>
+  </div>
 
-        </div>
+  <!-- include for pop up modal in adding events -->
+<?php include_once('add_event.php'); ?>      
 
-       
 
-<!-- Modal for updating event status -->
-
+<!-- Pagination of events (the previous and next button with numbers) -->
 <?php if ($total_events > 0): ?>
 <nav aria-label="Event page navigation" class="mt-2">
   <ul class="pagination justify-content-center">
@@ -339,25 +386,31 @@ $result2 = $conn->query($sql2);
       </div>
     </div>
   </div>
-  
 
+
+  <!-- script for participation table and volunteer table pop up modal -->
   <script>
-    function confirmSubmission(type) {
-        return confirm("Are you sure you want to submit your " + type + " request?");
-    }
+    let eventId; // To store the event ID
+
+    // Attach event listener to all buttons with the "open-modal" class
+    document.querySelectorAll('.open-modal').forEach(button => {
+        button.addEventListener('click', function() {
+            // Get the event_id from the data attribute of the clicked button
+            eventId = this.getAttribute('data-event-id');
+        });
+    });
+
+    // Redirect to the participation table PHP page with the correct event_id
+    document.getElementById('participationBtn').addEventListener('click', function() {
+        window.location.href = 'view_event_participation.php?event_id=' + eventId;
+    });
+
+    // Redirect to the volunteer table PHP page with the correct event_id
+    document.getElementById('volunteerBtn').addEventListener('click', function() {
+        window.location.href = 'view_event_volunteer.php?event_id=' + eventId;
+    });
 </script>
 
-<script>
-function confirmVolunteerSubmission() {
-    const selectedRole = document.getElementById("role").value;
-    if (selectedRole) {
-        return confirm("Are you sure you want to volunteer?");
-    } else {
-        alert("Please select a role before submitting.");
-        return false;
-    }
-}
-</script>
 
 <script>
       var el = document.getElementById("wrapper");

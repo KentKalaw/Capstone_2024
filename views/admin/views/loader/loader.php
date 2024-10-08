@@ -68,6 +68,6 @@
             setTimeout(function() {
                 loader.style.display = 'none';
             }, 500); // This should match the transition duration in CSS
-        }, 1500);
+        }, 1000);
     });
 </script>

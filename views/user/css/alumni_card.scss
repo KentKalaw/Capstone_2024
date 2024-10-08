@@ -131,6 +131,14 @@ background-size: cover;
   transform: rotateY(-180deg);
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">>";
+  font-weight: bold;
+  color: #6c757d;
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
+}
+
 
 
 /* Adjustments for smaller screens */

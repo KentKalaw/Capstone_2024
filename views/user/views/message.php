@@ -33,7 +33,7 @@ while($row1 = $result1->fetch_assoc()) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/user.css" />
+  <link rel="stylesheet" href="../css/messages.css" />
 </head>
 
 <body>
@@ -56,6 +56,16 @@ while($row1 = $result1->fetch_assoc()) {
         </li>
       </div>
     </nav>
+
+    <ol class="breadcrumb col-md-6 d-flex align-items-center" style="margin-left: 25px; margin-top:20px;">
+    <li class="breadcrumb-item" style="color:black;">
+        <a href="javascript:void(0)">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        Messages
+    </li>
+</ol>
+
 
 
   <div class="container-fluid py-4">

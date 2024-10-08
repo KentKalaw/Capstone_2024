@@ -108,7 +108,7 @@
           <div class="card text-secondary bg-light shadow h-100 py-2">
             <div class="card-body">
               <div class="text-center">
-                <h6 class="card-title">Number of Top Visitors</h6>
+                <h6 class="card-title">Number of Top Online Visitor</h6>
                 <p class="card-text fs-2" style="color: black;">450</p>
               </div>
             </div>

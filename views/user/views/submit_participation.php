@@ -5,6 +5,8 @@ include('../../connect.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $event_id = $_POST['event_id'];
     $alumni_id = $_POST['alumni_id'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
     $username = $_SESSION['username'];
 
     if (isset($_POST['participate'])) {
@@ -17,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit; // Exit to prevent further processing
         } else {
             // Insert a new record with Pending status
-            $insert_sql = "INSERT INTO events_participation (event_id, alumni_id, username, participationStatus) VALUES ($event_id, $alumni_id, '$username', 'Pending')";
+            $insert_sql = "INSERT INTO events_participation (event_id, alumni_id, fname, lname, username, participationStatus) VALUES ($event_id, $alumni_id, '$fname', '$lname', '$username', 'Pending')";
             if ($conn->query($insert_sql) === TRUE) {
                 echo '<script>alert("Participation submitted. We will email you for the details. Please wait for update."); window.location="events.php";</script>';
             } else {

@@ -214,11 +214,14 @@ $result2 = $conn->query($sql2);
                 <p class="modal-text mb-1" style="color: <?php echo ($volunteer_status === 'Pending') ? 'orange' : (($volunteer_status === 'Approved') ? 'green' : (($volunteer_status === 'Declined') ? 'red' : 'darkgrey')); ?>"><strong style="color: black;">Volunteer Status: </strong><?php echo $volunteer_status; ?></p>
                 <br>
                      <!-- Participate Form -->
+        <?php if ($row2['eventStatus'] !== 'Completed'): ?>
         <div class="row">
           <div class="col-12 text-start">
           <form method="POST" action="submit_participation.php" onsubmit="return confirmSubmission('participation')">
     <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
     <input type="hidden" name="alumni_id" value="<?php echo $alumni_id; ?>">
+    <input type="hidden" name="fname" value="<?php echo $fname; ?>">
+    <input type="hidden" name="lname" value="<?php echo $lname; ?>">
     <div class="mb-2">
         <button type="submit" name="participate" class="btn btn-dark w-100">Participate</button>
     </div>
@@ -232,6 +235,8 @@ $result2 = $conn->query($sql2);
         <form method="POST" action="submit_volunteer.php" onsubmit="return confirmVolunteerSubmission()">
             <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
             <input type="hidden" name="alumni_id" value="<?php echo $alumni_id; ?>">
+            <input type="hidden" name="fname" value="<?php echo $fname; ?>">
+            <input type="hidden" name="lname" value="<?php echo $lname; ?>">
             
             <!-- Role Selection -->
             <div class="mb-3">
@@ -251,6 +256,7 @@ $result2 = $conn->query($sql2);
         </form>
     </div>
 </div>
+<?php endif; ?>
 
         
 

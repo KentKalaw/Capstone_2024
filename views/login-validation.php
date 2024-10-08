@@ -53,7 +53,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 					date_default_timezone_set('Asia/Manila');
 					$message = 'Alumni account logged in';
 					$date = date('F d, Y h:i A');
-				$save = $conn->query("INSERT INTO audit (username,action, timestamp)VALUES ('$username','$message','$date')");
+				$save = $conn->query("INSERT INTO top_online_visitor (username,action, timestamp)VALUES ('$username','$message','$date')");
 				echo '<script>window.location="user/views/index.php"</script>';
 				}
 			}
