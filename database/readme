@@ -28,3 +28,14 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "u329692502_ublink";
+
+then 
+
+1. Left click the wamp icon in your hidden icons
+2. click PhpMyAdmin -> PhPMyAdmin (version)
+3. login using default account first
+ex: username: root
+    password:
+4. click Export
+5. Select the .zip file
+6. done.
