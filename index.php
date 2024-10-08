@@ -1,3 +1,3 @@
 <script>
-window.location='views/index.php';
+window.location='content/index.php';
 </script>
