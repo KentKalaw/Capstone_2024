@@ -1,4 +1,4 @@
-To add this database in your wamp, do this;
+(for deployment) To add this database in your wamp, do this;
 
 1. Left click the wamp icon in your hidden icons
 2. click PhpMyAdmin -> PhPMyAdmin (version)
@@ -18,6 +18,8 @@ ex: username: root
 14. Export the .zip database file.
 
 OR
+
+(for Testing/Development)
 
 go to connect.php
 then change the datas like this:
