@@ -212,9 +212,10 @@ $result2 = $conn->query($sql2);
                 <p class="modal-text mb-1" style="color: <?php echo ($row2['eventStatus'] === 'Scheduled') ? 'orange' : (($row2['eventStatus'] === 'Ongoing') ? 'green' : 'red'); ?>"><strong style="color: black;">Status: </strong><?php echo $row2['eventStatus']; ?></p>
                 <p class="modal-text mb-1" style="color: <?php echo ($participation_status === 'Pending') ? 'orange' : (($participation_status === 'Approved') ? 'green' : (($participation_status === 'Declined') ? 'red' : 'darkgrey')); ?>"><strong style="color: black;">Participation Status: </strong><?php echo $participation_status; ?></p>
                 <p class="modal-text mb-1" style="color: <?php echo ($volunteer_status === 'Pending') ? 'orange' : (($volunteer_status === 'Approved') ? 'green' : (($volunteer_status === 'Declined') ? 'red' : 'darkgrey')); ?>"><strong style="color: black;">Volunteer Status: </strong><?php echo $volunteer_status; ?></p>
-                <br>
+                
                      <!-- Participate Form -->
         <?php if ($row2['eventStatus'] !== 'Completed'): ?>
+          <?php if ($participation_status !== 'Declined' && $participation_status !== 'Pending' && $participation_status !== 'Approved'): ?>
         <div class="row">
           <div class="col-12 text-start">
           <form method="POST" action="submit_participation.php" onsubmit="return confirmSubmission('participation')">
@@ -228,8 +229,9 @@ $result2 = $conn->query($sql2);
 </form>
           </div>
         </div>
-
+        <?php endif; ?>
         <!-- Volunteer Form -->
+        <?php if ($volunteer_status !== 'Declined' && $volunteer_status !== 'Pending' && $volunteer_status !== 'Approved'): ?>
         <div class="row">
     <div class="col-12 text-start">
         <form method="POST" action="submit_volunteer.php" onsubmit="return confirmVolunteerSubmission()">
@@ -256,6 +258,7 @@ $result2 = $conn->query($sql2);
         </form>
     </div>
 </div>
+<?php endif; ?>
 <?php endif; ?>
 
         

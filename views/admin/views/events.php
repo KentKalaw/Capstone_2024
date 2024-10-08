@@ -203,10 +203,10 @@ $result2 = $conn->query($sql2);
                 <div class="col-md-2 col-12 align-self-center p-2">
                   <div class="d-md-none d-flex justify-content-center">
                     <a href="#" class="btn btn-dark px-4 py-2 me-2" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-eye"></i></a>
-                    <a href="#" class="btn btn-dark px-4 py-2" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-cog"></i></a>
+                    <a href="#" class="btn btn-dark px-4 py-2" data-bs-toggle="modal" data-bs-target="#updateStatusModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-cog"></i></a>
                   </div>
                   <div class="d-md-none d-flex justify-content-center">
-                  <a href="#" class="btn btn-warning px-4 py-2 mt-2 me-2 open-modal"  data-event-id="<?php echo $event_id; ?>"  data-bs-toggle="modal" data-bs-target="#eventModal"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                  <a href="#" class="btn btn-dark px-4 py-2 mt-2 me-2 open-modal"  data-event-id="<?php echo $event_id; ?>"  data-bs-toggle="modal" data-bs-target="#eventModal"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                   <a href="delete_event.php?id=<?php echo $row2['event_id']; ?>" onclick="return confirm('Are you sure you want to delete this event?');" class="btn btn-danger px-4 py-2 mt-2"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   </div>
                   <div class="d-none d-md-block text-end d-flex justify-content-end align-items-center">
@@ -216,7 +216,7 @@ $result2 = $conn->query($sql2);
                   </div>
                   <div class="d-none d-md-block text-end d-flex justify-content-end align-items-center mt-1 ">
                       <!-- Second Set of Buttons (User-Plus & Trash) -->
-                      <a href="#" class="btn btn-warning px-4 py-2 me-1 open-modal" data-event-id="<?php echo $event_id; ?>" data-bs-toggle="modal" data-bs-target="#eventModal">
+                      <a href="#" class="btn btn-dark px-4 py-2 me-1 open-modal" data-event-id="<?php echo $event_id; ?>" data-bs-toggle="modal" data-bs-target="#eventModal">
     <i class="fa fa-user-plus" aria-hidden="true"></i>
 </a>
 </a>
@@ -279,8 +279,7 @@ $result2 = $conn->query($sql2);
                 <p class="modal-text mb-1" style="color: <?php echo ($row2['eventStatus'] === 'Scheduled') ? 'orange' : (($row2['eventStatus'] === 'Ongoing') ? 'green' : 'red'); ?>"><strong style="color: black;">Status: </strong><?php echo $row2['eventStatus']; ?></p>
                 <p class="card-text mb-1"><strong>Number of Pending participants: </strong> <?php echo $total_pending; ?> </p>
                 <p class="card-text mb-1"><strong>Number of Approved participants: </strong><?php echo $total_approved; ?></p>
-                <p class="card-text mb-1"><strong>Event Volunteers: </strong>No</p>
-                <br>
+              
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

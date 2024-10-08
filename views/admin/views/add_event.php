@@ -39,7 +39,7 @@ include('../../connect.php');
           
           <!-- Event Image -->
           <div class="mb-3">
-            <label for="eventImage" class="form-label">Event Image</label>
+            <label for="upload" class="form-label">Event Image</label>
             <img src="../images/question_mark.jpg" style="width:30%; height: 30%;" id="img">
             <input type="file" id="upload" style=""  accept="image/png, image/gif, image/jpeg">
 			<textarea  name="file" id="file" style="display:none"></textarea>
