@@ -16,3 +16,13 @@ ex: username: root
 12. click Go.
 13. Login with your new PhpMyAdmin account
 14. Export the .zip database file.
+
+OR
+
+go to connect.php
+then change the datas like this:
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "u329692502_ublink";
