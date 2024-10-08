@@ -8,11 +8,11 @@ ex: username: root
 4. click User accounts
 5. click Add user accounts
 6. username: u329692502_ublink
-7. for host, click the dropdown table (Any host), then choost Local. after you choose local, the label should change to localhost.
+7. for host, click the dropdown table (Any host), then choose Local. after you choose local, the label should change to localhost.
 8. password: 0G:qvWC:v
 9. retype password: 0G:qvWC:v
 10. click Go
 11. after clicking go, click Global privilege: Check all.
 12. click Go.
 13. Login with your new PhpMyAdmin account
-14. Export the .zip file.
+14. Export the .zip database file.
