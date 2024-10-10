@@ -178,7 +178,21 @@ $result2 = $conn->query($sql2);
                     <p class="card-text mb-1"><strong>Category: </strong><?php echo $row2['categoryName']; ?></p>
                     <p class="card-text mb-1"><strong>Date: </strong><?php echo date('F j, Y, g:i A', strtotime($row2['eventStartDate'])); ?></p>
                     <p class="card-text mb-1"><strong>Type: </strong><?php echo $row2['eventType']; ?></p>
-                    <p class="card-text mb-1" style="color: <?php echo ($row2['eventStatus'] === 'Scheduled') ? 'orange' : (($row2['eventStatus'] === 'Ongoing') ? 'green' : 'red'); ?>"><strong style="color: black;">Status: </strong><?php echo $row2['eventStatus']; ?></p>
+                    <p class="card-text mb-1">
+                    <strong style="color: black;">Status: </strong>
+                    <span class="badge rounded-pill 
+                      <?php 
+                        if ($row2['eventStatus'] === 'Scheduled') {
+                          echo 'bg-warning text-dark'; // Orange for scheduled
+                        } elseif ($row2['eventStatus'] === 'Ongoing') {
+                          echo 'bg-success'; // Green for ongoing
+                        } else {
+                          echo 'bg-danger'; // Red for any other status
+                        }
+                      ?>">
+                      <?php echo $row2['eventStatus']; ?>
+                    </span>
+                      </p>
                   </div>
                 </div>
                 <div class="col-md-2 col-12 align-self-center p-2">
@@ -209,10 +223,57 @@ $result2 = $conn->query($sql2);
                 <p class="modal-text mb-1"><strong>Start Date: </strong><?php echo date('F j, Y, g:i A', strtotime($row2['eventStartDate'])); ?></p>
                 <p class="modal-text mb-1"><strong>End Date: </strong><?php echo date('F j, Y, g:i A', strtotime($row2['eventEndDate'])); ?></p>
                 <p class="modal-text mb-1"><strong>Type: </strong><?php echo $row2['eventType']; ?></p>
-                <p class="modal-text mb-1" style="color: <?php echo ($row2['eventStatus'] === 'Scheduled') ? 'orange' : (($row2['eventStatus'] === 'Ongoing') ? 'green' : 'red'); ?>"><strong style="color: black;">Status: </strong><?php echo $row2['eventStatus']; ?></p>
-                <p class="modal-text mb-1" style="color: <?php echo ($participation_status === 'Pending') ? 'orange' : (($participation_status === 'Approved') ? 'green' : (($participation_status === 'Declined') ? 'red' : 'darkgrey')); ?>"><strong style="color: black;">Participation Status: </strong><?php echo $participation_status; ?></p>
-                <p class="modal-text mb-1" style="color: <?php echo ($volunteer_status === 'Pending') ? 'orange' : (($volunteer_status === 'Approved') ? 'green' : (($volunteer_status === 'Declined') ? 'red' : 'darkgrey')); ?>"><strong style="color: black;">Volunteer Status: </strong><?php echo $volunteer_status; ?></p>
-                
+                <p class="modal-text mb-1">
+  <strong style="color: black;">Status: </strong>
+  <span class="badge rounded-pill 
+    <?php 
+      if ($row2['eventStatus'] === 'Scheduled') {
+        echo 'bg-warning text-dark';
+      } elseif ($row2['eventStatus'] === 'Ongoing') {
+        echo 'bg-success';
+      } else {
+        echo 'bg-danger';
+      }
+    ?>">
+    <?php echo $row2['eventStatus']; ?>
+  </span>
+</p>
+
+<p class="modal-text mb-1">
+  <strong style="color: black;">Participation Status: </strong>
+  <span class="badge rounded-pill 
+    <?php 
+      if ($participation_status === 'Pending') {
+        echo 'bg-warning text-dark'; // Orange for pending
+      } elseif ($participation_status === 'Approved') {
+        echo 'bg-success'; // Green for approved
+      } elseif ($participation_status === 'Declined') {
+        echo 'bg-danger'; // Red for declined
+      } else {
+        echo 'bg-secondary'; // Dark grey for any other status
+      }
+    ?>">
+    <?php echo $participation_status; ?>
+  </span>
+</p>
+
+<p class="modal-text mb-1">
+  <strong style="color: black;">Volunteer Status: </strong>
+  <span class="badge rounded-pill 
+    <?php 
+      if ($volunteer_status === 'Pending') {
+        echo 'bg-warning text-dark'; // Orange for pending
+      } elseif ($volunteer_status === 'Approved') {
+        echo 'bg-success'; // Green for approved
+      } elseif ($volunteer_status === 'Declined') {
+        echo 'bg-danger'; // Red for declined
+      } else {
+        echo 'bg-secondary'; // Dark grey for any other status
+      }
+    ?>">
+    <?php echo $volunteer_status; ?>
+  </span>
+</p>
                      <!-- Participate Form -->
         <?php if ($row2['eventStatus'] !== 'Completed'): ?>
           <?php if ($participation_status !== 'Declined' && $participation_status !== 'Pending' && $participation_status !== 'Approved'): ?>

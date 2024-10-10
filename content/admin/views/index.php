@@ -57,7 +57,7 @@ while($row1 = $result1->fetch_assoc()) {
 			$a = $conn->query("INSERT INTO post (post,date,username) VALUES ('$post','$date','$username')");
 			
 					date_default_timezone_set('Asia/Manila');
-					$message = 'Admin posted a post';
+					$message = 'Administrator posted a thread.';
 					$date = date('F d, Y h:i A');
 				$save = $conn->query("INSERT INTO audit (username,action, timestamp)VALUES ('$username','$message','$date')");
         echo '<script>alert("Announcement has been posted."); window.location="index.php";</script>';

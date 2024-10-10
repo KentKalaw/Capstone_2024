@@ -35,7 +35,7 @@ $c = mysqli_num_rows($r);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/users.css" />
+  <link rel="stylesheet" href="../css/index.css" />
 </head>
 
 <body>
@@ -68,6 +68,38 @@ $c = mysqli_num_rows($r);
         Dashboard
     </li>
 </ol>
+
+<!-- <div class="container my-5">
+  
+  <div class="row justify-content-end me-4">
+    <div class="col-md-7">
+      <div class="table-container mx-auto">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan='2' class="text-center" style="color: #752738">Top Online Visitor</td>
+            </tr>
+            <tr>
+              <td>1.</td>
+              <td>Visitor 1</td>
+            </tr>
+            <tr>
+              <td>2.</td>
+              <td>Visitor 2</td>
+            </tr>
+            <tr>
+              <td>3.</td>
+              <td>Visitor 3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div> -->
 
     <!-- Featured Alumni Section -->
     <div class="container my-5">
@@ -239,8 +271,6 @@ $c = mysqli_num_rows($r);
     };
   </script>
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
 
 </body>
 

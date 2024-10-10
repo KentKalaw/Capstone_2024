@@ -21,10 +21,7 @@ while($row1 = $result1->fetch_assoc()) {
   <title>Admin - Alumnite</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="../css/view_students.css" />
-   <!-- Facebox -->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.css" media="screen" rel="stylesheet" type="text/css"/>
-
+  <link rel="stylesheet" href="../css/admin.css" />
 </head>
 
 <body>
@@ -37,7 +34,7 @@ while($row1 = $result1->fetch_assoc()) {
       <div class="d-flex align-items-center justify-content-between w-100">
         <div class="d-flex align-items-center">
           <i class="fa fa-bars primary-text fs-4 me-3" id="menu-toggle"  aria-hidden="true"></i>
-          <h2 class="fs-4 m-0" style="color:#752738">Dashboard</h2>
+          <h2 class="fs-4 m-0" style="color:#752738">System Logs</h2>
         </div>
         <li class="d-flex align-items-center">
           <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,90 +44,51 @@ while($row1 = $result1->fetch_assoc()) {
       </div>
     </nav>
 
-    <?php include_once('./dashboardcard.php'); ?>
-    <!-- Dashboard Cards End -->
-  
-    
-    <?php
-				include('../../connect.php');
-					$result1aa = $conn->query("SELECT * FROM login WHERE status = 'Pending'");
-					$count1aa = $result1aa->num_rows;
-				?>
+    <h2 class="fs-4 my-5 b-0 pt-2 px-3" style="color:#752738">System Logs Record Table</h2>
 
-    <h2 class="fs-4 my-5 b-0 pt-4 px-3" style="color:#752738">Record Table - <?php echo $_GET['dept']; ?></h2>
-
-    <!-- Add the Record Table Below -->
+    <!-- System Logs Table Record -->
     <div class="container-fluid mt-3">
     <div class="d-flex justify-content-start mb-3 button-group">
-        <button class="btn btn-outline-secondary me-2 active" style="box-shadow: none;" onclick="window.location='index.php'">Alumnite</button>
-        <button class="btn btn-outline-secondary me-2" style="box-shadow: none;">GTS Reports</button>
-        <button class="btn btn-outline-secondary me-2" style="box-shadow: none;">Initiative Program</button>
-        <button class="btn btn-outline-secondary me-2" style="box-shadow: none;" onclick="window.location='approval.php'">For Approval [<?php echo $count1aa ?>] </button>
-        <select name="department" id="username" required id="department" class="form-select form-select-lg" onchange="go(this.value)" style="width: 100%; max-width: 400px; font-size:1rem; outline=none;">
-        <option value="" disabled selected><?php echo $_GET['dept'] ?></option>
-              <option>Senior High School</option>
-							<option>College of Allied Medical Sciences</option>
-<option>College of Arts and Sciences</option>
-<option>College of Business, Accountancy, and Hospitality Management</option>
-<option>College of Criminal Justice Education</option>
-<option>College of Education</option>
-<option>College of Engineering</option>
-<option>College of Information and Communications Technology</option>
-<option>College of Nursing and Midwifery</option>
-<option>College of Technical Education</option>
-						</select>
+        <button class="btn btn-outline-secondary me-2" style="box-shadow: none;" onclick="window.location='index.php'">Alumnite</button>
+        <button class="btn btn-outline-secondary me-2 active" style="box-shadow: none;" onclick="window.location='system_logs.php'">System Logs</button>
+        <button class="btn btn-outline-secondary me-2" style="box-shadow: none;" onclick="window.location='top_online_visitor.php'">Top Online Visitors</button>
       </div>
-      <script>
-							function go(val) {
-								window.location='view_students.php?dept='+val;
-							}
-						</script>
-            
+    
       <div class="table-responsive">
       <div class="col-lg-12 d-flex align-items-stretch" class="card w-100" style="border-radius:10px">
       <div class="card w-100" style="border-radius:10px;padding:10px">
         <table class="table vm no-th-brd pro-of-month" style="border-radius:10px" id="example">
           <thead style="background:#8E8B82;color:#FFF;border-radius:10px">
             <tr>
-              <th>Register ID</th>
-              <th>Date Registered</th>
+              <th>System Logs ID</th>
               <th>Name</th>
-              <th>Batch Year</th>
-              <th>Proof</th>
-              <th>Course</th>
+              <th>Timestamp</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
           <?php
 									include('../../connect.php');
-                                    $dept = $_GET['dept'];
-									$sql = "SELECT * FROM login WHERE status = 'Approved' AND type = 'alumni'";
-									$result = $conn->query($sql);
+									
+									$result = $conn->query("SELECT * FROM audit ORDER BY id DESC");
 										while($row = $result->fetch_assoc()) {
 										$username =$row['username'];
-									$sql1 = "SELECT * FROM alumni WHERE username = '$username' AND department = '$dept'";
-									$result1 = $conn->query($sql1);
-									while($row1 = $result1->fetch_assoc()) {
-										$id =$row1['id'];
-										$ub_id  = sprintf("%04d", $id);
-										$fname =$row1['fname'];
-										$lname =$row1['lname'];
-										$year =$row1['year'];
-										$department =$row1['department'];
-										$course =$row1['course'];
-										$file =$row1['file'];
-										$date =$row1['date'];
-										$date = date('F d, Y',strtotime($date));
+										if($username == 'admin') {
+											$name= 'Administrator';
+										} else {
+											$sql1 = "SELECT * FROM alumni WHERE username = '$username'";
+											$result1 = $conn->query($sql1);
+											while($row1 = $result1->fetch_assoc()) {
+										$name = $row1['fname'].' '.$row1['lname'].'';
+										
+										} }
                   echo '<tr>';
-              echo '<td>'.$ub_id.'</td>';
-              echo '<td>'.$date.'</td>';
-              echo '<td>'.$fname.' '.$lname.'</td>';
-              echo '<td>'.$year.'</td>';
-              echo '  <td><a href="view_file.php?id='.$id.'" rel="facebox" target="_blank" class="bg-transparent">View File</a></td>';
-              echo '  <td>'.$course.'</td>';
+              echo '<td>'.$row['id'].'</td>';
+              echo '<td>'.$name.'</td>';
+              echo '<td>'.$row['timestamp'].'</td>';
+              echo '<td>'.$row['action'].'</td>';
               echo '</tr>';
             }
-                }
             $conn->close();
             ?>
             </tr>
@@ -143,7 +101,7 @@ while($row1 = $result1->fetch_assoc()) {
 
   </div> <!-- End of page-content-wrapper -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script>
     var el = document.getElementById("wrapper");
@@ -153,16 +111,14 @@ while($row1 = $result1->fetch_assoc()) {
       el.classList.toggle("toggled");
     };
   </script>
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
 
-  
-  <script type="text/javascript">
-    $(document).ready(function($) {
-      $('a[rel=facebox]').facebox();
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('a[rel*=facebox]').facebox();
     });
-  </script>
+</script>
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

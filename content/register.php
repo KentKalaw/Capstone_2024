@@ -73,7 +73,7 @@
 	  $fname = $_POST['fname'];
 	  $lname = $_POST['lname'];
 	  $username = $_POST['username'];
-	  $password = md5($_POST['password']);
+	  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 	  $year = $_POST['year'];
 	  $department = $_POST['department'];
 	  $course = $_POST['course'];

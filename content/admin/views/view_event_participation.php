@@ -81,7 +81,7 @@ $participation_result = $conn->query($participation_sql);
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Participation Status</th>
-                                <th>Action</th>
+                                <th><center>Action</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
         date_default_timezone_set('Asia/Manila');
-        $message = 'Admin added '. $categoryName . ' ' . 'as a event category';
+        $message = 'Administrator added '. $categoryName . ' ' . 'as a event category';
         $date = date('F d, Y h:i A');
         
         // Insert into audit table

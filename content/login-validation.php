@@ -22,22 +22,22 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
        return $data;
     }
     $username = validate($_POST['username']);
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
     if (empty($username)) {
-        
-    }else if(empty($password)){
-    }else{
+        }
+        else if(empty($password)){
+    }
+    else {
         $sql = "SELECT * FROM login WHERE  username='$username' AND status = 'Approved'";
         $result = mysqli_query($conn, $sql);
+
         if (mysqli_num_rows($result) > 0) {
-			
-        $row = mysqli_fetch_assoc($result);
-		
-			$password1 = $row['password'];
+            $row = mysqli_fetch_assoc($result);
+			$hashedPasswordFromDB = $row['password'];
 			$user = $row['username'];
 			$type = $row['type'];
 			
-			if($password1 != $password) {
+            if (!password_verify($password, $hashedPasswordFromDB)) {
 				echo '<script>alert("Password is incorrect");window.location="index.php";</script>';
 			} else {
 				$_SESSION['username'] = $user;
@@ -46,7 +46,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 					date_default_timezone_set('Asia/Manila');
 					$message = 'Admin account logged in';
 					$date = date('F d, Y h:i A');
-				$save = $conn->query("INSERT INTO audit (username,action, timestamp)VALUES ('$username','$message','$date')");
+				$save = $conn->query("INSERT INTO top_online_visitor (username,action, timestamp)VALUES ('$username','$message','$date')");
 				echo '<script>window.location="admin/views/index.php"</script>';
 				}
 				if($type == 'alumni') {
