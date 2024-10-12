@@ -1,24 +1,8 @@
+<?php include_once('./client/client.php'); ?>
+
 <?php
-include('../../auth.php');
-include('../../connect.php');
 
-$sql1 = "SELECT * FROM alumni WHERE username = '$username'";
-$result1 = $conn->query($sql1);
-while($row1 = $result1->fetch_assoc()) {
-    $fname = $row1['fname'];
-    $lname = $row1['lname'];
-    $occupation = $row1['occupation'];
-    $company = $row1['company'];
-    $city = $row1['city'];
-    $region = $row1['region'];
-    $program = $row1['program'];
-    $file = $row1['profile'];
-    if ($file == '') {
-        $file = '../images/ub-logo.png';
-    }
-}
-
-$category_result = mysqli_query($conn, "SELECT * FROM threads_categories");
+$category_result = mysqli_query($conn, "SELECT * FROM forum_category");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = mysqli_real_escape_string($conn, $_POST['title']);
@@ -32,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $author_id = $alumni['id'];
 
     // Insert the new thread into the database with a category
-    $sql = "INSERT INTO threads (title, content, author_id, category_id) 
+    $sql = "INSERT INTO forums (title, content, author_id, category_id) 
             VALUES ('$title', '$content', '$author_id', '$category_id')";
     if (mysqli_query($conn, $sql)) {
         date_default_timezone_set('Asia/Manila');

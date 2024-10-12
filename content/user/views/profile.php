@@ -1,27 +1,4 @@
-<?php
-include('../../auth.php');
-include('../../connect.php');
-$username = $_SESSION['username'];
-
-// Get the logged-in user details
-$sql1 = "SELECT * FROM alumni WHERE username = '$username'";
-$result1 = $conn->query($sql1);
-while($row1 = $result1->fetch_assoc()) {
-    $fname = $row1['fname'];
-    $lname = $row1['lname'];
-    $birthday = $row1['birthday'];
-    $occupation = $row1['occupation'];
-    $company = $row1['company'];
-    $city = $row1['city'];
-    $region = $row1['region'];
-    $program = $row1['program'];
-    $file = $row1['profile'];
-    if ($file == '') {
-        $file = '../img/logo.png';
-    }
-}
-
-?>
+<?php include_once('./client/client.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,40 +56,7 @@ while($row1 = $result1->fetch_assoc()) {
                 <textarea id="file" name="file" style="display:none"></textarea>
             </div>
 
-            <?php
-				if(isset($_POST['submit'])) {
-					include('../../connect.php');
-					$lname =$_POST['lname'];
-					$fname =$_POST['fname'];
-          $birthday =$_POST['birthday'];
-					$occupation =$_POST['occupation'];
-					$company =$_POST['company'];
-					$region = $_POST['region'];
-					$city =$_POST['city'];
-					$program =$_POST['program'];
-					$file =$_POST['file'];
-					$username = $_SESSION['username'];
-		$conn->query("UPDATE alumni SET fname = '$fname' WHERE username = '$username'");
-		$conn->query("UPDATE alumni SET lname = '$lname' WHERE username = '$username'");
-    $conn->query("UPDATE alumni SET birthday = '$birthday' WHERE username = '$username'");
-		$conn->query("UPDATE alumni SET occupation = '$occupation' WHERE username = '$username'");
-		$conn->query("UPDATE alumni SET company = '$company' WHERE username = '$username'");
-		$conn->query("UPDATE alumni SET city = '$city' WHERE username = '$username'");
-		$conn->query("UPDATE alumni SET region = '$region' WHERE username = '$username'");
-		$conn->query("UPDATE alumni SET program = '$program' WHERE username = '$username'");
-		if($file == '') {
-			
-		} else {
-			$conn->query("UPDATE alumni SET profile = '$file' WHERE username = '$username'");
-		}
-		
-					date_default_timezone_set('Asia/Manila');
-					$message = 'Alumni updated profile';
-					$date = date('F d, Y h:i A');
-				$save = $conn->query("INSERT INTO audit (username,action, timestamp)VALUES ('$username','$message','$date')");
-		echo '<script>alert("Profile has been updated");window.location="profile.php";</script>';
-				}
-				?>
+            <?php include_once('./client/profile_sql.php'); ?>
                 
                 
                 <div class="mb-3 text-start">

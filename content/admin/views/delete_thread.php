@@ -2,7 +2,7 @@
 include('../../connect.php');
 session_start();
 $id =$_GET['id'];
-mysqli_query($conn,"DELETE FROM threads WHERE id = '$id'");
+mysqli_query($conn,"DELETE FROM forums WHERE id = '$id'");
 
 
 					date_default_timezone_set('Asia/Manila');

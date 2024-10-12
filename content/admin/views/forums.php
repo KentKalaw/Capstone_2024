@@ -2,7 +2,7 @@
 include('../../auth.php');
 include('../../connect.php');
 $username = $_SESSION['username'];
-$sql1 = "SELECT * FROM login WHERE username = '$username'";
+$sql1 = "SELECT * FROM users WHERE username = '$username'";
 $result1 = $conn->query($sql1);
 while($row1 = $result1->fetch_assoc()) {
 	$type = $row1['type'];
@@ -21,7 +21,7 @@ $category_id = isset($_GET['category']) ? intval($_GET['category']) : 0;
 
 $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 
-$total_threads_query = "SELECT COUNT(*) AS total FROM threads";
+$total_threads_query = "SELECT COUNT(*) AS total FROM forums";
 if ($category_id > 0) {
     $total_threads_query .= " WHERE category_id = $category_id"; // Filter by category
 }
@@ -37,9 +37,9 @@ $total_pages = ceil($total_threads / $limit);
 
 // Fetch threads for the current page with limit and offset
 $query = "SELECT t.id, t.title, t.created_at, a.fname, a.lname, a.profile, c.name AS category_name 
-          FROM threads t
+          FROM forums t
           JOIN alumni a ON t.author_id = a.id
-          JOIN threads_categories c ON t.category_id = c.id";
+          JOIN forum_category c ON t.category_id = c.id";
 
 $conditions = [];
 
@@ -148,7 +148,7 @@ $result = mysqli_query($conn, $query);
             <a class="nav-link <?php if($category_id == 0) echo 'active'; ?>" href="forums.php">All</a>
           </li>
           <?php 
-          $categories_result = mysqli_query($conn, "SELECT * FROM threads_categories");
+          $categories_result = mysqli_query($conn, "SELECT * FROM forum_category");
           while ($category = mysqli_fetch_assoc($categories_result)): 
           ?>
             <li class="nav-item">
@@ -211,7 +211,7 @@ $result = mysqli_query($conn, $query);
         </nav>
       <?php endif; ?>
 
-<?php $category_result = mysqli_query($conn, "SELECT * FROM threads_categories"); ?>
+<?php $category_result = mysqli_query($conn, "SELECT * FROM forum_category"); ?>
       <!-- Modal -->
 <div class="modal fade" id="createThreadModal" tabindex="-1" aria-labelledby="createThreadModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

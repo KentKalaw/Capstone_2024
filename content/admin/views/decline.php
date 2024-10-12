@@ -2,7 +2,7 @@
 include('../../connect.php');
 $id =  $_GET['id'];
 
-$sql = "DELETE FROM login WHERE id = '$id'";
+$sql = "DELETE FROM users WHERE id = '$id'";
 $conn->query($sql);
 // send email
 $email = $_GET['email'];

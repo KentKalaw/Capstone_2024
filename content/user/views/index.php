@@ -1,25 +1,6 @@
+<?php include_once('./client/client.php'); ?>
+
 <?php
-include('../../auth.php');
-include('../../connect.php');
-$username = $_SESSION['username'];
-
-// Get the logged-in user details
-$sql1 = "SELECT * FROM alumni WHERE username = '$username'";
-$result1 = $conn->query($sql1);
-while($row1 = $result1->fetch_assoc()) {
-    $fname = $row1['fname'];
-    $lname = $row1['lname'];
-    $occupation = $row1['occupation'];
-    $company = $row1['company'];
-    $city = $row1['city'];
-    $region = $row1['region'];
-    $program = $row1['program'];
-    $file = $row1['profile'];
-    if ($file == '') {
-        $file = '../images/ub-logo.png';
-    }
-}
-
 $r = mysqli_query($conn, "SELECT * FROM top_online_visitor WHERE username = '$username' AND action = 'Alumni account logged in'");
 $c = mysqli_num_rows($r);
 ?>
@@ -35,7 +16,7 @@ $c = mysqli_num_rows($r);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/index.css" />
+  <link rel="stylesheet" href="../css/alumni.css" />
 </head>
 
 <body>

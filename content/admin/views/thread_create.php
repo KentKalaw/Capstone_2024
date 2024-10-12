@@ -4,7 +4,7 @@ include('../../connect.php');
 $username = $_SESSION['username'];
 
 // Check user type
-$sql1 = "SELECT * FROM login WHERE username = '$username'";
+$sql1 = "SELECT * FROM users WHERE username = '$username'";
 $result1 = $conn->query($sql1);
 while($row1 = $result1->fetch_assoc()) {
 	$type = $row1['type'];
@@ -13,7 +13,7 @@ while($row1 = $result1->fetch_assoc()) {
 	}
 }
 
-$category_result = mysqli_query($conn, "SELECT * FROM threads_categories");
+$category_result = mysqli_query($conn, "SELECT * FROM forum_category");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = mysqli_real_escape_string($conn, $_POST['title']);
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle posting based on user type
     if ($type == 'admin') {
         // If the user is an admin, insert using admin's login info
-        $result = mysqli_query($conn, "SELECT id FROM login WHERE username = '$username'");
+        $result = mysqli_query($conn, "SELECT id FROM users WHERE username = '$username'");
         $admin = mysqli_fetch_assoc($result);
         $author_id = $admin['id'];
         $author_type = 'admin'; // Mark author type as admin
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert the new thread into the database with the category and author type
-    $sql = "INSERT INTO threads (title, content, author_id, category_id, author_type) 
+    $sql = "INSERT INTO forums (title, content, author_id, category_id, author_type) 
             VALUES ('$title', '$content', '$author_id', '$category_id', '$author_type')";
     
     if (mysqli_query($conn, $sql)) {

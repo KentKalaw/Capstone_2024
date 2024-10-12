@@ -1,34 +1,10 @@
-<?php
-include('../../auth.php');
-include('../../connect.php');
-$username = $_SESSION['username'];
-
-// Get the logged-in user details
-$sql1 = "SELECT * FROM alumni WHERE username = '$username'";
-$result1 = $conn->query($sql1);
-while($row1 = $result1->fetch_assoc()) {
-    $fname = $row1['fname'];
-    $lname = $row1['lname'];
-    $occupation = $row1['occupation'];
-    $company = $row1['company'];
-    $city = $row1['city'];
-    $region = $row1['region'];
-    $program = $row1['program'];
-    $file = $row1['profile'];
-    if ($file == '') {
-        $file = '../images/ub-logo.png';
-    }
-}
-
-$r = mysqli_query($conn, "SELECT * FROM audit WHERE username = '$username' AND action = 'Alumni account logged in'");
-$c = mysqli_num_rows($r);
-?>
+<?php include_once('./client/client.php'); ?>
 
 <?php
 $thread_id = isset($_GET['id']) ? $_GET['id'] : null;
 
 $thread_result = mysqli_query($conn, "SELECT t.title, t.content, t.created_at, a.fname, a.lname, a.profile
-                                      FROM threads t
+                                      FROM forums t
                                       JOIN alumni a ON t.author_id = a.id
                                       WHERE t.id = '$thread_id'");
 
@@ -50,7 +26,7 @@ $author_profile = isset($thread['profile']) && $thread['profile'] ? $thread['pro
 
 // Fetch the thread details
 $posts_result = mysqli_query($conn, "SELECT p.id, p.content, p.created_at, a.fname, a.lname, a.profile
-                                     FROM threads_posts p
+                                     FROM forum_replies p
                                      JOIN alumni a ON p.author_id = a.id
                                      WHERE p.thread_id = '$thread_id' AND p.parent_id IS NULL
                                      ORDER BY p.created_at ASC");
@@ -58,7 +34,7 @@ $posts_result = mysqli_query($conn, "SELECT p.id, p.content, p.created_at, a.fna
 // Function to fetch child replies for a specific post
 function fetch_child_replies($parent_id, $conn) {
     $child_posts_result = mysqli_query($conn, "SELECT p.id, p.content, p.created_at, a.fname, a.lname, a.profile
-                                               FROM threads_posts p
+                                               FROM forum_replies p
                                                JOIN alumni a ON p.author_id = a.id
                                                WHERE p.parent_id = '$parent_id'
                                                ORDER BY p.created_at ASC");
@@ -74,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $author_id = $alumni['id'];
 
     // Insert the new post (reply) into the database
-    $sql = "INSERT INTO threads_posts (thread_id, content, author_id) VALUES ('$thread_id', '$content', '$author_id')";
+    $sql = "INSERT INTO forum_replies (thread_id, content, author_id) VALUES ('$thread_id', '$content', '$author_id')";
     if (mysqli_query($conn, $sql)) {
         header("Location: thread_details.php?id=$thread_id");
         exit();

@@ -1,0 +1,183 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EBDFD7;
+}
+
+nav#top-bar {
+    border-bottom: 1px solid #DDD3CD !important;
+    margin-bottom: -2px !important; /* Negative margin to pull the top bar up */
+    padding-bottom: 12px !important;
+}
+
+nav#top-bar .d-flex img {
+    width: 40px;
+    height: 40px;
+}
+
+nav#top-bar .d-flex span {
+    font-size: 16px;
+    color: #000000;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">>";
+    font-weight: bold;
+    color: #6c757d;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+}
+
+.table-container {
+    width: 100%; /* Ensures the container spans the full width */
+    padding: 10px; /* Optional padding */
+    
+    
+}
+
+table {
+    width: auto; /* Ensures the container spans the full width */
+    padding: 10px; /* Optional padding */
+    border-collapse: collapse; 
+    border: 1px solid #000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead th {
+    background-color: white;
+    color: #752738;
+    font-size: 1.2em;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+    text-align: center;
+}
+
+tbody td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr{
+background-color: #f2f2f2;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #ffffff; /* Highlight row on hover */
+}
+
+
+/* Carousel styles */
+#featuredAlumniCarousel {
+    max-width: 1200px !important; /* Adjust the width */
+    margin: 0 auto;   /* Center the carousel */
+}
+
+.carousel-item img {
+    width: 100% !important;
+    height: 380px !important; /* Set a fixed height */
+    object-fit: fit !important; /* Make the image cover the entire container */
+    object-position: center !important; /* Ensure the central part of the image is focused */
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.3); /* Add a semi-transparent black background */
+    padding: 10px; /* Add some padding */
+    border-radius: 10px; /* Optional: rounded corners */
+}
+
+.carousel-caption h5 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.carousel-caption p {
+    font-size: 18px;
+}
+
+.carousel-logo {
+    position: absolute !important;
+    top: 10px !important; /* Adjust this value to control vertical spacing */
+    right: 10px !important; /* Adjust this value to control horizontal spacing */
+    width: 120px !important; /* Adjust the size of the logo */
+    height: auto !important; /* Maintain aspect ratio */
+    z-index: 1000 !important; /* Ensure it stays on top of other elements */
+}
+
+.card {
+    border-radius: 8px;
+}
+.card .btn {
+    font-size: 0.85rem;
+}
+.card img {
+    width: 60px;
+    height: 60px;
+}
+
+.card-text {
+    white-space: pre-wrap; /* Allow line breaks */
+    word-wrap: break-word; /* Break long words */
+    overflow: hidden; /* Hide overflow */
+    max-height: 200px; /* Limit the height of the text box */
+    text-overflow: ellipsis; /* Optionally add ellipsis for overflow */
+}
+
+.card-body {
+    max-height: 200px; /* Limit the overall height of the card's body */
+    overflow-y: auto; /* Allow scrolling if content is too long */
+}
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 767px) {
+    .alumni-text {
+        display: none;
+    }
+    .carousel-item img {
+        height: 300px; /* Smaller height for mobile screens */
+    }
+    .carousel-caption {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .carousel-caption p.positioncompany {
+        display: none; /* Hide additional info on mobile screens */
+    }
+
+    .carousel-caption h5 {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .card-text {
+        max-height: 150px; /* Adjust height for smaller screens */
+    }
+
+
+    
+}
+
+/* Adjustments for larger screens */
+@media (min-width: 768px) {
+    #featuredAlumniCarousel {
+        max-width: 1200px; /* Wider carousel for larger screens */
+    }
+    .carousel-item img {
+        height: 500px; /* Increase height for larger screens */
+    }
+    
+}

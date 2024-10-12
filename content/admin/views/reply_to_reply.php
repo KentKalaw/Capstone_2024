@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert the new post (reply) with the parent_id into the database
-    $sql = "INSERT INTO threads_posts (thread_id, content, author_id, parent_id) 
+    $sql = "INSERT INTO forum_replies (thread_id, content, author_id, parent_id) 
             VALUES ('$thread_id', '$content', '$author_id', '$parent_id')";
     
     if (mysqli_query($conn, $sql)) {

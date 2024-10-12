@@ -28,7 +28,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         else if(empty($password)){
     }
     else {
-        $sql = "SELECT * FROM login WHERE  username='$username' AND status = 'Approved'";
+        $sql = "SELECT * FROM users WHERE  username='$username' AND status = 'Approved'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {

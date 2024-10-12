@@ -1,71 +1,5 @@
-<?php
-include('../../auth.php');
-include('../../connect.php');
-$username = $_SESSION['username'];
-
-// Get the logged-in user details
-$sql1 = "SELECT * FROM alumni WHERE username = '$username'";
-$result1 = $conn->query($sql1);
-while ($row1 = $result1->fetch_assoc()) {
-    $fname = $row1['fname'];
-    $lname = $row1['lname'];
-    $occupation = $row1['occupation'];
-    $company = $row1['company'];
-    $city = $row1['city'];
-    $region = $row1['region'];
-    $program = $row1['program'];
-    $file = $row1['profile'];
-    if ($file == '') {
-        $file = '../images/ub-logo.png';  // Default image if no profile picture
-    }
-}
-
-// Pagination Logic
-$limit = 5; // Number of threads to display per page
-$page = isset($_GET['page']) ? $_GET['page'] : 1; // Current page
-$offset = ($page - 1) * $limit; // Offset for SQL query
-
-// Get the category ID from the URL
-$category_id = isset($_GET['category']) ? intval($_GET['category']) : 0;
-
-// Capture the search input
-$search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
-
-// Count total threads for pagination
-$total_threads_query = "SELECT COUNT(*) AS total FROM threads";
-if ($category_id > 0) {
-    $total_threads_query .= " WHERE category_id = $category_id"; // Filter by category
-}
-$total_threads_result = mysqli_query($conn, $total_threads_query);
-$total_threads_row = mysqli_fetch_assoc($total_threads_result);
-$total_threads = $total_threads_row['total'];
-
-// Calculate total number of pages
-$total_pages = ceil($total_threads / $limit);
-
-// Fetch threads for the current page with limit and offset
-$query = "SELECT t.id, t.title, t.created_at, a.fname, a.lname, a.profile, c.name AS category_name 
-          FROM threads t
-          JOIN alumni a ON t.author_id = a.id
-          JOIN threads_categories c ON t.category_id = c.id";
-
-$conditions = [];
-
-if ($category_id > 0) {
-    $conditions[] = "t.category_id = $category_id";// Filter by category
-}
-
-if (!empty($search)) {
-  $conditions[] = "(t.title LIKE '%$search%' OR a.fname LIKE '%$search%' OR a.lname LIKE '%$search%')";
-}
-
-if (count($conditions) > 0) {
-  $query .= " WHERE " . implode(' AND ', $conditions);
-}
-
-$query .= " ORDER BY t.created_at DESC LIMIT $limit OFFSET $offset";
-$result = mysqli_query($conn, $query);
-?>
+<?php include_once('./client/client.php'); ?>
+<?php include_once('./client/forums_sql.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -136,7 +70,7 @@ $result = mysqli_query($conn, $query);
             <a class="nav-link <?php if($category_id == 0) echo 'active'; ?>" href="forums.php">All</a>
           </li>
           <?php 
-          $categories_result = mysqli_query($conn, "SELECT * FROM threads_categories");
+          $categories_result = mysqli_query($conn, "SELECT * FROM forum_category");
           while ($category = mysqli_fetch_assoc($categories_result)): 
           ?>
             <li class="nav-item">
@@ -190,7 +124,7 @@ $result = mysqli_query($conn, $query);
         </nav>
       <?php endif; ?>
 
-      <?php $category_result = mysqli_query($conn, "SELECT * FROM threads_categories"); ?>
+      <?php $category_result = mysqli_query($conn, "SELECT * FROM forum_category"); ?>
       <!-- Modal -->
 <div class="modal fade" id="createThreadModal" tabindex="-1" aria-labelledby="createThreadModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

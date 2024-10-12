@@ -2,7 +2,7 @@
 include('../../auth.php');
 include('../../connect.php');
 $username = $_SESSION['username'];
-$sql1 = "SELECT * FROM login WHERE username = '$username'";
+$sql1 = "SELECT * FROM users WHERE username = '$username'";
 $result1 = $conn->query($sql1);
 while($row1 = $result1->fetch_assoc()) {
 	$type = $row1['type'];
@@ -53,7 +53,7 @@ while($row1 = $result1->fetch_assoc()) {
     
     <?php
 				include('../../connect.php');
-					$result1aa = $conn->query("SELECT * FROM login WHERE status = 'Pending'");
+					$result1aa = $conn->query("SELECT * FROM users WHERE status = 'Pending'");
 					$count1aa = $result1aa->num_rows;
 				?>
 
@@ -104,7 +104,7 @@ while($row1 = $result1->fetch_assoc()) {
           <?php
 									include('../../connect.php');
                                     $dept = $_GET['dept'];
-									$sql = "SELECT * FROM login WHERE status = 'Approved' AND type = 'alumni'";
+									$sql = "SELECT * FROM users WHERE status = 'Approved' AND type = 'alumni'";
 									$result = $conn->query($sql);
 										while($row = $result->fetch_assoc()) {
 										$username =$row['username'];

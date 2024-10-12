@@ -2,7 +2,7 @@
 include('../../auth.php');
 include('../../connect.php');
 $username = $_SESSION['username'];
-$sql1 = "SELECT * FROM login WHERE username = '$username'";
+$sql1 = "SELECT * FROM users WHERE username = '$username'";
 $result1 = $conn->query($sql1);
 while($row1 = $result1->fetch_assoc()) {
 	$type = $row1['type'];
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $categoryName = trim($_POST['categoryName']);
 
     // Insert the new category into the database
-    $sql = "INSERT INTO threads_categories (name) VALUES (?)";
+    $sql = "INSERT INTO forum_category (name) VALUES (?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $categoryName);
 

@@ -81,7 +81,7 @@
 	  $type = 'alumni';
 	  $status = 'Pending';
 	  //check user
-	  $sq = mysqli_query($conn,"SELECT * FROM login WHERE username = '$username'");
+	  $sq = mysqli_query($conn,"SELECT * FROM users WHERE username = '$username'");
 	  $count = mysqli_num_rows($sq);
 	  if($count > 0) {
 		echo '<script>alert("The alumni account you are trying to register is already on the database. Please wait or check your email for the status of your request.");window.location="index.php"</script>';  
