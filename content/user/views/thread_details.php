@@ -17,6 +17,7 @@
 <body>
   
   <?php include_once('./sidebar/sidebar.php'); ?>
+  <?php include_once('./loader/loader.php'); ?>
 
   <div id="page-content-wrapper">
 
@@ -51,7 +52,7 @@
 
         <!-- Display the main thread -->
         <div class="row mb-4">
-            <div class="col-lg-8 mx-auto">
+            <div class="col-lg-12 mx-auto">
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-3">
@@ -69,7 +70,7 @@
 
         <!-- Form to submit a reply to the main thread -->
         <div class="row mb-4">
-            <div class="col-lg-8 mx-auto">
+            <div class="col-lg-12 mx-auto">
                 <form method="POST" action="">
                     <textarea class="form-control mb-2" name="content" rows="1" placeholder="Write your reply here..." required></textarea>
                     <button type="submit" class="btn btn-dark btn-sm">Submit Reply</button>
@@ -79,7 +80,7 @@
 
         <!-- Display replies -->
         <div class="row mb-4">
-    <div class="col-lg-8 mx-auto">
+    <div class="col-md-12 mx-auto">
         <div class="replies-section">
             <h4 class="mb-4" style="color:#752738">Replies</h4>
             <?php echo render_replies($thread_id, $conn); ?>
