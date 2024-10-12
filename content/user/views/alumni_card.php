@@ -46,6 +46,15 @@
     </div>
 </div>
 
+<div class="text-center my-4">
+    <button class="btn btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#howToUseModal">
+        <i class="fas fa-info-circle me-2"></i> How to Use APC
+    </button>
+    <button class="btn btn-dark mx-2" data-bs-toggle="modal" data-bs-target="#applicationFormModal">
+        <i class="fas fa-file-alt me-2"></i> APC Application Form
+    </button>
+</div>
+
 <div class="not-container my-5">
       <h3 class="text-center mb-4" style="color:#752738; font-weight: bold;">Alumni Privilege Card Preview</h3>
 <div>
@@ -84,6 +93,8 @@
     </div>
 <div>
 
+
+
 <div class="not-container my-5">
     <h3 class="text-center mb-4" style="color:#752738; font-weight: bold;">Franchise Benefits</h3>
     <div class="not-container">
@@ -121,11 +132,6 @@
     </div>
 </div>
 
-<!-- Add the buttons here -->
-<div class="text-center my-4">
-    <button class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#howToUseModal">How to Use APC</button>
-    <a href="" class="btn btn-success mx-2">APC Application Form</a>
-</div>
 
 <!-- Modal for How to Use APC -->
 <div class="modal fade" id="howToUseModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -158,6 +164,40 @@
     </div>
 </div>
 
+<!-- Modal for Application Form -->
+<div class="modal fade" id="applicationFormModal" tabindex="-1" aria-labelledby="applicationFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="applicationFormModalLabel">APC Application Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Here you can include the application form or any information related to it.</p>
+                <!-- You can embed a form here or provide a link to download the application form -->
+                <form>
+                    <!-- Example fields -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
   </div> <!-- End of page-content-wrapper -->
