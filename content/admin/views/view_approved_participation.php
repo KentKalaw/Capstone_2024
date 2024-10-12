@@ -1,19 +1,6 @@
+<?php include_once('./client/client.php'); ?>
+
 <?php
-include('../../auth.php');
-include('../../connect.php');
-
-$username = $_SESSION['username'];
-
-// Check user type
-$sql1 = "SELECT * FROM users WHERE username = '$username'";
-$result1 = $conn->query($sql1);
-while($row1 = $result1->fetch_assoc()) {
-    $type = $row1['type'];
-    if($type != 'admin') {
-        echo '<script>window.location="../logout.php";</script>';
-    }
-}
-
 // Get the event_id from the URL
 $event_id = isset($_GET['event_id']) ? intval($_GET['event_id']) : 0;
 
