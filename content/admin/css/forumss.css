@@ -154,13 +154,14 @@ nav#top-bar .d-flex span {
     margin-top: 10px;
 }
 
+
 /* Responsive adjustments */
 @media (max-width: 767px) {
     body {
         font-size: 14px;
     }
 
-    .alumni-text {
+    .admin-text {
         display: none;
     }
 
@@ -184,7 +185,7 @@ nav#top-bar .d-flex span {
     }
 
     .reply-thread {
-        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .reply-item .reply-thread {
@@ -199,10 +200,20 @@ nav#top-bar .d-flex span {
         padding: 0.3rem 0.6rem;
         font-size: 0.9rem;
     }
+
+    .reply-thread::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 10px;
+        bottom: 0;
+        width: 2px;
+        background: #505050;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-    .alumni-text {
+    .admin-text {
         display:none;
     }
     .container {
