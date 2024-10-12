@@ -32,6 +32,18 @@
       </div>
     </nav>
 
+    <h2 class="fs-4 mb-2 pt-2 px-3" style="color:#752738; margin-top:20px;">Dashboard</h2>
+
+<!-- Breadcrumb below the title -->
+<ol class="breadcrumb col-md-4 px-3">
+  <li class="breadcrumb-item">
+    <a href="index.php" style="color: black;">Home</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Dashboard
+  </li>
+</ol>
+
    <?php include_once('./dashboardcard.php'); ?>
     <!-- Dashboard Cards End -->
   
@@ -181,7 +193,7 @@
     <div class="container-fluid mt-3">
     <div class="d-flex justify-content-start mb-3 button-group">
         <button class="btn btn-outline-secondary me-2 active" style="box-shadow: none;" onclick="window.location='index.php'">Alumnite</button>
-        <button class="btn btn-outline-secondary me-2" style="box-shadow: none;">GTS Reports</button>
+        <button class="btn btn-outline-secondary me-2" style="box-shadow: none;" onclick="window.location='gts.php'">GTS Reports</button>
         <button class="btn btn-outline-secondary me-2" style="box-shadow: none;">Initiative Program</button>
         <button class="btn btn-outline-secondary me-2" style="box-shadow: none;" onclick="window.location='approval.php'">For Approval [<?php echo $count1aa ?>] </button>
         <select name="department" id="username" required id="department" class="form-select form-select-lg" onchange="go(this.value)" style="width: 100%; max-width: 400px; font-size:1rem; outline=none;">

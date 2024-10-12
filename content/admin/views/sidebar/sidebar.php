@@ -14,7 +14,7 @@
     <i class="fa-solid fa-book me-3"  aria-hidden="true"></i>Dashboard
   </a>
 
-  <li> <a href="#" class="list-group-item list-group-item-action">
+  <li> <a href="feature_alumni.php" class="list-group-item list-group-item-action">
     <i class="fa-solid fa-user-graduate me-3"  aria-hidden="true"></i>Featured Alumni
   </a> </li>
 
@@ -23,16 +23,8 @@
   </a> </li>
 
   <li> <a href="#" class="list-group-item list-group-item-action">
-    <i class="fa fa-desktop me-3"  aria-hidden="true"></i>Template
+    <i class="fa-solid fa-hand-holding-heart me-3"  aria-hidden="true"></i>Initiative Programs
   </a> 
-  <ul>
-        <li> <a class="list-group-item list-group-item-action" href="#" aria-expanded="false">
-        <span class="hide-menu">Initiative Programs</span></a></li>
-        <li> <a class="list-group-item list-group-item-action" href="#" aria-expanded="false">
-        <span class="hide-menu">Featured Alumni</span></a></li>
-    </ul>
-</li>
-
   <li><a href="events.php" class="list-group-item list-group-item-action">
     <i class="fa fa-calendar me-3"  aria-hidden="true"></i>Event Management
   </a></li>
@@ -45,11 +37,11 @@
     <i class="fa fa-newspaper me-3"  aria-hidden="true"></i>Yearbook
   </a> </li>
 
-  <li> <a href="#" class="list-group-item list-group-item-action">
+  <li> <a href="ub_wall.php" class="list-group-item list-group-item-action">
     <i class="fa fa-map me-3 "  aria-hidden="true"></i>UB Wall
   </a> </li>
 
-  <li> <a href="#" class="list-group-item list-group-item-action">
+  <li> <a href="gts.php" class="list-group-item list-group-item-action">
     <i class="fa fa-file me-3"  aria-hidden="true"></i>GTS
   </a> </li>
 

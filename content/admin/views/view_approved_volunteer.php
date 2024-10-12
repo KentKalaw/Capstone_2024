@@ -52,6 +52,40 @@ $volunteer_result = $conn->query($volunteer_sql);
             <button class="btn btn-outline-dark me-2" style="box-shadow: none;" onclick="window.location='view_event_volunteer.php?event_id=<?php echo $event_id; ?>'">Pending Volunteer</button>
             <button class="btn btn-outline-dark me-2" style="box-shadow: none;" onclick="window.location='events.php'">Back to Events</button>
         </div>
+        <a href="#" class="btn btn-outline-dark me-2 mb-3" data-bs-toggle="modal" data-bs-target="#emailApprovedModal"><i class="fas fa-envelope"></i> Email approved participants</a>
+</div>
+
+<!-- pop up modal for email -->
+<div class="modal fade" id="emailApprovedModal" tabindex="-1" aria-labelledby="emailApprovedModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="emailApprovedModalLabel">Compose Email</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Email Form -->
+        <form id="emailForm">
+          <div class="mb-3">
+            <p><strong>Note:</strong> This email will be sent to all approved volunteer.</p>
+          </div>
+          <div class="mb-3">
+            <label for="emailSubject" class="form-label">Subject:</label>
+            <input type="text" class="form-control" id="emailSubject" placeholder="Enter email subject" required>
+          </div>
+          <div class="mb-3">
+            <label for="emailBody" class="form-label">Message:</label>
+            <textarea class="form-control" id="emailBody" rows="5" placeholder="Write your message here..." required></textarea>
+          </div>
+          <!-- Email Actions -->
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-success">Send Email</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 

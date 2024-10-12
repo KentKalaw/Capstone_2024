@@ -36,7 +36,7 @@
     <i class="fa fa-newspaper me-3"  aria-hidden="true"></i>Yearbook
   </a> </li>
 
-  <li> <a href="#" class="list-group-item list-group-item-action">
+  <li> <a href="ub_wall.php" class="list-group-item list-group-item-action">
     <i class="fa fa-map me-3 "  aria-hidden="true"></i>UB Wall
   </a> </li>
 

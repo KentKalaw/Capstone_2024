@@ -27,7 +27,7 @@
       <div class="d-flex align-items-center justify-content-between w-100">
         <div class="d-flex align-items-center">
           <i class="fa fa-bars primary-text fs-4 me-3" id="menu-toggle" aria-hidden="true"></i>
-          <h2 class="fs-4 m-0" style="color:#752738">Featured Alumni Form</h2>
+          <h2 class="fs-4 m-0" style="color:#752738"></h2>
         </div>
         <li class="d-flex align-items-center">
           <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,14 +38,16 @@
       </div>
     </nav>
 
-    <ol class="breadcrumb col-md-6 d-flex align-items-center" style="margin-left: 25px; margin-top:20px;">
-    <li class="breadcrumb-item" style="color:black;">
-        <a href="javascript:void(0)">Home</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">
-        Featured Alumni Form
-    </li>
-</ol>
+    <div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
+    <img src="<?php echo $file ?>" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
+    <div class="col-md-5">
+        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">Feature Alumni Form</h3>
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#000 !important;">Home</a></li>
+            <li class="breadcrumb-item active">Feature Alumni Form</li>
+        </ol>
+    </div>
+</div>
 
     <div class="container-fluid p-4 text-center">
             <img src="<?php echo $file ?>" id="img1" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
