@@ -3,40 +3,23 @@ session_start(); // Start the session to access session variables
 include('../../connect.php'); // Include the database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Ensure the required POST variables are set
-    $content = $_POST['content'] ?? '';
-    $parent_id = $_POST['parent_id'] ?? '';
-    $thread_id = $_POST['thread_id'] ?? ''; // Retrieve thread_id from POST
-    $username = $_SESSION['username'] ?? ''; // Check if username is set in session
-
-    // Check if the username is set
-    if (empty($username)) {
-        die('User not logged in.');
-    }
+    $thread_id = $_POST['thread_id'];
+    $parent_id = $_POST['parent_id'];
+    $content = $_POST['content'];
+    $username = $_SESSION['username'];
 
     // Get the author (alumni) details from the database
-    $result = mysqli_query($conn, "SELECT id FROM alumni WHERE username = '$username'");
-    if (!$result) {
-        die('Error fetching alumni details: ' . mysqli_error($conn));
-    }
-    
-    $alumni = mysqli_fetch_assoc($result);
-    $author_id = $alumni['id'] ?? null;
+    $result = mysqli_query($conn, "SELECT id FROM users WHERE username = '$username'");
+    $admin_id = mysqli_fetch_assoc($result);
+    $author_id = $admin_id['id'];
 
-    // Check if author_id is found
-    if (!$author_id) {
-        die('Author not found.');
-    }
-
-    // Insert the new post (reply) with the parent_id into the database
-    $sql = "INSERT INTO forum_replies (thread_id, content, author_id, parent_id) 
-            VALUES ('$thread_id', '$content', '$author_id', '$parent_id')";
-    
+    // Insert the new reply into the database
+    $sql = "INSERT INTO forum_replies (thread_id, parent_id, content, author_id) VALUES ('$thread_id', '$parent_id', '$content', '$author_id')";
     if (mysqli_query($conn, $sql)) {
         header("Location: thread_details.php?id=$thread_id");
         exit();
     } else {
-        die('Error inserting reply: ' . mysqli_error($conn));
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 }
 ?>

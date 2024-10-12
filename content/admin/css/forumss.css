@@ -6,11 +6,12 @@
 
 body {
     background-color: #EBDFD7;
+    font-size: 16px;
 }
 
 nav#top-bar {
     border-bottom: 1px solid #DDD3CD !important;
-    margin-bottom: -2px !important; /* Negative margin to pull the top bar up */
+    margin-bottom: -2px !important;
     padding-bottom: 12px !important;
 }
 
@@ -27,42 +28,41 @@ nav#top-bar .d-flex span {
 }
 
 .nav-pills .nav-link {
-    background-color: white; /* White background */
-    color: #6B1500; /* Default text color */
-    border: 1px solid #b3b3b3 !important; /* Border color */
+    background-color: white;
+    color: #6B1500;
+    border: 1px solid #b3b3b3 !important;
     border-radius: 0.25rem;
     margin: 0.2rem;
-    padding: 0.5rem 1rem; /* Add padding for better appearance */
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .nav-pills .nav-link:hover {
-    background-color: #e9ecef; /* Light gray background on hover */
-    color: #270b06; /* Darker text color on hover */
+    background-color: #e9ecef;
+    color: #270b06;
 }
 
 .nav-pills .nav-link.active {
-    background-color: #962723; /* Active link color */
-    color: white; /* Active link text color */
-    border-color: #993d37; /* Keep the border color consistent */
-    outline:none;
+    background-color: #962723;
+    color: white;
+    border-color: #993d37;
+    outline: none;
 }
 
 .pagination-maroon .page-link {
-    background-color: white; /* White background */
-    color: #6B1500; /* Default text color */
-    border: 1px solid #b3b3b3 !important; /* Border color */
+    background-color: white;
+    color: #6B1500;
+    border: 1px solid #b3b3b3 !important;
     border-radius: 0.25rem;
-
 }
 
 .pagination-maroon .page-item.active .page-link {
-    background-color: #962723; /* For the active page */
+    background-color: #962723;
     color: white;
 }
 
 .pagination-maroon .page-item.disabled .page-link {
-    background-color: lightgray; /* For disabled pages */
+    background-color: lightgray;
     color: white;
 }
 
@@ -72,6 +72,13 @@ nav#top-bar .d-flex span {
     color: #6c757d;
     margin-right: 0.3rem;
     margin-left: 0.3rem;
+}
+
+.replies-section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .reply-thread {
@@ -86,7 +93,7 @@ nav#top-bar .d-flex span {
     left: 10px;
     bottom: 0;
     width: 2px;
-    background: #e0e0e0;
+    background: #505050;
 }
 
 .reply-item {
@@ -147,18 +154,63 @@ nav#top-bar .d-flex span {
     margin-top: 10px;
 }
 
-
-
-/* Adjustments for smaller screens */
+/* Responsive adjustments */
 @media (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+
     .alumni-text {
         display: none;
     }
-   
+
+    nav#top-bar .d-flex img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .reply-avatar {
+        width: 24px;
+        height: 24px;
+    }
+
+    .reply-thread {
+        padding-left: 10px;
+    }
+
+    .reply-item .reply-thread {
+        margin-left: 20px;
+    }
+
+    .reply-bubble {
+        padding: 6px 10px;
+    }
+
+    .nav-pills .nav-link {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .alumni-text {
+        display:none;
+    }
+    .container {
+        max-width: 95%;
+    }
     
 }
 
-/* Adjustments for larger screens */
-@media (min-width: 768px) {
-
+@media (min-width: 992px) {
+   
 }

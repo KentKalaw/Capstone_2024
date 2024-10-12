@@ -10,7 +10,7 @@
   <title>Admin - Alumnite</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-  <link rel="stylesheet" href="../css/forums.css" />
+  <link rel="stylesheet" href="../css/forumss.css" />
 </head>
 
 <body>
@@ -39,90 +39,44 @@
 
 <h1 class="text-center mb-4"><?php echo $thread['title']; ?></h1>
 
-<!-- Display the main thread -->
-<div class="row mb-4">
-    <div class="col-lg-8 mx-auto">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="<?php echo $author_profile; ?>" alt="Author's Profile" class="rounded-circle me-3" style="width: 60px; height: 60px;">
-                    <div>
-                        <h5 class="mb-0"><?php echo $thread['fname'] . ' ' . $thread['lname']; ?></h5>
-                        <p class="text-muted">Posted on <?php echo date('F d, Y', strtotime($thread['created_at'])); ?></p>
+ <!-- Display the main thread -->
+ <div class="row mb-4">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="<?php echo $author_profile; ?>" alt="Author's Profile" class="rounded-circle me-3" style="width: 60px; height: 60px;">
+                            <div>
+                                <h5 class="mb-0"><?php echo $thread['fname'] . ' ' . $thread['lname']; ?></h5>
+                                <p class="text-muted">Posted on <?php echo date('F d, Y', strtotime($thread['created_at'])); ?></p>
+                            </div>
+                        </div>
+                        <p><?php echo $thread['content']; ?></p>
                     </div>
                 </div>
-                <p><?php echo $thread['content']; ?></p>
             </div>
+        </div>
+
+        <!-- Form to submit a reply to the main thread -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mx-auto">
+                <form method="POST" action="">
+                    <textarea class="form-control mb-2" name="content" rows="1" placeholder="Write your reply here..." required></textarea>
+                    <button type="submit" class="btn btn-dark btn-sm">Submit Reply</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Display replies -->
+        <div class="row mb-4">
+    <div class="col-lg-8 mx-auto">
+        <div class="replies-section">
+            <h4 class="mb-4" style="color:#752738">Replies</h4>
+            <?php echo render_replies($thread_id, $conn); ?>
         </div>
     </div>
 </div>
-
-<!-- Form to submit a reply to the main thread -->
-<div class="row mb-4">
-    <div class="col-lg-8 mx-auto">
-        <form method="POST" action="">
-            <textarea class="form-control mb-2" name="content" rows="1" placeholder="Write your reply here..." required></textarea>
-            <button type="submit" class="btn btn-dark btn-sm">Submit Reply</button>
-        </form>
     </div>
-</div>
-
-<!-- Display main replies -->
-<div class="row mb-4">
-    <div class="col-lg-8 mx-auto">
-        <h4 class="mb-4" style="color:#752738">Replies</h4>
-
-        <?php if (mysqli_num_rows($posts_result) > 0): ?>
-            <?php while ($post = mysqli_fetch_assoc($posts_result)): 
-                $reply_profile = $post['profile'] ? $post['profile'] : '../images/ub-logo.png'; // Default profile picture
-            ?>
-            <div class="card mb-3 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="<?php echo $reply_profile; ?>" alt="Reply Author's Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
-                        <div>
-                            <h5 class="mb-0"><?php echo $post['fname'] . ' ' . $post['lname']; ?></h5>
-                            <p class="text-muted"><?php echo date('F d, Y', strtotime($post['created_at'])); ?></p>
-                        </div>
-                    </div>
-                    <p><?php echo $post['content']; ?></p>
-
-                    <!-- Form to reply to this reply -->
-                    <form method="POST" action="reply_to_reply.php">
-                        <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>">
-                        <input type="hidden" name="parent_id" value="<?php echo $post['id']; ?>">
-                        <textarea class="form-control mb-2" name="content" rows="1" placeholder="Reply to this comment..."></textarea>
-                        <button type="submit" class="btn btn-dark btn-sm">Reply</button>
-                    </form>
-
-                    <!-- Display child replies -->
-                    <?php
-                        $child_replies = fetch_child_replies($post['id'], $conn);
-                        while ($child_post = mysqli_fetch_assoc($child_replies)):
-                            $child_profile = $child_post['profile'] ? $child_post['profile'] : '../images/ub-logo.png';
-                    ?>
-                        <div class="ms-5 mt-3 card shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?php echo $child_profile; ?>" alt="Reply Author's Profile" class="rounded-circle me-3" style="width: 40px; height: 40px;">
-                                    <div>
-                                        <h6 class="mb-0"><?php echo $child_post['fname'] . ' ' . $child_post['lname']; ?></h6>
-                                        <p class="text-muted small"><?php echo date('F d, Y', strtotime($child_post['created_at'])); ?></p>
-                                    </div>
-                                </div>
-                                <p><?php echo $child_post['content']; ?></p>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
-                </div>
-            </div>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p>There are currently no replies to this thread.</p>
-        <?php endif; ?>
-    </div>
-</div>
-
 
   </div> <!-- End of page-content-wrapper -->
 
