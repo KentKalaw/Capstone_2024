@@ -93,7 +93,7 @@
                   <img src="<?php echo $thread['profile'] ? : '../images/ub-logo.png'; ?>" alt="Profile Picture" class="rounded-circle me-3" style="width: 50px !important; height: 50px !important;">
                   <div class="flex-grow-1">
                     <h5 class="mb-0"><?php echo $thread['title']; ?></h5>
-                    <p class="mb-0 text-muted">Posted by <?php echo $thread['fname'] . ' ' . $thread['lname']; ?> in <?php echo $thread['category_name']; ?></p>
+                    <p class="mb-0 text-muted">Posted by <?php echo $thread['fname'] . ' ' . $thread['lname']; ?> in <?php echo $thread['category_name']. ' >>' ?><span class="badge bg-secondary ms-2"><?php echo $thread['reply_count']; ?> replies</span></p>
                   </div>
                 </div>
                 <small class="text-muted ms-auto"><?php echo date('F d, Y', strtotime($thread['created_at'])); ?></small>

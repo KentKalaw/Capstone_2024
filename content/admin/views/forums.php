@@ -116,7 +116,10 @@
                             <p class="mb-0 text-muted">Posted by <?php echo $thread['fname'] . ' ' . $thread['lname']; ?> in <?php echo $thread['category_name']; ?></p>
                         </div>
                     </div>
-                    <small class="text-muted ms-auto" style="margin-left: 65px !important;"><?php echo date('F d, Y', strtotime($thread['created_at'])); ?></small>
+                    <small class="text-muted ms-auto" style="margin-left: 65px !important;">
+    <?php echo date('F d, Y', strtotime($thread['created_at'])); ?> 
+    • <span class="badge bg-secondary ms-2"><?php echo $thread['reply_count']; ?> replies</span>
+</small>
                 </a>
                 <!-- Delete Button -->
                 <a href="delete_thread.php?id=<?php echo $thread['id']; ?>" 
