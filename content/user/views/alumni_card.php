@@ -47,10 +47,10 @@
 </div>
 
 <div class="text-center my-4">
-    <button class="btn btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#howToUseModal">
+    <button class="btn btn-warning mx-2" style="box-shadow: none;" data-bs-toggle="modal" data-bs-target="#howToUseModal">
         <i class="fas fa-info-circle me-2"></i> How to Use APC
     </button>
-    <button class="btn btn-dark mx-2" data-bs-toggle="modal" data-bs-target="#applicationFormModal">
+    <button class="btn btn-dark mx-2" style="box-shadow: none;" data-bs-toggle="modal" data-bs-target="#applicationFormModal">
         <i class="fas fa-file-alt me-2"></i> APC Application Form
     </button>
 </div>

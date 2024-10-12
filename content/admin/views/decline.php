@@ -1,9 +1,12 @@
 <?php
 include('../../connect.php');
 $id =  $_GET['id'];
+$username =  $_GET['email'];
 
 $sql = "DELETE FROM users WHERE id = '$id'";
 $conn->query($sql);
+$sql2 = "DELETE FROM alumni WHERE username = '$username'";
+$conn->query($sql2);
 // send email
 $email = $_GET['email'];
  $from = "dontreply.alumnite@gmail.com";

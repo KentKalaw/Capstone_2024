@@ -74,6 +74,7 @@
 	  $lname = $_POST['lname'];
 	  $username = $_POST['username'];
 	  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+      $birthday = $_POST['birthday'];
 	  $year = $_POST['year'];
 	  $department = $_POST['department'];
 	  $course = $_POST['course'];
@@ -86,9 +87,9 @@
 	  if($count > 0) {
 		echo '<script>alert("The alumni account you are trying to register is already on the database. Please wait or check your email for the status of your request.");window.location="index.php"</script>';  
 	  } else {
-	  $sql = "INSERT INTO alumni (fname, lname, username,year,department,course,file) VALUES ('$fname', '$lname', '$username', '$year', '$department', '$course', '$file')";
+	  $sql = "INSERT INTO alumni (fname, lname, username,birthday,year,department,course,file) VALUES ('$fname', '$lname', '$username', '$birthday', '$year', '$department', '$course', '$file')";
 		$conn->query($sql);
-	  $sql1 = "INSERT INTO login (username, password, type,status) VALUES ('$username', '$password', '$type', '$status')";
+	  $sql1 = "INSERT INTO users (username, password, type,status) VALUES ('$username', '$password', '$type', '$status')";
 		$conn->query($sql1);
 		echo '<script>alert("Alumni account has been created. Please wait until admin notify you for the status of your request.");window.location="index.php"</script>';
 	  }
@@ -147,6 +148,12 @@
                                                         <span class="position-absolute top-50 end-0 translate-middle-y password-toggle" id="togglePassword">
                                                             <i class="bi bi-eye"></i>
                                                         </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="date" class="form-control" name="birthday" id="birthday" required>
+                                                        <label for="birthday" class="form-label">Birthday</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-6">
