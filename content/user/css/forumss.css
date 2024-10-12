@@ -185,7 +185,7 @@ nav#top-bar .d-flex span {
     }
 
     .reply-thread {
-        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .reply-item .reply-thread {
@@ -209,7 +209,6 @@ nav#top-bar .d-flex span {
         bottom: 0;
         width: 2px;
         background: #505050;
-        margin-right: 50px;
     }
 }
 
