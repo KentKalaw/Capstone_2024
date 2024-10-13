@@ -96,7 +96,7 @@
 
 
 <div class="not-container my-5">
-    <h3 class="text-center mb-4" style="color:#752738; font-weight: bold;">Franchise Benefits</h3>
+    <h3 class="text-center mb-4" style="color:#752738; font-weight: bold;">Alumni Card Benefits</h3>
     <div class="not-container">
         <div class="row text-center d-flex justify-content-center">
             <div class="col-6 col-md-4 col-lg-3 mb-4">

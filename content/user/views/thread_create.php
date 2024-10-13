@@ -14,10 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_query($conn, "SELECT id FROM alumni WHERE username = '$username'");
     $alumni = mysqli_fetch_assoc($result);
     $author_id = $alumni['id'];
+    $author_type = 'alumni';
 
     // Insert the new thread into the database with a category
-    $sql = "INSERT INTO forums (title, content, author_id, category_id) 
-            VALUES ('$title', '$content', '$author_id', '$category_id')";
+    $sql = "INSERT INTO forums (title, content, author_id, category_id, author_type) 
+            VALUES ('$title', '$content', '$author_id', '$category_id', '$author_type')";
     if (mysqli_query($conn, $sql)) {
         date_default_timezone_set('Asia/Manila');
         $message = 'Alumni posted a thread';
