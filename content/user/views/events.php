@@ -17,6 +17,7 @@
 <?php include_once('./loader/loader.php'); ?>
   <?php include_once('./sidebar/sidebar.php'); ?>
 
+
   <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4 border-bottom" id="top-bar">
       <div class="d-flex align-items-center justify-content-between w-100">

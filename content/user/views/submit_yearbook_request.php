@@ -6,6 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $alumni_id = $_POST['alumni_id'];  // Get the alumni ID
     $fullname = $_POST['fullname'];     // Get the full name
     $address = $_POST['address'];       // Get the delivery address
+    $latitude = $_POST['latitude'];   
+    $longitude = $_POST['longitude'];   
     $number = $_POST['number'];         // Get the phone number
 
     // Check if the alumni has already requested a yearbook
@@ -18,10 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit; // Exit to prevent further processing
     } else {
         // Insert a new record with Pending status
-        $insert_sql = "INSERT INTO yearbook (alumni_id, fullname, address, number, request_status, delivery_status) VALUES ($alumni_id, '$fullname', '$address', '$number', 'Pending', '')";
+        $insert_sql = "INSERT INTO yearbook (alumni_id, fullname, address, latitude, longitude, number, request_status, order_status) VALUES ($alumni_id, '$fullname', '$address', '$latitude', '$longitude', '$number', 'Pending', '')";
         
         if ($conn->query($insert_sql) === TRUE) {
-            echo '<script>alert("Yearbook Delivery request submitted. We will contact you for further details."); window.location="yearbook.php";</script>';
+            echo '<script>alert("Yearbook Delivery request submitted. We will verify if you are elligible or not. Please wait for further details"); window.location="yearbook.php";</script>';
         } else {
             echo '<script>alert("Error: ' . $conn->error . '"); window.location="index.php";</script>';
         }
