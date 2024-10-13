@@ -152,7 +152,7 @@
 ?>">
     <?php echo htmlspecialchars($request_status); ?>
   </span></h6>
-    <h6 class="card-title">Order ID: <span id="order-id"><?php echo htmlspecialchars($order_id); ?></span></h6>
+    <h6 class="card-title">Order ID: <span id="order-id"><?php echo htmlspecialchars($order_id); ?> (Order ID can be tracked)</span></h6>
     <h6 class="card-title">Order Status: <span id="order-status"><?php echo htmlspecialchars($order_status); ?></span></h6>
       
     </div>
