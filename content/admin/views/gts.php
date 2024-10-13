@@ -22,7 +22,7 @@
       <div class="d-flex align-items-center justify-content-between w-100">
         <div class="d-flex align-items-center">
           <i class="fa fa-bars primary-text fs-4 me-3" id="menu-toggle"  aria-hidden="true"></i>
-          <h2 class="fs-4 m-0" style="color:#752738">Dashboard</h2>
+          <h2 class="fs-4 m-0" style="color:#752738"></h2>
         </div>
         <li class="d-flex align-items-center">
           <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,17 +32,16 @@
       </div>
     </nav>
 
-    <h2 class="fs-4 mb-2 pt-2 px-3" style="color:#752738; margin-top:20px;">Graduate Tracer Survey</h2>
-
-<!-- Breadcrumb below the title -->
-<ol class="breadcrumb col-md-4 px-3">
-  <li class="breadcrumb-item">
-    <a href="javascript:void(0)" style="color: black;">Home</a>
-  </li>
-  <li class="breadcrumb-item active" aria-current="page">
-    Graduate Tracer Survey
-  </li>
-</ol>
+    <div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
+    <img src="../images/admin-logo.jpg" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
+    <div class="col-md-5">
+        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">Graduate Tracer Survey</h3>
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#000 !important;">Home</a></li>
+            <li class="breadcrumb-item active">Graduate Tracer Survey</li>
+        </ol>
+    </div>
+</div>
 
 
       <div class="table-responsive">

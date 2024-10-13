@@ -6,7 +6,7 @@
 					$count2 = $result2->num_rows;
 					$result3 = $conn->query("SELECT * FROM users WHERE type = 'alumni' AND status = 'Approved'");
 					$count3 = $result3->num_rows;
-					$result4 = $conn->query("SELECT * FROM gts WHERE q2 = 'Yes'");
+					$result4 = $conn->query("SELECT * FROM gts1 WHERE a18 = 'Yes'");
 					$count4 = $result4->num_rows;
 					$result5 = $conn->query("SELECT * FROM profile1 WHERE status = 'Approved'");
 					$count5 = $result5->num_rows;

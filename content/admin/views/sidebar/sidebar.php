@@ -45,6 +45,10 @@
     <i class="fa fa-file me-3"  aria-hidden="true"></i>GTS
   </a> </li>
 
+  <li> <a href="system_analytics.php" class="list-group-item list-group-item-action">
+    <i class="fa fa-bar-chart me-3"  aria-hidden="true"></i>System Analytics
+  </a> </li>
+
   <li> <a href="system_logs.php" class="list-group-item list-group-item-action">
     <i class="fa fa-desktop me-3"  aria-hidden="true"></i>System Logs
   </a> </li>

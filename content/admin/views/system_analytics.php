@@ -1,4 +1,9 @@
-<?php include_once('./client/client.php'); ?>
+<?php include_once('./client/client.php'); 
+
+$eventsQuery = "SELECT event_id, eventName FROM events ORDER BY eventStartDate DESC";
+$eventsResult = $conn->query($eventsQuery);
+$events = $eventsResult->fetch_all(MYSQLI_ASSOC);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +15,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -32,23 +38,49 @@
       </div>
     </nav>
 
-
-    <div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
+<!-- Breadcrumb below the title -->
+<div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
     <img src="../images/admin-logo.jpg" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
     <div class="col-md-5">
-        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">Programs, News, and Updates</h3>
+        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">System Analytics</h3>
         <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#000 !important;">Home</a></li>
-            <li class="breadcrumb-item active">UB Wall</li>
+            <li class="breadcrumb-item active">System Analytics</li>
         </ol>
     </div>
 </div>
 
+<div class="container-fluid mt-5 px-3">
+    <div class="row justify-content-center">
+    <h2 class="fs-4 mb-4 text-center" style="color:#752738;">System Analytics</h2>
+        <div class="col-md-11">
+            <canvas id="loginChart" class="shadow" width="500" height="300" style="background-color: #fff;"></canvas>
+        </div>
+    </div>
+</div>
 
+<?php include_once('./client/login_analytics.php'); ?>
 
+<div class="container-fluid mt-5 px-3">
+    <div class="row justify-content-center">
+        <h2 class="fs-4 mb-4 text-center" style="color:#752738;">Events Analytics</h2>
+        <div class="col-md-6 text-center">
+            <select id="eventSelect" class="form-select mb-4 mx-auto" style="max-width: 300px;">
+                <option value="">Select an event</option>
+                <?php foreach ($events as $event): ?>
+                    <option value="<?php echo htmlspecialchars($event['event_id']); ?>">
+                        <?php echo htmlspecialchars($event['eventName']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <div class="chart-container mx-auto mb-5" style="position: relative; height:40vh; width:80%; max-width:400px; background-color: #f8f9fa; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <canvas id="eventParticipationChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-
+<?php include_once('./client/events_analytics.php'); ?>
 
   </div> <!-- End of page-content-wrapper -->
 
@@ -62,8 +94,6 @@
       el.classList.toggle("toggled");
     };
   </script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 </body>
 

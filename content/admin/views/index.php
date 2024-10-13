@@ -10,6 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -22,7 +23,7 @@
       <div class="d-flex align-items-center justify-content-between w-100">
         <div class="d-flex align-items-center">
           <i class="fa fa-bars primary-text fs-4 me-3" id="menu-toggle"  aria-hidden="true"></i>
-          <h2 class="fs-4 m-0" style="color:#752738">Dashboard</h2>
+          <h2 class="fs-4 m-0" style="color:#752738"></h2>
         </div>
         <li class="d-flex align-items-center">
           <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,17 +33,17 @@
       </div>
     </nav>
 
-    <h2 class="fs-4 mb-2 pt-2 px-3" style="color:#752738; margin-top:20px;">Dashboard</h2>
-
 <!-- Breadcrumb below the title -->
-<ol class="breadcrumb col-md-4 px-3">
-  <li class="breadcrumb-item">
-    <a href="index.php" style="color: black;">Home</a>
-  </li>
-  <li class="breadcrumb-item active" aria-current="page">
-    Dashboard
-  </li>
-</ol>
+<div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
+    <img src="../images/admin-logo.jpg" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
+    <div class="col-md-5">
+        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">Dashboard</h3>
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#000 !important;">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </div>
+</div>
 
    <?php include_once('./dashboardcard.php'); ?>
     <!-- Dashboard Cards End -->
