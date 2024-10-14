@@ -69,6 +69,7 @@
               <th>Longitude</th>
               <th>Number</th>
               <th>Status</th>
+              <th>Order ID</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -97,6 +98,7 @@
                     echo '<td>'.$longitude.'</td>';
                     echo '<td>'.$number.'</td>';
                     echo '<td>'.$requestStatus.'</td>';
+                    echo '<td>'.$order_id.'</td>';
                     echo '<td>';
                           if (is_null($order_id)) {
                               echo '<form action="order_yearbook.php" method="post" style="display:inline;">

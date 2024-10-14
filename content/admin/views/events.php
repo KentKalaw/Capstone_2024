@@ -32,7 +32,7 @@
       <div class="d-flex align-items-center justify-content-between w-100">
         <div class="d-flex align-items-center">
           <i class="fa fa-bars primary-text fs-4 me-3" id="menu-toggle"  aria-hidden="true"></i>
-          <h2 class="fs-4 m-0" style="color:#752738">Events Management</h2>
+          <h2 class="fs-4 m-0" style="color:#752738"></h2>
         </div>
         <li class="d-flex align-items-center">
           <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -45,10 +45,10 @@
     <div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
     <img src="../images/admin-logo.jpg" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
     <div class="col-md-5">
-        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">Update Feature Alumni</h3>
+        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">Events Management</h3>
         <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#000 !important;">Home</a></li>
-            <li class="breadcrumb-item active">Update Feature Alumni</li>
+            <li class="breadcrumb-item active">Events Management</li>
         </ol>
     </div>
 </div>

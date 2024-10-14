@@ -84,8 +84,8 @@ include('../../connect.php');
                         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
                         curl_close($curl);
 
-                        echo "Quotation Request Status Code: $httpCode\n";
-                        echo "Returned Data: $response\n";
+                        // echo "Quotation Request Status Code: $httpCode\n";
+                        // echo "Returned Data: $response\n";
 
                         return json_decode($response, true);
                     }
@@ -136,8 +136,8 @@ include('../../connect.php');
                         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
                         curl_close($curl);
 
-                        echo "Order Request Status Code: $httpCode\n";
-                        echo "Returned Data: $response\n";
+                        // echo "Order Request Status Code: $httpCode\n";
+                        // echo "Returned Data: $response\n";
 
                         return json_decode($response, true);
                     }
@@ -159,6 +159,7 @@ include('../../connect.php');
                             $conn->query($update_order_sql);
 
                             echo "<script>alert('Order placed successfully!'); window.location.href='view_approved_yearbook.php';</script>";
+                            console.log($response);
                         } else {
                             error_log("Order Error: " . print_r($order, true));
                             echo "<script>alert('Failed to place Order.'); window.location.href='view_approved_yearbook.php';</script>";
