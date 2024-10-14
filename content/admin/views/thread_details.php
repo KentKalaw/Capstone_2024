@@ -16,6 +16,7 @@
 <body>
   
   <?php include_once('./sidebar/sidebar.php'); ?>
+  <?php include_once('./loader/loader.php'); ?>
 
   <div id="page-content-wrapper">
 

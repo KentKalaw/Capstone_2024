@@ -69,6 +69,7 @@
               <th>Longitude</th>
               <th>Number</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -85,6 +86,7 @@
                     $longitude = $row2['longitude'];
                     $number = $row2['number'];
                     $requestStatus = $row2['request_status'];
+                    $order_id = $row2['order_id'];
 
                     echo '<tr>';
                     echo '<td>'.$yearbook_id.'</td>';
@@ -95,7 +97,14 @@
                     echo '<td>'.$longitude.'</td>';
                     echo '<td>'.$number.'</td>';
                     echo '<td>'.$requestStatus.'</td>';
-                    echo '</tr>';
+                    echo '<td>';
+                          if (is_null($order_id)) {
+                              echo '<form action="order_yearbook.php" method="post" style="display:inline;">
+                                      <input type="hidden" name="yearbook_id" value="'.$yearbook_id.'">
+                                      <button type="submit" name="action" value="Approve" class="btn btn-warning btn-sm">Create Order</button>
+                                    </form>';
+                          }
+                    echo '</td>';
                 }
                 $conn->close();
                 ?>

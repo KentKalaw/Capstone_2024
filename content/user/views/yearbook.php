@@ -18,7 +18,7 @@
 
   <?php
 
-    $sql = "SELECT fullname, request_status, order_id, order_status FROM yearbook WHERE alumni_id = ?";
+    $sql = "SELECT fullname, request_status, address, order_id FROM yearbook WHERE alumni_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $alumni_id);
     $stmt->execute();
@@ -29,14 +29,14 @@
       $row = $result->fetch_assoc();
       $fullname = $row['fullname'];
       $request_status = $row['request_status'] ? $row['request_status'] : 'No request submitted yet';
+      $address = $row['address'] ? $row['address'] : 'N/A';
       $order_id = $row['order_id'] ? $row['order_id'] : 'N/A';
-      $order_status = $row['order_status'] ? $row['order_status'] : 'Not processed';
   } else {
       // Set default values if no data found
       $fullname = 'N/A';
       $request_status = 'No request submitted yet';
+      $address = 'N/A';
       $order_id = 'N/A';
-      $order_status = 'Not processed';
   }
 
   $stmt->close();
@@ -134,27 +134,27 @@
  
 
   <!-- Yearbook Request Status Card -->
-  <div class="card mt-4">
-    <div class="card-header">
+  <div class="d-flex justify-content-center">
+  <div class="card mt-4" style="max-width: 500px;">
+    <div class="card-header text-center">
       <h5 class="mb-0">Yearbook Delivery Status</h5>
     </div>
     <div class="card-body">
-    <h6 class="card-title">Full name: <span id="full-name"><?php echo htmlspecialchars($fullname); ?></span></h6>
-    <h6 class="card-title">Request Status: <span class="badge rounded-pill 
-    <?php 
-      if ($request_status === 'Pending') {
-        echo 'bg-warning text-dark';
-      } elseif ($request_status === 'Approved') {
-        echo 'bg-success';
-      } else {
-        echo 'bg-danger';
-      }
-?>">
-    <?php echo htmlspecialchars($request_status); ?>
-  </span></h6>
-    <h6 class="card-title">Order ID: <span id="order-id"><?php echo htmlspecialchars($order_id); ?> (Order ID can be tracked)</span></h6>
-    <h6 class="card-title">Order Status: <span id="order-status"><?php echo htmlspecialchars($order_status); ?></span></h6>
-      
+      <h6 class="card-title">Full name: <span id="full-name"><?php echo htmlspecialchars($fullname); ?></span></h6>
+      <h6 class="card-title">Request Status: <span class="badge rounded-pill 
+      <?php 
+        if ($request_status === 'Pending') {
+          echo 'bg-warning text-dark';
+        } elseif ($request_status === 'Approved') {
+          echo 'bg-success';
+        } else {
+          echo 'bg-danger';
+        }
+      ?>">
+      <?php echo htmlspecialchars($request_status); ?>
+      </span></h6>
+      <h6 class="card-title">Delivery Address: <span id="order-id"><?php echo htmlspecialchars($address); ?></span></h6>
+      <h6 class="card-title">Order ID: <span id="order-id"><?php echo htmlspecialchars($order_id); ?> (Order ID can be tracked)</span></h6>
     </div>
   </div>
 </div>
