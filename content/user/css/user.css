@@ -9,7 +9,7 @@ body {
 }
 
 nav#top-bar {
-    border-bottom: 1px solid #DDD3CD !important;
+    border-bottom: 3px solid #DDD3CD !important;
     margin-bottom: -2px !important; /* Negative margin to pull the top bar up */
     padding-bottom: 12px !important;
 }

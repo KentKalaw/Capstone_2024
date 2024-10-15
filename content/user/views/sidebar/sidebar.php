@@ -1,6 +1,10 @@
 <head>
   <link rel="stylesheet" href="../css/sidebar.css"> 
 </head>
+
+<?php $current_page = basename($_SERVER['PHP_SELF']); ?>
+
+
 <div class="d-flex" id="wrapper">
     <!-- Sidebar Start -->
     <div class="side" id="sidebar-wrapper">
