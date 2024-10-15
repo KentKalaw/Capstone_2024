@@ -105,6 +105,8 @@
                                       <input type="hidden" name="yearbook_id" value="'.$yearbook_id.'">
                                       <button type="submit" name="action" value="Approve" class="btn btn-warning btn-sm">Create Order</button>
                                     </form>';
+                          } else {
+                            echo 'Order Already created';
                           }
                     echo '</td>';
                 }

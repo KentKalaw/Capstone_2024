@@ -118,7 +118,11 @@
             
             <div class="mb-3">
               <label for="number" class="form-label">Phone Number (use +63)</label>
-              <input type="text" class="form-control" id="number" name="number" required autocomplete="off">
+              <input type="text" id="number" name="number" class="form-control"
+                      pattern="^\+63[0-9]{10}$" 
+                      placeholder="+63XXXXXXXXXX"
+                      maxlength="13" 
+                      required autocomplete=off>
             </div>
             
             <div class="modal-footer justify-content-center">

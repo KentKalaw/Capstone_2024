@@ -34,10 +34,10 @@
 
 <body data-bs-spy="scroll" data-bs-target="#bsb-tpl-navbar" data-bs-smooth-scroll="true" tabindex="0">
   <!-- Header -->
-  <header id="header" class="sticky-top bsb-tpl-header-sticky bsb-tpl-header-sticky-animationX">
+  <header id="header" class="bsb-tpl-header-sticky-animationX">
 
     <!-- Navbar 1 - Bootstrap Brain Component -->
-    <nav id="scrollspyNav" class="navbar navbar-expand-lg bsb-tpl-bg-blue bsb-navbar bsb-navbar-hover bsb-navbar-caret bsb-tpl-navbar-sticky" data-bsb-sticky-target="#header">
+    <nav id="scrollspyNav" class="navbar navbar-expand-lg bsb-tpl-bg-blue bsb-navbar bsb-navbar-hover bsb-navbar-caret" data-bsb-sticky-target="#header">
       <div class="container">
         <a class="navbar-brand" href="index.php">
           <img src="./assets/img/branding/header.png" class="bsb-tpl-logo" alt="">
@@ -65,7 +65,6 @@
       </div>
     </div>
   </section>
-
 
   <!-- bigger front page -->
 
@@ -98,7 +97,7 @@
       <div class="bg-light py-4 py-md-5 py-xl-8 border-light-subtle">
           <div class="container d-flex flex-column align-items-center justify-content-center">
               <div class="copyright text-center">
-                  &copy; Alumnite 2024-2025. All Rights Reserved.
+                  &copy; Alumnite 2024-2025.
               </div>
   
               <!-- Social Media Icons -->
