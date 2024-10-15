@@ -76,7 +76,7 @@ li {
   list-style-type: none;
 }
 
-.list-group-item {
+.sidebar-admin {
   display: flex;
   align-items: center; /* Ensures icons and text are vertically centered */
   justify-content: flex-start;
@@ -94,7 +94,7 @@ li {
   border-bottom-left-radius: 40px; 
 }
 
-.list-group-item:hover {
+.sidebar-admin:hover {
   background-color: #EBDFD7;
   transition: background-color 0.3s ease, border-radius 0.3s ease; 
   color: #6B1500; 
@@ -102,7 +102,7 @@ li {
   border-bottom-left-radius: 40px;
 }
 
-.list-group-item.active {
+.sidebar-admin.active {
   background-color: #EBDFD7; 
   color: #6B1500; 
   font-weight: bold;
@@ -111,7 +111,7 @@ li {
 }
 
 /* Icon and text alignment */
-.list-group-item i {
+.sidebar-admin i {
   width: 25px; 
   min-width: 25px;
   text-align: center;
@@ -132,7 +132,7 @@ ul li a {
 
 
 
-.list-group-item span {
+.sidebar-admin span {
   flex-grow: 1; 
 }
 

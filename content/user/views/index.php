@@ -1,9 +1,7 @@
 <?php include_once('./client/client.php'); ?>
+<?php include_once('./client/top_online_visitor_sql.php'); ?>
 
-<?php
-$r = mysqli_query($conn, "SELECT * FROM top_online_visitor WHERE username = '$username' AND action = 'Alumni account logged in'");
-$c = mysqli_num_rows($r);
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,37 +49,7 @@ $c = mysqli_num_rows($r);
         </ol>
     </div>
 </div>
-<!-- <div class="container my-5">
-  
-  <div class="row justify-content-end me-4">
-    <div class="col-md-7">
-      <div class="table-container mx-auto">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan='2' class="text-center" style="color: #752738">Top Online Visitor</td>
-            </tr>
-            <tr>
-              <td>1.</td>
-              <td>Visitor 1</td>
-            </tr>
-            <tr>
-              <td>2.</td>
-              <td>Visitor 2</td>
-            </tr>
-            <tr>
-              <td>3.</td>
-              <td>Visitor 3</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div> -->
+
 
     <!-- Featured Alumni Section -->
     <div class="container my-5">
@@ -238,6 +206,45 @@ $c = mysqli_num_rows($r);
         </div>
     </div>
 </div>
+
+<div class="container my-5">
+<h3 class="text-center mb-4" style="color:#752738;">Top Online Visitor</h3>
+  <div class="row justify-content-center me-4">
+    <div class="col-md-7">
+      <div class="table-container mx-auto">
+        <table class="table table-bordered">
+          <thead>
+            <tr></tr> 
+          </thead>
+          <tbody>
+            <tr>
+            <td colspan='2' class="text-center" style="color: #752738;"> Top Online Visitor for Today<br>(<?php echo date('F j, Y'); ?>) </td>
+            </tr>
+            
+            <?php
+            if (mysqli_num_rows($loginResult) > 0) {
+                $rank = 1; // Initialize rank counter
+
+                // Loop through each visitor
+                while ($row = mysqli_fetch_assoc($loginResult)) {
+                    echo "<tr>";
+                    echo "<td>" . $rank . ".</td>"; // Display rank
+                    echo "<td>" . $row['fname'] . ' '. $row['lname'] . "</td>"; // Display visitor username
+                    echo "</tr>";
+                    $rank++;
+                }
+            } else {
+                // If no visitors, display a message
+                echo "<tr><td colspan='2' class='text-center'>No visitors this week</td></tr>";
+            }
+            ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
   </div> <!-- End of page-content-wrapper -->
