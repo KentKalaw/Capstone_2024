@@ -1,5 +1,5 @@
-<?php include_once('./client/client.php'); ?>
-<?php include_once('./client/events_admin_sql.php'); ?>
+<?php include_once('./backend/client.php'); ?>
+<?php include_once('./backend/events_admin_sql.php'); ?>
 
 
 <!DOCTYPE html>

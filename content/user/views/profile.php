@@ -1,4 +1,4 @@
-<?php include_once('./client/client.php'); ?>
+<?php include_once('./backend/client.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +58,7 @@
                 <textarea id="file" name="file" style="display:none"></textarea>
             </div>
 
-            <?php include_once('./client/profile_sql.php'); ?>
+            <?php include_once('./backend/profile_sql.php'); ?>
                 
                 
                 <div class="mb-3 text-start">

@@ -1,5 +1,5 @@
-<?php include_once('./client/client.php'); ?>
-<?php include_once('./client/forums_sql.php'); ?>
+<?php include_once('./backend/client.php'); ?>
+<?php include_once('./backend/forums_sql.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">

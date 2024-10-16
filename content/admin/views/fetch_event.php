@@ -1,6 +1,6 @@
 <?php
 // fetch_event_data.php
-include_once('./client/client.php');
+include_once('./backend/client.php');
 
 function getEventData($eventId) {
     global $conn;

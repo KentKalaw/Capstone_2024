@@ -1,4 +1,4 @@
-<?php include_once('./client/client.php'); ?>
+<?php include_once('./backend/client.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +58,7 @@
         <button class="btn btn-outline-secondary me-2 active" style="box-shadow: none;" onclick="window.location='gts.php'">Back to GTS</button>
 </div>
 
-<?php include_once('./client/view_gts_admin_sql.php'); ?>
+<?php include_once('./backend/view_gts_admin_sql.php'); ?>
   
   <div class="container mt-5 mb-5">
   <ul class="nav nav-pills nav-tabs" id="myForm" role="tablist">

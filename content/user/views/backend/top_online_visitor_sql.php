@@ -12,9 +12,9 @@ $loginResult = mysqli_query($conn, "
       AND STR_TO_DATE(t.timestamp, '%M %d, %Y %h:%i %p') >= CURDATE()  -- Start at 12:00 AM
       AND STR_TO_DATE(t.timestamp, '%M %d, %Y %h:%i %p') <= CURDATE() + INTERVAL 1 DAY - INTERVAL 1 SECOND  -- End at 11:59 PM
     GROUP BY t.username
-    HAVING login_count >= 3  -- Require a minimum of 5 logins
+    HAVING login_count >= 3  -- Require a minimum of 3 logins
     ORDER BY login_count DESC
-    LIMIT 3
+    LIMIT 5
 ");
 
 ?>

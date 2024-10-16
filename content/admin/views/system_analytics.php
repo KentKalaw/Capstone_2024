@@ -1,4 +1,4 @@
-<?php include_once('./client/client.php'); 
+<?php include_once('./backend/client.php'); 
 
 $eventsQuery = "SELECT event_id, eventName FROM events ORDER BY eventStartDate DESC";
 $eventsResult = $conn->query($eventsQuery);
@@ -59,7 +59,7 @@ $events = $eventsResult->fetch_all(MYSQLI_ASSOC);
     </div>
 </div>
 
-<?php include_once('./client/login_analytics.php'); ?>
+<?php include_once('./backend/login_analytics.php'); ?>
 
 <div class="container-fluid mt-5 px-3">
     <div class="row justify-content-center">
@@ -80,7 +80,7 @@ $events = $eventsResult->fetch_all(MYSQLI_ASSOC);
     </div>
 </div>
 
-<?php include_once('./client/events_analytics.php'); ?>
+<?php include_once('./backend/events_analytics.php'); ?>
 
   </div> <!-- End of page-content-wrapper -->
 

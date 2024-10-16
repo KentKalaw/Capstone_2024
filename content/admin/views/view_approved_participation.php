@@ -1,4 +1,4 @@
-<?php include_once('./client/client.php'); ?>
+<?php include_once('./backend/client.php'); ?>
 
 <?php
 // Get the event_id from the URL

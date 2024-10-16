@@ -1,4 +1,4 @@
-<?php include_once('./client/client.php'); ?>
+<?php include_once('./backend/client.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,7 @@
   </p>
 </div>
 
-<?php include_once('./client/gts_sql.php'); ?>
+<?php include_once('./backend/gts_sql.php'); ?>
   
   <div class="container mt-5 mb-5">
   <ul class="nav nav-pills nav-tabs" id="myForm" role="tablist">

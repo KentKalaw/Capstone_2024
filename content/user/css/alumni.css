@@ -148,8 +148,9 @@ tbody tr:hover {
     .alumni-text {
         display: none;
     }
+
     .carousel-item img {
-        height: 300px; /* Smaller height for mobile screens */
+        height: 100%; /* Smaller height for mobile screens */
     }
     .carousel-caption {
         font-size: 12px;

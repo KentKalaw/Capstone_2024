@@ -14,7 +14,16 @@
           $count6 = $result6->num_rows;
           $result7 = $conn->query("SELECT * FROM yearbook WHERE request_status IN ('Pending', 'Approved')");
           $count7 = $result7->num_rows;
+
+
+          $topVisitorCountResult = $conn->query(" SELECT COUNT(*) AS top_visitor_count FROM (SELECT username, COUNT(username) AS login_count FROM top_online_visitor WHERE action = 'Alumni account logged in'
+          AND STR_TO_DATE(timestamp, '%M %d, %Y %h:%i %p') >= CURDATE()  -- Start at 12:00 AM
+          AND STR_TO_DATE(timestamp, '%M %d, %Y %h:%i %p') <= CURDATE() + INTERVAL 1 DAY - INTERVAL 1 SECOND  -- End at 11:59 PM
+          GROUP BY username HAVING login_count >= 3) AS top_visitors_for_the_day");
+          $topVisitorCountRow = mysqli_fetch_assoc($topVisitorCountResult);
+          $topVisitorCount = $topVisitorCountRow['top_visitor_count'];
 				?>
+          
 
     <!-- Dashboard Cards -->
     <div class="container-fluid px-4 mt-4">
@@ -110,8 +119,8 @@
         <div class="card bg-light shadow h-100 py-2">
             <div class="card-body">
               <div class="text-center">
-                <h6 class="card-title"style="color:#752738">Number of Top Online Visitor</h6>
-                <p class="card-text fs-2" style="color: black;">450</p>
+                <h6 class="card-title"style="color:#752738">Today's Number of Top Online Visitors</h6>
+                <p class="card-text fs-2" style="color: black;"><?php echo $topVisitorCount ?></p>
               </div>
             </div>
           </div>

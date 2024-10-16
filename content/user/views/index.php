@@ -1,5 +1,5 @@
-<?php include_once('./client/client.php'); ?>
-<?php include_once('./client/top_online_visitor_sql.php'); ?>
+<?php include_once('./backend/client.php'); ?>
+<?php include_once('./backend/top_online_visitor_sql.php'); ?>
 
 
 
@@ -218,7 +218,7 @@
           </thead>
           <tbody>
             <tr>
-            <td colspan='2' class="text-center" style="color: #752738;"> Top Online Visitor for Today<br>(<?php echo date('F j, Y'); ?>) </td>
+            <td colspan='2' class="text-center" style="color: #752738;">Today's Top Online Visitors<br>(<?php echo date('F j, Y'); ?>) </td>
             </tr>
             
             <?php
