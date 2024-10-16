@@ -15,7 +15,7 @@ ex: username: root
 11. after clicking go, click Global privilege: Check all.
 12. click Go.
 13. Login with your new PhpMyAdmin account
-14. Export the .zip database file.
+14. Import the .zip database file.
 
 
 
@@ -36,6 +36,6 @@ then
 3. login using default account first
 ex: username: root
     password:
-4. click Export
+4. click Import
 5. Select the .zip file
 6. done.
