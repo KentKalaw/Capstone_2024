@@ -15,35 +15,8 @@
 <body>
   <?php include_once('./loader/loader.php'); ?>
   <?php include_once('./sidebar/sidebar.php'); ?>
-
-  <?php
-
-    $sql = "SELECT fullname, request_status, address, order_id FROM yearbook WHERE alumni_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $alumni_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-      // Fetch the alumni details
-      $row = $result->fetch_assoc();
-      $fullname = $row['fullname'];
-      $request_status = $row['request_status'] ? $row['request_status'] : 'No request submitted yet';
-      $address = $row['address'] ? $row['address'] : 'N/A';
-      $order_id = $row['order_id'] ? $row['order_id'] : 'N/A';
-  } else {
-      // Set default values if no data found
-      $fullname = 'N/A';
-      $request_status = 'No request submitted yet';
-      $address = 'N/A';
-      $order_id = 'N/A';
-  }
-
-  $stmt->close();
-  $conn->close();
-
-?>
-
+  <?php include_once('./backend/yearbook_sql.php'); ?>
+ 
 
   <div id="page-content-wrapper">
 
@@ -97,9 +70,15 @@
             <input type="hidden" name="alumni_id" value="<?php echo isset($alumni_id) ? $alumni_id : ''; ?>">
             
             <div class="mb-3">
+              <label for="student_number" class="form-label">Student Number</label>
+              <input type="text" class="form-control" id="student_number" name="student_number" required autocomplete="off">
+            </div>
+            
+            <div class="mb-3">
               <label for="fullname" class="form-label">Full Name</label>
               <input type="text" class="form-control" id="fullname" name="fullname" required autocomplete="off">
             </div>
+
             
             <div class="mb-3">
               <label for="address" class="form-label">Delivery Address (your accurate delivery address)</label>
@@ -144,6 +123,7 @@
       <h5 class="mb-0">Yearbook Delivery Status</h5>
     </div>
     <div class="card-body">
+      <h6 class="card-title">Student Number: <span id="student-number"><?php echo htmlspecialchars($student_number); ?></span></h6>
       <h6 class="card-title">Full name: <span id="full-name"><?php echo htmlspecialchars($fullname); ?></span></h6>
       <h6 class="card-title">Request Status: <span class="badge rounded-pill 
       <?php 
@@ -162,6 +142,8 @@
     </div>
   </div>
 </div>
+
+
     <!-- Request Notice -->
     <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">

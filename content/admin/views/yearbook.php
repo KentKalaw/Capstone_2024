@@ -63,6 +63,7 @@
             <tr>
               <th>ID</th>
               <th>Alumni ID</th>
+              <th>Student Number</th>
               <th>Full name</th>
               <th>Address</th>
               <th>Latitude</th>
@@ -80,6 +81,7 @@
                 while($row2 = $result2->fetch_assoc()) {
                     $yearbook_id = $row2['id'];
                     $alumni = $row2['alumni_id'];
+                    $student_number= $row2['student_number'];
                     $fullname = $row2['fullname'];
                     $address = $row2['address'];
                     $latitude = $row2['latitude'];
@@ -90,6 +92,7 @@
                     echo '<tr>';
                     echo '<td>'.$yearbook_id.'</td>';
                     echo '<td>'.$alumni.'</td>';
+                    echo '<td>'.$student_number.'</td>';
                     echo '<td>'.$fullname.'</td>';
                     echo '<td>'.$address.'</td>';
                     echo '<td>'.$latitude.'</td>';
