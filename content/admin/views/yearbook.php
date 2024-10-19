@@ -111,7 +111,7 @@
                     </td>';
                     echo '</tr>';
                 }
-                $conn->close();
+                
                 ?>
             </tr>
             <!-- Add more rows as necessary -->

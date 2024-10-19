@@ -113,8 +113,6 @@ $volunteer_result = $conn->query($volunteer_sql);
                                             </td>
                                         </tr>";
                                 }
-                            } else {
-                                echo "<tr><td colspan='6' class='text-center'>No pending volunteer found.</td></tr>";
                             }
                             ?>
                             </tbody>

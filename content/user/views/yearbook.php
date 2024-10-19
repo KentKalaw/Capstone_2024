@@ -138,7 +138,8 @@
       <?php echo htmlspecialchars($request_status); ?>
       </span></h6>
       <h6 class="card-title">Delivery Address: <span id="order-id"><?php echo htmlspecialchars($address); ?></span></h6>
-      <h6 class="card-title">Order ID: <span id="order-id"><?php echo htmlspecialchars($order_id); ?> (Order ID can be tracked)</span></h6>
+      <h6 class="card-title">Order ID: <span id="order-id"><?php echo htmlspecialchars($order_id); ?> (Order ID can be tracked)</span></h6><br>
+      <h6 class="card-title">If Request Status is Approved but Order ID is still N/A,<br>it means the admin has yet to create the order.</h6>
     </div>
   </div>
 </div>

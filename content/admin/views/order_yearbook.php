@@ -1,17 +1,13 @@
-                
 <?php
 include('../../auth.php');
 include('../../connect.php');
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $yearbook_id = isset($_POST['yearbook_id']) ? intval($_POST['yearbook_id']) : 0;
-                $action = isset($_POST['action']) ? $_POST['action'] : '';
-                
                 $fetch_sql = "SELECT * FROM yearbook WHERE id = $yearbook_id";
                 $result = $conn->query($fetch_sql);
                 if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
-
                     // Extract relevant data
                     $recipient_name = $row['fullname'];
                     $recipient_phone = $row['number'];
@@ -159,7 +155,7 @@ include('../../connect.php');
                             $conn->query($update_order_sql);
 
                             echo "<script>alert('Order placed successfully!'); window.location.href='view_approved_yearbook.php';</script>";
-                            console.log($response);
+                            var_dump($response);
                         } else {
                             error_log("Order Error: " . print_r($order, true));
                             echo "<script>alert('Failed to place Order.'); window.location.href='view_approved_yearbook.php';</script>";

@@ -110,9 +110,7 @@ $participation_result = $conn->query($participation_sql);
                                             </td>
                                         </tr>";
                                 }
-                            } else {
-                                echo "<tr><td colspan='4' class='text-center'>No pending participation found.</td></tr>";
-                            }
+                            } 
                             ?>
                             </tbody>
                     </table>
