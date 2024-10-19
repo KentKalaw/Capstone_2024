@@ -235,7 +235,7 @@
                 }
             } else {
                 // If no visitors, display a message
-                echo "<tr><td colspan='2' class='text-center'>No visitors this week</td></tr>";
+                echo "<tr><td colspan='2' class='text-center'>No Top Online Visitors this week</td></tr>";
             }
             ?>
           </tbody>

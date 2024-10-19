@@ -39,6 +39,9 @@
             max-width: 150%;
             height: auto;
         }
+        .card-body {
+            height: 100%;
+        }
         .img-fluid {
             height: 100%;
             object-fit: cover;
@@ -96,19 +99,21 @@
 
   }
   ?>
-    <!-- Registration Form -->
-    <section class="p-3 p-md-4 p-xl-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-xxl-11">
-                    <div class="card border-light-subtle shadow-sm">
-                        <div class="row g-0">
-                            <div class="col-12 col-md-6">
-                                <img class="img-fluid rounded-start" loading="lazy" src="assets/img/hero/main.jpg" alt="Welcome back you've been missed!">
-                            </div>
-                            <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                                <div class="col-12 col-lg-11 col-xl-10">
-                                    <div class="card-body p-3 p-md-4 p-xl-5">
+<!-- Registration Form -->
+<section class="p-3 p-md-4 p-xl-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xxl-11">
+                <div class="card border-light-subtle shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-12 col-md-6">
+                            <img class="img-fluid rounded-start" loading="lazy" src="assets/img/hero/main.jpg" alt="Welcome back you've been missed!">
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+                            <div class="col-12 col-lg-11 col-xl-10">
+                                <div class="card-body p-3 p-md-4 p-xl-5">
+                                    <!-- Scrollable container with no horizontal scroll -->
+                                    <div class="scrollable-content" style="max-height: 468px; overflow-y: auto; overflow-x: hidden; padding-right: 10px;">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="mb-5">
@@ -117,7 +122,7 @@
                                                             <img src="assets/img/branding/header.png" alt="UB Logo" width="175" height="57">
                                                         </a>
                                                     </div>
-                                                    
+                                                    <h5 class="text-center">Sign up into your account!</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -125,13 +130,13 @@
                                             <div class="row gy-3">
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" name="fname" id="first_name" placeholder="First Name" pattern="[a-zA-Z ]+" title="You can only use alphabeth letters" required autocomplete="off">
+                                                        <input type="text" class="form-control" name="fname" id="first_name" placeholder="First Name" pattern="[a-zA-Z ]+" title="You can only use alphabet letters" required autocomplete="off">
                                                         <label for="first_name" class="form-label">First Name</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" name="lname" id="last_name" placeholder="Last Name" pattern="[a-zA-Z ]+"  title="You can only use alphabeth letters" required autocomplete="off">
+                                                        <input type="text" class="form-control" name="lname" id="last_name" placeholder="Last Name" pattern="[a-zA-Z ]+"  title="You can only use alphabet letters" required autocomplete="off">
                                                         <label for="last_name" class="form-label">Last Name</label>
                                                     </div>
                                                 </div>
@@ -143,7 +148,7 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-floating mb-3 position-relative">
-                                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be minimum of 8 characters, 1 number and 1 special character" required>
+                                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be a minimum of 8 characters, 1 number, and 1 special character" required>
                                                         <label for="password" class="form-label">Password</label>
                                                         <span class="position-absolute top-50 end-0 translate-middle-y password-toggle" id="togglePassword">
                                                             <i class="bi bi-eye"></i>
@@ -158,7 +163,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-floating mb-3">
-                                                        <select class="form-select" name="year" id="username" required placeholder="username">
+                                                        <select class="form-select" name="year" id="year_graduated" required>
                                                             <option selected disabled>Choose year...</option>
                                                             <option>2024-2025</option>
                                                             <option>2023-2024</option>
@@ -178,7 +183,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-floating mb-3">
-                                                        <select class="form-select" name="department" id="username" required id="department" onchange="dept(this.value)">
+                                                        <select class="form-select" name="department" id="department" required onchange="dept(this.value)">
                                                         <option selected disabled>Choose department...</option>
                                                         <option>Senior High School</option>
                                                         <option>College of Allied Medical Sciences</option>
@@ -198,19 +203,17 @@
                                                     <div class="form-floating mb-3">
                                                         <select class="form-select" name="course" id="course1" required>
                                                             <option selected disabled>Choose course...</option>
-                                                
                                                         </select>
                                                         <label for="course1" class="form-label">Course</label>
                                                     </div>
                                                 </div>
-                                                    <div class="col-12">
-                                        <!-- Trigger element for popover -->
-                                        <div class="info" data-bs-toggle="popover" data-bs-container="body" data-bs-placement="left" data-bs-content="Use suggested documents like Diploma, Transcript of Records (TOR), Alumni Card, Certificate of Graduate.">
-                                            File Upload <i class="bi bi-info-circle"></i>
-                                        </div>
-                                        <input type="file" placeholder="File Upload" name="file1" id="upload" required placeholder="username"/>
-                                        <textarea id="file" name="file" style="display:none"></textarea>
-                                    </div>
+                                                <div class="col-12">
+                                                    <div class="info" data-bs-toggle="popover" data-bs-container="body" data-bs-placement="left" data-bs-content="Use suggested documents like Diploma, Transcript of Records (TOR), Alumni Card, Certificate of Graduate.">
+                                                        File Upload <i class="bi bi-info-circle"></i>
+                                                    </div>
+                                                    <input type="file" placeholder="File Upload" name="file1" id="upload" required />
+                                                    <textarea id="file" name="file" style="display:none"></textarea>
+                                                </div>
                                                 <div class="col-12">
                                                     <div class="d-grid">
                                                         <button class="btn btn-dark btn-lg" type="submit" name="submit" id="submit1">Register</button>
@@ -225,7 +228,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> <!-- End of scrollable content -->
                                 </div>
                             </div>
                         </div>
@@ -233,7 +236,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
 
     <script>
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
