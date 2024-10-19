@@ -9,7 +9,7 @@
   <title>Alumni - Alumnite</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-  <link rel="stylesheet" type="text/css" href="../css/alumni.css" />
+  <link rel="stylesheet" type="text/css" href="../css/yearbook.css" />
 </head>
 
 <body>
@@ -118,9 +118,9 @@
 
   <!-- Yearbook Request Status Card -->
   <div class="d-flex justify-content-center">
-  <div class="card mt-4" style="max-width: 500px;">
+  <div class="card mt-4" style="width: 800px; font-size: 1.2rem;">
     <div class="card-header text-center">
-      <h5 class="mb-0">Yearbook Delivery Status</h5>
+      <h5 class="mb-0" style="font-size: 1.5rem;">Yearbook Delivery Status</h5>
     </div>
     <div class="card-body">
       <h6 class="card-title">Student Number: <span id="student-number"><?php echo htmlspecialchars($student_number); ?></span></h6>
