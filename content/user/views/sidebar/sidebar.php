@@ -45,6 +45,10 @@
     <i class="fa fa-map me-3 "  aria-hidden="true"></i>UB Wall
   </a> </li>
 
+  <li> <a href="campus_tour.php" class="list-group-item list-group-item-action sidebar-user <?php echo $current_page == 'ub_wall.php' ? 'active' : ''; ?>">
+    <i class="fas fa-map-marked-alt"  aria-hidden="true"></i>Campus Tour
+  </a> </li>
+
   <li> <a href="gts.php" class="list-group-item list-group-item-action sidebar-user <?php echo $current_page == 'gts.php' ? 'active' : ''; ?>">
     <i class="fa fa-file me-3"  aria-hidden="true"></i>GTS
   </a> </li>
