@@ -45,7 +45,7 @@
     <i class="fa fa-map me-3 "  aria-hidden="true"></i>UB Wall
   </a> </li>
 
-  <li> <a href="campus_tour.php" class="list-group-item list-group-item-action sidebar-user <?php echo $current_page == 'ub_wall.php' ? 'active' : ''; ?>">
+  <li> <a href="campus_tour.php" class="list-group-item list-group-item-action sidebar-user <?php echo $current_page == 'campus_tour.php' ? 'active' : ''; ?>">
     <i class="fas fa-map-marked-alt"  aria-hidden="true"></i>Campus Tour
   </a> </li>
 
