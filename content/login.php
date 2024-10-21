@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO4pCxa7D8S1xkI3M7u4d8aI67ak6jeQ7z1JIG93HmoXaU0FLC6zC" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-wEmeIV1mK2SzT1d47G3nUM3yHz3LMwqNJO6UR/7h6xDDV0MELQ2R7Oog9+VxZhK0" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/img/favicon/logo.png">
     <style>
         html, body {
             height: 100%;

@@ -11,7 +11,7 @@
 
 
   <!-- Favicon and Touch Icons -->
-  <!-- <link rel="icon" type="image/png" sizes="512x512" href="./assets/favicon/logo.png"> -->
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/img/favicon/logo.png">
 
   <!-- Google Fonts Files -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

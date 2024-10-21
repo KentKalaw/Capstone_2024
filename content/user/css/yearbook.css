@@ -1,3 +1,9 @@
+:root {
+    --primary-color: #752738;
+    --secondary-color: #8B4513;
+    --accent-color: #FFD700;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -43,6 +49,39 @@ span {
     font-weight: bold;
 }
 
+.status-card {
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+
+
+.action-button {
+    transition: all 0.3s ease;
+    border-radius: 25px;
+    padding: 10px 25px;
+}
+
+
+.steps-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.step-item {
+    padding: 15px;
+    border-left: 3px solid var(--primary-color);
+    margin: 10px 0;
+    transition: background-color 0.3s ease;
+}
+
+.step-item:hover {
+    background-color: #f8f9fa;
+}
 
 /* Adjustments for smaller screens */
 @media (max-width: 767px) {

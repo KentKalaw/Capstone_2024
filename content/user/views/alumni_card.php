@@ -10,13 +10,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/img/favicon/logo.png">
   <link rel="stylesheet" type="text/css" href="../css/alumni_card.scss"/>
 </head>
 
 <body>
 <?php include_once('./loader/loader.php'); ?>
   <?php include_once('./sidebar/sidebar.php'); ?>
+  <?php include_once('./backend/alumni_card_sql.php'); ?>
 
   <div id="page-content-wrapper">
 
@@ -46,13 +47,79 @@
     </div>
 </div>
 
-<div class="text-center my-4">
-    <button class="btn btn-warning mx-2" style="box-shadow: none;" data-bs-toggle="modal" data-bs-target="#howToUseModal">
-        <i class="fas fa-info-circle me-2"></i> How to Use APC
-    </button>
-    <button class="btn btn-dark mx-2" style="box-shadow: none;" data-bs-toggle="modal" data-bs-target="#applicationFormModal">
-        <i class="fas fa-file-alt me-2"></i> APC Application Form
-    </button>
+<div class="not-container mt-5">
+ <div class="row justify-content-center mt-4">
+            <div class="col-md-4 text-center">
+                <button class="btn btn-warning btn-l mb-3 w-50" data-bs-toggle="modal" data-bs-target="#howToUseModal">
+                    <i class="fas fa-info-circle me-2"></i> How to Use APC
+                </button>
+            </div>
+            <div class="col-md-4 text-center">
+                <button class="btn btn-secondary btn-l mb-3 w-50" data-bs-toggle="modal" data-bs-target="#applicationFormModal">
+                    <i class="fas fa-file-alt me-2"></i> APC Application Form
+                </button>
+            </div>
+        </div>
+        <hr class="mb-4 w-50 mx-auto">
+</div>
+
+<div class="not-container m-5 mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="card-title mb-0" style="color: #752738;">
+                <i class="fas fa-clock me-2"></i>APC Request Information
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <!-- Left Column -->
+                <div class="col-md-6 col-12">
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-1">Name:</h6>
+                        <p class="fw-bold mb-3"><?php echo htmlspecialchars($fullname); ?></p>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-1">Student Number:</h6>
+                        <p class="fw-bold mb-3"><?php echo htmlspecialchars($student_number); ?></p>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-1">Department:</h6>
+                        <p class="fw-bold mb-3"><?php echo htmlspecialchars($department); ?></p>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-1">Year Graduated:</h6>
+                        <p class="fw-bold mb-3"><?php echo htmlspecialchars($year_graduated); ?></p>
+                    </div>
+                </div>
+                <!-- Right Column -->
+                <div class="col-md-6 col-12">
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-1">Course:</h6>
+                        <p class="fw-bold mb-3"><?php echo htmlspecialchars($course); ?></p>
+                    </div>
+                    <div class="mb-3">
+                      <?php $formattedDate = date('F j, Y g:ia', strtotime($date)); ?>
+                        <h6 class="text-muted mb-1">Request Date:</h6>
+                        <p class="fw-bold mb-3"><?php echo htmlspecialchars($formattedDate); ?></p>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-1">Request Status:</h6>
+                        <span class="badge rounded-pill px-3 py-2 <?php 
+                                    if ($status === 'Pending') {
+                                        echo 'bg-warning text-dark';
+                                    } elseif ($status === 'Approved') {
+                                        echo 'bg-success';
+                                    } else {
+                                        echo 'bg-danger';
+                                    }
+                                ?>">
+                                    <?php echo htmlspecialchars($status); ?>
+                                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="not-container my-5">
@@ -174,27 +241,50 @@
             </div>
             <div class="modal-body">
                 <p>Here you can include the application form or any information related to it.</p>
-                <!-- You can embed a form here or provide a link to download the application form -->
-                <form>
+
+                <form method="post" action="submit_alumni_card_request.php">
+                <input type="hidden" name="alumni_id" value="<?php echo isset($alumni_id) ? $alumni_id : ''; ?>">
                     <!-- Example fields -->
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" required>
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" name="fullname" required>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" required>
+                        <label class="form-label">Student Number</label>
+                        <input type="text" class="form-control" name="student_number" required>
                     </div>
                     <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                        <label class="form-label">Department</label>
+                        <select class="form-select" name="department" id="department" required onchange="dept(this.value)">
+                            <option selected disabled>Choose department...</option>
+                            <option>Senior High School</option>
+                            <option>College of Allied Medical Sciences</option>
+                            <option>College of Arts and Sciences</option>
+                            <option>College of Business, Accountancy, and Hospitality Management</option>
+                            <option>College of Criminal Justice Education</option>
+                            <option>College of Education</option>
+                            <option>College of Engineering</option>
+                            <option>College of Information and Communications Technology</option>
+                            <option>College of Nursing and Midwifery</option>
+                            <option>College of Technical Education</option>
+                            </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                    <div class="mb-3">
+                        <label class="form-label">Course</label>
+                        <select class="form-select" name="course" id="course1" required>
+                        <option selected disabled>Choose course...</option>
+                    </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Year Graduated</label>
+                        <input type="text" class="form-control" name="year_graduated" required>
+                    </div>
             </div>
             <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -237,6 +327,143 @@
     myModal.show();
   });
 </script>
+
+<script>
+				function dept(value) {
+					var department1 = value;
+				//	alert(value);
+					if(department1 == 'College of Allied Medical Sciences') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+						'<option selected disabled>Choose course...</option>'+
+						'<option>Bachelor of Science in Occupational Therapy</option>'+
+						'<option>Bachelor of Science in Physical Therapy</option>'+
+						'<option>Bachelor of Science in Respiratory Therapy</option>'+
+						'</select>';
+					}	
+					if(department1 == 'College of Arts and Sciences') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+						'<option selected disabled>Choose course...</option>'+
+						'<option>Bachelor in Human Services</option>'+
+						'<option>Bachelor of Arts in Communication</option>'+
+						'<option>Bachelor of Science in Legal Management</option>'+
+						'<option>Bachelor of Arts in Political Science</option>'+
+						'<option>Bachelor of Arts in Psychology</option>'+
+						'<option>Bachelor of Multimedia Arts</option>'+
+						'</select>';
+					}	
+					if(department1 == 'College of Business, Accountancy, and Hospitality Management') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+                        '<option selected disabled>Choose course...</option>'+
+						'<option>Bachelor of Science in Accountancy</option>'+
+						'<option>Bachelor of Science in Business Administration major in Business Administration</option>'+
+						'<option>Bachelor of Science in Business Administration major in Financial Management</option>'+
+						'<option>Bachelor of Science in Business Administration major in Human Resource Development Management</option>'+
+						'<option>Bachelor of Science in in Business Administration major in Marketing Management</option>'+
+						'<option>Bachelor of Science in Entrepreneurship</option>'+
+						'<option>Bachelor of Science in Tourism Management</option>'+
+						'<option>Bachelor of Science in Management Accounting</option>'+
+						'<option>Bachelor of Science in International Hospitality Management</option>'+
+						'<option>Bachelor of Science in International Hospitality Management with Specialization in Cruiseline Operation</option>'+
+						'</select>';
+					}	
+					if(department1 == 'Bachelor of Science in Accountancy') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+                        '<option selected disabled>Choose course...</option>'+
+						'<option>Bachelor of Science in Business Administration major in Business Administration</option>'+
+						'<option>Bachelor of Science in Business Administration major in Financial Management</option>'+
+						'<option>Bachelor of Science in Business Administration major in Human Resource Development Management</option>'+
+						'<option>Bachelor of Science in in Business Administration major in Marketing Management</option>'+
+						'<option>Bachelor of Science in Entrepreneurship</option>'+
+						'<option>Bachelor of Science in Tourism Management</option>'+
+						'<option>Bachelor of Science in Management Accounting</option>'+
+						'<option>Bachelor of Science in International Hospitality Management</option>'+
+						'<option>Bachelor of Science in International Hospitality Management with Specialization in Cruiseline Operation</option>'+
+						'</select>';
+					}	
+					if(department1 == 'College of Criminal Justice Education') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+                        '<option selected disabled>Choose course...</option>'+
+						'<option>Bachelor of Science in Criminology</option>'+
+						'</select>';
+					}	
+					if(department1 == 'College of Education') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+                        '<option selected disabled>Choose course...</option>'+
+						'<option>Bachelor of Culture and Arts Education</option>'+
+						'<option>Bachelor of Early Childhood Education</option>'+
+						'<option>Bachelor of Elementary Education</option>'+
+						'<option>Bachelor of Physical Education</option>'+
+						'<option>Bachelor of Secondary Education</option>'+
+						'<option>Bachelor of Special Needs Education</option>'+
+						'<option>Certificate in Teaching Program</option>'+
+						'<option>Post Baccalaureate Diploma in Alternative Learning System</option>'+
+						'</select>';
+					}	
+					if(department1 == 'College of Engineering') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+                        '<option selected disabled>Choose course...</option>'+
+						'<option>Bachelor of Science in Civil Engineering</option>'+
+						'<option>Bachelor of Science in Computer Engineering</option>'+
+						'<option>Bachelor of Science in Electrical Engineering</option>'+
+						'<option>Bachelor of Science in Electronics Engineering</option>'+
+						'<option>Bachelor of Science in Industrial Engineering</option>'+
+						'<option>Bachelor of Science in Mechanical Engineering</option>'+
+						'</select>';
+					}	
+					if(department1 == 'College of Information and Communications Technology') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+                        '<option selected disabled>Choose course...</option>'+
+						'<option>Associate in Computer Technology</option>'+
+						'<option>Bachelor of Library and Information Science</option>'+
+						'<option>Bachelor of Science in Computer Science</option>'+
+						'<option>Bachelor of Science in Information Systems</option>'+
+						'<option>Bachelor of Science in Information Technology</option>'+
+						'</select>';
+					}	
+					if(department1 == 'College of Nursing and Midwifery') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+                        '<option selected disabled>Choose course...</option>'+
+						'<option>Bachelor of Science in Nursing</option>'+
+						'<option>Caregiving (Newborn To Preschooler)</option>'+
+						'<option>Health Care Services NC II</option>'+
+						'</select>';
+					}	
+					if(department1 == 'College of Technical Education') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+                        '<option selected disabled>Choose course...</option>'+
+						'<option>Automotive Technology</option>'+
+						'<option>Drafting/CAD Technology</option>'+
+						'<option>Electrical and Instrumentation Technology</option>'+
+						'<option>Industrial Automation Technology</option>'+
+						'<option>Instrumentation and Control Technology</option>'+
+						'</select>';
+					}	
+					if(department1 == 'Senior High School') {
+						document.getElementById('course1').innerHTML = ''+
+						'<select placeholder="Course" name="course" id="course"  placeholder="username"/>'+
+                        '<option selected disabled>Choose course...</option>'+
+						'<option>ABM</option>'+
+						'<option>HUMSS</option>'+
+						'<option>STEM - E</option>'+
+						'<option>STEM - AH</option>'+
+						'<option>GAS</option>'+
+						'<option>TVL</option>'+
+						'<option>Arts and Design</option>'+
+						'</select>';
+					}	
+				}
+
+        </script>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

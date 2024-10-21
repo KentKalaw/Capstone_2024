@@ -1,8 +1,17 @@
-<?php include_once('./backend/client.php'); 
+<?php include_once('./backend/client.php'); ?>
+<?php include_once('./backend/programs_admin_sql.php'); ?>
+<?php include_once('./backend/ub_wall_admin_sql.php'); ?>
+<?php
 
-$eventsQuery = "SELECT event_id, eventName FROM events ORDER BY eventStartDate DESC";
-$eventsResult = $conn->query($eventsQuery);
-$events = $eventsResult->fetch_all(MYSQLI_ASSOC);
+$news_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+$news_item = getNewsDetails($conn, $news_id);
+
+if (!$news_item) {
+  header("Location: ub_wall.php");
+  exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -15,13 +24,15 @@ $events = $eventsResult->fetch_all(MYSQLI_ASSOC);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="icon" type="image/png" sizes="512x512" href="./assets/img/favicon/logo.png">
 </head>
+
+
 
 <body>
 <?php include_once('./loader/loader.php'); ?>
   <?php include_once('./sidebar/sidebar.php'); ?>
+
 
   <div id="page-content-wrapper">
 
@@ -39,51 +50,61 @@ $events = $eventsResult->fetch_all(MYSQLI_ASSOC);
       </div>
     </nav>
 
-<!-- Breadcrumb below the title -->
-<div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
+
+    <div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
     <img src="../images/admin-logo.jpg" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
     <div class="col-md-5">
-        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">System Analytics</h3>
+        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">Programs, News, and Updates</h3>
         <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#000 !important;">Home</a></li>
-            <li class="breadcrumb-item active">System Analytics</li>
+            <li class="breadcrumb-item active">UB Wall</li>
         </ol>
     </div>
 </div>
 
-<div class="container-fluid mt-5 px-3">
-    <div class="row justify-content-center">
-    <h2 class="fs-4 mb-4 text-center" style="color:#752738;">System Analytics</h2>
-        <div class="col-md-11">
-            <canvas id="loginChart" class="shadow" width="500" height="300" style="background-color: #fff;"></canvas>
-        </div>
+    <!-- START HERE -->
+    <div class="container my-5">
+      <!-- News Title and Subtitle -->
+      <h1 class="mb-4 text-dark"><?php echo htmlspecialchars($news_item['postTitle']); ?></h1>
+      <h4 class="mb-4 text-secondary"><?php echo htmlspecialchars($news_item['postSubTitle']); ?></h4>
+
+      <!-- Post Date -->
+      <p class="text-muted">
+        <i class="fa fa-clock"></i> 
+        Posted <?php echo timeAgo($news_item['postDate']); ?>
+      </p>
+
+      <!-- News Image -->
+      <?php if (!empty($news_item['postImage'])): ?>
+      <div class="text-center mb-4">
+        <img src="<?php echo htmlspecialchars($news_item['postImage']); ?>" class="img-fluid rounded shadow-sm" alt="<?php echo htmlspecialchars($news_item['postTitle']); ?>" style="width: 100%; max-height: 500px; object-fit: fit;">
+      </div>
+      <?php endif; ?>
+
+      <!-- News Content -->
+      <div class="news-content">
+        <p class="lead">
+          <?php 
+          // Ensure newlines are displayed properly
+          $content = str_replace(['\r', '\n'], ["\r", "\n"], $news_item['postContent']);
+          echo nl2br(htmlspecialchars($content)); 
+          ?>
+        </p>
+      </div>
+
+      <!-- Separator Line -->
+      <hr class="my-4">
+
+      <!-- Back Button -->
+      <div class="text-end">
+        <a href="ub_wall.php" class="btn btn-warning">
+          <i class="fa fa-arrow-left"></i> Back to News
+        </a>
+      </div>
     </div>
-</div>
 
-<?php include_once('./backend/login_analytics.php'); ?>
-
-<div class="container-fluid mt-5 px-3">
-    <div class="row justify-content-center">
-        <h2 class="fs-4 mb-4 text-center" style="color:#752738;">Events Analytics</h2>
-        <div class="col-md-6 text-center">
-            <select id="eventSelect" class="form-select mb-4 mx-auto" style="max-width: 300px;">
-                <option value="">Select an event</option>
-                <?php foreach ($events as $event): ?>
-                    <option value="<?php echo htmlspecialchars($event['event_id']); ?>">
-                        <?php echo htmlspecialchars($event['eventName']); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-            <div class="chart-container mx-auto mb-5" style="position: relative; height:40vh; width:80%; max-width:400px; background-color: #f8f9fa; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <canvas id="eventParticipationChart"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php include_once('./backend/events_analytics.php'); ?>
-
-  </div> <!-- End of page-content-wrapper -->
+            
+  </div> <!-- End of container -->
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -95,6 +116,8 @@ $events = $eventsResult->fetch_all(MYSQLI_ASSOC);
       el.classList.toggle("toggled");
     };
   </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 </body>
 

@@ -13,7 +13,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/img/favicon/logo.png">
   <link rel="stylesheet" type="text/css" href="../css/alumni.css"/>
 </head>
 
@@ -39,6 +39,8 @@
       </div>
     </nav>
 
+    
+
     <div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
     <img src="<?php echo $file ?>" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
     <div class="col-md-5">
@@ -51,9 +53,12 @@
 </div>
 
 
+
+
     <!-- Featured Alumni Section -->
     <div class="container my-5">
       <h3 class="text-center mb-4" style="color:#752738;">Featured Alumni</h3>
+      <hr class="mb-4">
       <div id="featuredAlumniCarousel" class="carousel slide" data-bs-ride="carousel" style="background-color:#BCB2AC; border-radius: 25px; overflow: hidden;">
 
         <img src="../../assets/img/branding/header.png" alt="Logo" class="carousel-logo">
@@ -128,6 +133,7 @@
 
     <div class="container my-5">
     <h3 class="text-center mb-4" style="color:#752738;">Announcement</h3>
+    <hr class="mb-4">
 
     <div class="row justify-content-center">
         <div class="col-lg-11 col-md-10">
@@ -209,6 +215,7 @@
 
 <div class="container my-5">
 <h3 class="text-center mb-4" style="color:#752738;">Top Online Visitor</h3>
+<hr class="mb-4">
   <div class="row justify-content-center me-4">
     <div class="col-md-7">
       <div class="table-container mx-auto">

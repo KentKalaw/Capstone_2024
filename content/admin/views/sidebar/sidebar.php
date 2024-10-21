@@ -25,7 +25,7 @@
     <i class="fa fa-users me-3" aria-hidden="true"></i>Forums
   </a>
 
-  <a href="#" class="list-group-item list-group-item-action sidebar-admin <?php echo $current_page == '#' ? 'active' : ''; ?>">
+  <a href="programs.php" class="list-group-item list-group-item-action sidebar-admin <?php echo $current_page == '#' ? 'active' : ''; ?>">
     <i class="fa-solid fa-hand-holding-heart me-3" aria-hidden="true"></i>Initiative Programs
   </a>
 
@@ -33,7 +33,7 @@
     <i class="fa fa-calendar me-3" aria-hidden="true"></i>Event Management
   </a>
 
-  <a href="#" class="list-group-item list-group-item-action sidebar-admin <?php echo $current_page == '#' ? 'active' : ''; ?>">
+  <a href="view_alumni_privilege_card.php" class="list-group-item list-group-item-action sidebar-admin <?php echo $current_page == '#' ? 'active' : ''; ?>">
     <i class="fa fa-id-card me-3" aria-hidden="true"></i>Alumni Card
   </a>
 

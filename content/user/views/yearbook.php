@@ -9,6 +9,7 @@
   <title>Alumni - Alumnite</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/img/favicon/logo.png">
   <link rel="stylesheet" type="text/css" href="../css/yearbook.css" />
 </head>
 
@@ -47,15 +48,23 @@
     </div>
 
     <div class="container mt-5">
-    <!-- Centered Button to open the modal -->
-    <div class="d-flex justify-content-center">
-  <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#infoModal">
-      <i class="fas fa-info-circle me-2"></i> Latitude and Longitude Info
-  </button>
-  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#yearbookModal">
-      <i class="fas fa-book me-2"></i> Request Yearbook Delivery
-  </button>
-</div>
+    <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="primary-text mb-3">Request Your Yearbook</h1>
+                    <p class="text-muted">Preserve your memories forever with our beautifully crafted yearbook. Request your copy today!</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button type="button" class="btn btn-warning action-button me-2" data-bs-toggle="modal" data-bs-target="#infoModal">
+                        <i class="fas fa-info-circle me-2"></i>Location Guide
+                    </button>
+                    <button type="button" class="btn btn-dark action-button" data-bs-toggle="modal" data-bs-target="#yearbookModal">
+                        <i class="fas fa-book me-2"></i>Request Now
+                    </button>
+                </div>
+            </div>
+        </div>
+<hr class="mb-4">
 
   <!-- Yearbook Request Modal -->
   <div class="modal fade" id="yearbookModal" tabindex="-1" aria-labelledby="yearbookModalLabel" aria-hidden="true">
@@ -117,32 +126,67 @@
  
 
   <!-- Yearbook Request Status Card -->
-  <div class="d-flex justify-content-center">
-  <div class="card mt-4" style="width: 800px; font-size: 1.2rem;">
-    <div class="card-header text-center">
-      <h5 class="mb-0" style="font-size: 1.5rem;">Yearbook Delivery Status</h5>
-    </div>
-    <div class="card-body">
-      <h6 class="card-title">Student Number: <span id="student-number"><?php echo htmlspecialchars($student_number); ?></span></h6>
-      <h6 class="card-title">Full name: <span id="full-name"><?php echo htmlspecialchars($fullname); ?></span></h6>
-      <h6 class="card-title">Request Status: <span class="badge rounded-pill 
-      <?php 
-        if ($request_status === 'Pending') {
-          echo 'bg-warning text-dark';
-        } elseif ($request_status === 'Approved') {
-          echo 'bg-success';
-        } else {
-          echo 'bg-danger';
-        }
-      ?>">
-      <?php echo htmlspecialchars($request_status); ?>
-      </span></h6>
-      <h6 class="card-title">Delivery Address: <span id="order-id"><?php echo htmlspecialchars($address); ?></span></h6>
-      <h6 class="card-title">Order ID: <span id="order-id"><?php echo htmlspecialchars($order_id); ?> (Order ID can be tracked)</span></h6><br>
-      <h6 class="card-title">If Request Status is Approved but Order ID is still N/A,<br>it means the admin has yet to create the order.</h6>
-    </div>
-  </div>
-</div>
+  <div class="container mb-5">
+            <div class="status-card card border-0">
+                <div class="card-header text-white text-center py-3" style="background-color: #6B1500">
+                    <h4 class="mb-0">Your Yearbook Request Status</h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">Student Details</h6>
+                            <p><strong>Student Number:</strong> <span id="student-number"><?php echo htmlspecialchars($student_number); ?></span></p>
+                            <p><strong>Full Name:</strong> <span id="full-name"><?php echo htmlspecialchars($fullname); ?></span></p>
+                            <p><strong>Delivery Address:</strong> <span id="order-id"><?php echo htmlspecialchars($address); ?></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">Request Information</h6>
+                            <p><strong>Request Status:</strong> 
+                                <span class="badge rounded-pill <?php 
+                                    if ($request_status === 'Pending') {
+                                        echo 'bg-warning text-dark';
+                                    } elseif ($request_status === 'Approved') {
+                                        echo 'bg-success';
+                                    } else {
+                                        echo 'bg-danger';
+                                    }
+                                ?>">
+                                    <?php echo htmlspecialchars($request_status); ?>
+                                </span>
+                            </p>
+                            <p><strong>Order ID:</strong> <span id="order-id"><?php echo htmlspecialchars($order_id); ?></span></p>
+                            <?php if ($request_status === 'Approved' && ($order_id === 'N/A')): ?>
+                                <div class="alert alert-info mt-3">
+                                    <i class="fas fa-info-circle me-2"></i>Your request has been approved. The admin will generate your order ID soon.
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mb-5">
+            <h4 class="primary-text mb-4">How to Request Your Yearbook</h4>
+            <div class="steps-container">
+                <div class="step-item">
+                    <h5><i class="fas fa-check-circle me-2 text-success"></i>Check Your Eligibility</h5>
+                    <p class="text-muted mb-0">Ensure your tuition is fully paid/no balance and you haven't received a yearbook yet.</p>
+                </div>
+                <div class="step-item">
+                    <h5><i class="fas fa-map-marker-alt me-2 text-danger"></i>Get Your Location</h5>
+                    <p class="text-muted mb-0">Visit <a href="https://www.latlong.net/" target="_blank">https://www.latlong.net</a> to get your precise delivery coordinates.</p>
+                </div>
+                <div class="step-item">
+                    <h5><i class="fas fa-paper-plane me-2 text-primary"></i>Submit Your Request</h5>
+                    <p class="text-muted mb-0">Fill out the request form with your details and delivery information.</p>
+                </div>
+                <div class="step-item">
+                    <h5><i class="fas fa-clock me-2 text-warning"></i>Track Your Request</h5>
+                    <p class="text-muted mb-0">Use your Order ID to track the status of your yearbook delivery.</p>
+                </div>
+            </div>
+        </div>
 
 
     <!-- Request Notice -->
@@ -167,6 +211,7 @@
       </div>
     </div>
 
+    <!-- Location Guide Modal -->
     <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
