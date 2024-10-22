@@ -86,14 +86,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <table class="table vm no-th-brd pro-of-month" style="border-radius:10px" id="example">
           <thead style="background:#8E8B82;color:#FFF;border-radius:10px">
             <tr>
-              <th>ID</th>
-              <th>Alumni ID</th>
               <th>Student Number</th>
               <th>Full name</th>
               <th>Email</th>
               <th>Number</th>
               <th>Status</th>
               <th>Special Request</th>
+              <th>From</th>
+              <th>To</th>
               <th>Approved Date</th>
               <th><center>Action</th>
             </tr>
@@ -111,21 +111,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $email = $row2['email'];
                     $number = $row2['number'];
                     $status = $row2['status'];
+                    $fromDate = $row2['fromDate'];
+                    $toDate = $row2['toDate'];
                     $special_request = $row2['special_request'];
                     $date = $row2['approved_date'];
 
+                    $minDate = date('Y-m-d\TH:i', strtotime($fromDate));
+                    $maxDate = date('Y-m-d\TH:i', strtotime($toDate));
+
                     echo '<tr>';
-                    echo '<td>' . $campus_id . '</td>';
-                    echo '<td>' . $alumni . '</td>';
                     echo '<td>' . $student_number . '</td>';
                     echo '<td>' . $fullname . '</td>';
                     echo '<td>' . $email . '</td>';
                     echo '<td>' . $number . '</td>';
                     echo '<td>' . $status . '</td>';
                     echo '<td>' . $special_request . '</td>';
+                    echo '<td>' . $fromDate . '</td>';
+                    echo '<td>' . $toDate . '</td>';
                     echo '<td>';
                     if (is_null($date)) {
-                        echo '<input type="datetime-local" id="approved_date_' . $campus_id . '" name="approved_date' . $campus_id . '" required class="form-control">';
+                      echo '<input type="datetime-local" id="approved_date_' . $campus_id . '" name="approved_date' . $campus_id . '" required class="form-control" min="' . $minDate . '" max="' . $maxDate . '">';
                     } else {
                         echo date('F j, Y g:ia', strtotime($date));
                     }

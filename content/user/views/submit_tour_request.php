@@ -8,8 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fullname = $_POST['fullname'];    
     $email = $_POST['email'];       
     $number = $_POST['number'];   
+    $fromDate = $_POST['fromDate'];
+    $toDate = $_POST['toDate'];
     $special_request = $_POST['special_request'];   
-      
+    
+    $fromDate = date('F j, Y g:ia', strtotime($fromDate));
+    $toDate = date('F j, Y g:ia', strtotime($toDate));
 
     // Check if the alumni has already requested
     $check_sql = "SELECT * FROM campus_tour WHERE alumni_id = $alumni_id";
@@ -21,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit; // Exit to prevent further processing
     } else {
         // Insert a new record with Pending status
-        $insert_sql = "INSERT INTO campus_tour (alumni_id, student_number, fullname, email, number, status, special_request, created_at) VALUES ($alumni_id, '$student_number', '$fullname', '$email', '$number', 'Pending', '$special_request', CURRENT_TIMESTAMP)";
+        $insert_sql = "INSERT INTO campus_tour (alumni_id, student_number, fullname, email, number, status, fromDate, toDate, special_request) VALUES ($alumni_id, '$student_number', '$fullname', '$email', '$number', 'Pending', '$fromDate', '$toDate', '$special_request')";
         
         if ($conn->query($insert_sql) === TRUE) {
             echo '<script>alert("Campus Tour request submitted. Please wait for further details"); window.location="campus_tour.php";</script>';

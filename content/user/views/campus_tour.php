@@ -131,7 +131,7 @@
               <?php echo htmlspecialchars($status); ?>
             </span>
           </p>
-          
+          <p><strong>Date Range:</strong> <span><?php echo htmlspecialchars($fromDate).' '.'-'.' '.htmlspecialchars($toDate); ?></span></p>
           <p><strong>Approved Date for Tour:</strong> <span id="approved-date"><?php echo htmlspecialchars($approved_date); ?></span></p>
             <?php if ($status === 'Approved' && ($approved_date === 'N/A')): ?>
                 <div class="alert alert-info mt-3">
@@ -200,6 +200,8 @@
         </div>
       </div>
 
+      <?php $requestDate = date('F j, Y g:i A'); ?>
+
       <div class="modal fade" id="tourModal" tabindex="-1" aria-labelledby="tourModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -234,6 +236,23 @@
                          maxlength="13" 
                          required autocomplete="off">
                 </div>
+
+                <div class="mb-3">
+                  <label for="fromDate" class="form-label">From</label>
+                  <input type="datetime-local" class="form-control" id="fromDate" name="fromDate" required min="<?php echo $requestDate ?>" onchange="ac()" autocomplete="off">
+                </div>
+
+                <div class="mb-3">
+                  <label for="toDate" class="form-label">To</label>
+                  <input type="datetime-local" class="form-control" id="toDate" name="toDate" required min="<?php echo $requestDate ?>" autocomplete="off">
+                </div>
+
+                <script>
+						    function ac() {
+						        var start_date = document.getElementById('fromDate').value;
+						        document.getElementById('toDate').min = start_date;
+						      }
+						    </script>
                 
                 <div class="mb-3">
                   <label for="special_requests" class="form-label">Special Requests or Comments</label>

@@ -69,8 +69,9 @@
               <th>Email</th>
               <th>Number</th>
               <th>Status</th>
+              <th>From</th>
+              <th>To</th>
               <th>Special Request</th>
-              <th>Created at</th>
               <th><center>Action</th>
             </tr>
           </thead>
@@ -87,9 +88,9 @@
                     $email = $row2['email'];
                     $number = $row2['number'];
                     $status = $row2['status'];
+                    $fromDate = $row2['fromDate'];
+                    $toDate = $row2['toDate'];
                     $special_request = $row2['special_request'];
-                    $date = $row2['created_at'];
-                    $date = date('F j, Y g:ia',strtotime($date));
                     echo '<tr>';
                     echo '<td>'.$campus_id.'</td>';
                     echo '<td>'.$alumni.'</td>';
@@ -98,8 +99,9 @@
                     echo '<td>'.$email.'</td>';
                     echo '<td>'.$number.'</td>';
                     echo '<td>'.$status.'</td>';
+                    echo '<td>'.$fromDate.'</td>';
+                    echo '<td>'.$toDate.'</td>';
                     echo '<td>'.$special_request.'</td>';
-                    echo '<td>'.$date.'</td>';
                     echo '<td><center>
                     <form action="update_campus_tour.php" method="post" style="display:inline;">
                         <input type="hidden" name="campus_id" value="'.$campus_id.'">

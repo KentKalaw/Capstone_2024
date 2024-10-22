@@ -1,6 +1,6 @@
 <?php
 
-$sql = "SELECT student_number, fullname, email, number, status, special_request, approved_date FROM campus_tour WHERE alumni_id = ?";
+$sql = "SELECT student_number, fullname, email, number, status, fromDate, toDate, special_request, approved_date FROM campus_tour WHERE alumni_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $alumni_id);
 $stmt->execute();
@@ -15,6 +15,8 @@ if ($result->num_rows > 0) {
   $email = $row['email'] ? $row['email'] : 'N/A';
   $number = $row['number'] ? $row['number'] : 'N/A';
   $status = $row['status'] ? $row['status'] : 'No request submitted yet';
+  $fromDate = $row['fromDate'] ? $row['fromDate'] : 'N/A';
+  $toDate = $row['toDate'] ? $row['toDate'] : 'N/A';
   $special_request = $row['special_request'] ? $row['special_request'] : 'N/A';
   $approved_date = $row['approved_date'] ? $row['approved_date'] : 'N/A';
 
@@ -26,6 +28,8 @@ if ($result->num_rows > 0) {
   $email = 'N/A';
   $number = 'N/A';
   $status = 'No request submitted yet';
+  $fromDate = 'N/A';
+  $toDate = 'N/A';
   $special_request = 'N/A';
   $approved_date = 'N/A';
 }
