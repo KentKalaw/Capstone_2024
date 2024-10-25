@@ -10,6 +10,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link rel="icon" type="image/png" sizes="512x512" href="../../assets/img/favicon/logo.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/yearbook.css" />
 </head>
 
@@ -93,15 +95,20 @@
               <label for="address" class="form-label">Delivery Address (your accurate delivery address)</label>
               <input type="text" class="form-control" id="address" name="address" required autocomplete="off">
             </div>
-            
+
             <div class="mb-3">
-              <label for="latitude" class="form-label">Latitude of your address (latitude of your address e.g: 12.435345)</label>
-              <input type="text" class="form-control" id="latitude" name="latitude" required autocomplete="off">
+            <label class="form-label">Select your accurate address here (for latitude and longitude)</label>
+            <div id="map" style="height: 400px; width: 100%; display: block;"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="latitude" class="form-label">Latitude</label>
+              <input type="text" class="form-control" id="latitude" name="latitude" required readonly>
             </div>
             
             <div class="mb-3">
-              <label for="longitude" class="form-label">Longitude of your address (longitude of your address e.g: 122.435345)</label>
-              <input type="text" class="form-control" id="longitude" name="longitude" required autocomplete="off">
+              <label for="longitude" class="form-label">Longitude</label>
+              <input type="text" class="form-control" id="longitude" name="longitude" required readonly>
             </div>
             
             <div class="mb-3">
@@ -122,6 +129,37 @@
       </div>
     </div>
   </div>
+
+  <!-- Script for leaflet api openstreetmap geolocation -->
+
+  <script>
+                const map = L.map('map').setView([12.8797, 121.7740], 6); // Set default location
+
+                // Load and display the tile layer from OpenStreetMap
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // Add a marker with drag and drop functionality
+                const marker = L.marker([12.8797, 121.7740], { draggable: true }).addTo(map);
+
+                marker.on('dragend', function(e) {
+                    const position = marker.getLatLng();
+                    document.getElementById("latitude").value = event.latLng.lat().toFixed(6);
+                    document.getElementById("longitude").value = event.latLng.lng().toFixed(6);
+                });
+
+                map.on('click', function(e) {
+                const { lat, lng } = e.latlng;
+                marker.setLatLng(e.latlng); // Move the marker to the clicked location
+                document.getElementById("latitude").value = lat.toFixed(6);
+                document.getElementById("longitude").value = lng.toFixed(6);
+            });
+
+            document.getElementById('yearbookModal').addEventListener('shown.bs.modal', function () {
+                            map.invalidateSize();
+                        });
+            </script>
   
  
 
@@ -174,8 +212,8 @@
                     <p class="text-muted mb-0">Ensure your tuition is fully paid/no balance and you haven't received a yearbook yet.</p>
                 </div>
                 <div class="step-item">
-                    <h5><i class="fas fa-map-marker-alt me-2 text-danger"></i>Get Your Location</h5>
-                    <p class="text-muted mb-0">Visit <a href="https://www.latlong.net/" target="_blank">https://www.latlong.net</a> to get your precise delivery coordinates.</p>
+                    <h5><i class="fas fa-map-marker-alt me-2 text-danger"></i>Get Your Location's Accurate Coordinates</h5>
+                    <p class="text-muted mb-0"> Select your accurate delivery address on the map to get your precise delivery coordinates.</p>
                 </div>
                 <div class="step-item">
                     <h5><i class="fas fa-paper-plane me-2 text-primary"></i>Submit Your Request</h5>
@@ -220,11 +258,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          1. Go to <a href="https://www.latlong.net/">https://www.latlong.net/</a> <br> <br>
-          2. Type Your Delivery Address. <br> <br>
-          3. Adjust the pinpoint to your delivery address location for accuracy. <br> <br>
-          4. Copy the Latitude and Longitude given to you. <br> <br>
-          5. Paste it in the Yearbook Delivery Form. <br> <br>
+          1. In the form, Type in your accurate delivery address first.</a> <br> <br>
+          2. Adjust the pinpoint to your delivery address location for accuracy. <br> <br>
+          3. It will automatically give you the latitude and longitude of your address. <br> <br>
         </div>
       </div>
     </div>

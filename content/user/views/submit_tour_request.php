@@ -12,8 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $toDate = $_POST['toDate'];
     $special_request = $_POST['special_request'];   
     
-    $fromDate = date('F j, Y g:ia', strtotime($fromDate));
-    $toDate = date('F j, Y g:ia', strtotime($toDate));
+    if (!empty($fromDate)) {
+        $fromDate = date('F j, Y g:ia', strtotime($fromDate));
+    } else {
+        $fromDate = null;
+    }
+
+    if (!empty($toDate)) {
+        $toDate = date('F j, Y g:ia', strtotime($toDate));
+    } else {
+        $toDate = null;
+    }
 
     // Check if the alumni has already requested
     $check_sql = "SELECT * FROM campus_tour WHERE alumni_id = $alumni_id";

@@ -239,12 +239,12 @@
 
                 <div class="mb-3">
                   <label for="fromDate" class="form-label">From</label>
-                  <input type="datetime-local" class="form-control" id="fromDate" name="fromDate" required min="<?php echo $requestDate ?>" onchange="ac()" autocomplete="off">
+                  <input type="datetime-local" class="form-control" id="fromDate" name="fromDate" min="<?php echo $requestDate ?>" onchange="ac()" autocomplete="off">
                 </div>
 
                 <div class="mb-3">
                   <label for="toDate" class="form-label">To</label>
-                  <input type="datetime-local" class="form-control" id="toDate" name="toDate" required min="<?php echo $requestDate ?>" autocomplete="off">
+                  <input type="datetime-local" class="form-control" id="toDate" name="toDate" min="<?php echo $requestDate ?>" autocomplete="off">
                 </div>
 
                 <script>
