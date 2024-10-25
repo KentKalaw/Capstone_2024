@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-4 text-end">
                     <button type="button" class="btn btn-warning action-button me-2" data-bs-toggle="modal" data-bs-target="#infoModal">
-                        <i class="fas fa-info-circle me-2"></i>Location Guide
+                        <i class="fas fa-info-circle me-2"></i>Loc. Info
                     </button>
                     <button type="button" class="btn btn-dark action-button" data-bs-toggle="modal" data-bs-target="#yearbookModal">
                         <i class="fas fa-book me-2"></i>Request Now
@@ -133,32 +133,32 @@
   <!-- Script for leaflet api openstreetmap geolocation -->
 
   <script>
-                const map = L.map('map').setView([12.8797, 121.7740], 6); // Set default location
+      const map = L.map('map').setView([12.8797, 121.7740], 6); // Set default location
 
-                // Load and display the tile layer from OpenStreetMap
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
+      // Load and display the tile layer from OpenStreetMap
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
 
-                // Add a marker with drag and drop functionality
-                const marker = L.marker([12.8797, 121.7740], { draggable: true }).addTo(map);
+      // Add a marker with drag and drop functionality
+      const marker = L.marker([12.8797, 121.7740], { draggable: true }).addTo(map);
 
-                marker.on('dragend', function(e) {
-                    const position = marker.getLatLng();
-                    document.getElementById("latitude").value = event.latLng.lat().toFixed(6);
-                    document.getElementById("longitude").value = event.latLng.lng().toFixed(6);
-                });
+      marker.on('dragend', function(e) {
+          const position = marker.getLatLng();
+          document.getElementById("latitude").value = event.latLng.lat().toFixed(6);
+          document.getElementById("longitude").value = event.latLng.lng().toFixed(6);
+      });
 
-                map.on('click', function(e) {
-                const { lat, lng } = e.latlng;
-                marker.setLatLng(e.latlng); // Move the marker to the clicked location
-                document.getElementById("latitude").value = lat.toFixed(6);
-                document.getElementById("longitude").value = lng.toFixed(6);
-            });
+      map.on('click', function(e) {
+      const { lat, lng } = e.latlng;
+      marker.setLatLng(e.latlng); // Move the marker to the clicked location
+      document.getElementById("latitude").value = lat.toFixed(6);
+      document.getElementById("longitude").value = lng.toFixed(6);
+  });
 
-            document.getElementById('yearbookModal').addEventListener('shown.bs.modal', function () {
-                            map.invalidateSize();
-                        });
+  document.getElementById('yearbookModal').addEventListener('shown.bs.modal', function () {
+                  map.invalidateSize();
+              });
             </script>
   
  
@@ -232,7 +232,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalLabel">Yearbook Request Notice</h5>
+            <h5 class="modal-title" id="modalLabel">Yearbook Request  Privacy Notice</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body" style="color: #000; font-weight: bold; padding: 30px;">

@@ -114,6 +114,7 @@ if ($initialNewsResult && mysqli_num_rows($initialNewsResult) > 0) :
     <p>No news available at the moment.</p>
 <?php endif; ?>
 
+
     <!-- Load More Button -->
     <div class="row mt-4">
     <div class="col-12 text-center">
