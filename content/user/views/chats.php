@@ -5,38 +5,83 @@ $date = date('F d, Y');
 $username1 = $_SESSION['username'];
 $id = $_GET['id'];
 
+// Get the profile picture of the other user
+$sql_user = "SELECT profile FROM alumni WHERE username = '$id'";
+$result_user = $conn->query($sql_user);
+$profile_pic = '../images/ub-logo.png'; // Default profile picture
+if ($row_user = $result_user->fetch_assoc()) {
+    if (!empty($row_user['profile'])) {
+        $profile_pic = $row_user['profile'];
+    }
+}
+
+
+// Get messages
 $sql = "SELECT * FROM message WHERE (user1 = '$username1' AND user2 = '$id') OR (user1 = '$id' AND user2 = '$username1')";
 $result = $conn->query($sql);
+
+$previous_date = '';
 
 while($row = $result->fetch_assoc()) {
     $user1 = $row['user1'];
     $user2 = $row['user2'];
     $message = $row['message'];
     $file = $row['file'];
-    $date = date('F d, Y h:i A', strtotime($row['date']));
+    $current_date = date('F d, Y', strtotime($row['date']));
+    $time = date('h:i A', strtotime($row['date']));
+    
+    // Show date separator if it's a new date
+    if ($current_date != $previous_date) {
+        echo '<div class="text-center mb-3">';
+        echo '<span class="badge bg-light text-dark px-3 py-2 rounded-pill">' . $current_date . '</span>';
+        echo '</div>';
+        $previous_date = $current_date;
+    }
 
     if ($user1 == $username1) {
-        // Right-aligned messages (for current user)
-        echo '<div class="row mb-5 justify-content-end">';
-        echo '<div class="col-auto bg-primary text-dark p-3 rounded-3 shadow" style="max-width: 75%; word-wrap: break-word;">';
-        echo '<p class="mb-1 fw-bold text-dark">' . nl2br(htmlspecialchars($message)) . '</p>';
-        if ($file != '') {
-            echo '<img src="' . htmlspecialchars($file) . '" class="img-fluid my-2" style="max-width: 100%;">';
+        // Sent messages (right-aligned)
+        echo '<div class="message-row sent">';
+        echo '<div class="message-content">';
+        if (!empty($message)) {
+            echo '<p class="mb-1">' . nl2br(htmlspecialchars($message)) . '</p>';
         }
-        echo '<small class="text-dark d-block">' . $date . '</small>';
+        if (!empty($file)) {
+            echo '<div class="message-attachment">';
+            echo '<img src="' . htmlspecialchars($file) . '" class="message-img" style="height: 300px;; width: 100%; border-radius: 10px; margin-top: 5px; " alt="Attachment">';
+            echo '</div>';
+        }
+        echo '<span class="message-time">' . $time . '</span>';
         echo '</div>';
         echo '</div>';
     } else {
-        // Left-aligned messages (from the other user)
-        echo '<div class="row mb-3 justify-content-start">';
-        echo '<div class="col-auto bg-white text-dark p-3 rounded-3 shadow-sm" style="max-width: 75%; word-wrap: break-word;">';
-        echo '<p class="mb-1 fw-bold ">' . nl2br(htmlspecialchars($message)) . '</p>';
-        if ($file != '') {
-            echo '<img src="' . htmlspecialchars($file) . '" class="img-fluid my-2" style="max-width: 100%;">';
+        // Received messages (left-aligned)
+        echo '<div class="message-row received">';
+        echo '<img src="' . $profile_pic . '" alt="Profile" class="profile-img">';
+        echo '<div class="message-content">';
+        if (!empty($message)) {
+            echo '<p class="mb-1">' . nl2br(htmlspecialchars($message)) . '</p>';
         }
-        echo '<small class="text-dark d-block">' . $date . '</small>';
+        if (!empty($file)) {
+            echo '<div class="message-attachment">';
+            echo '<img src="' . htmlspecialchars($file) . '" class="message-img"  style="height: 300px;; width: 100%; border-radius: 10px; margin-top: 5px; " alt="Attachment">';
+            echo '</div>';
+        }
+        echo '<span class="message-time">' . $time . '</span>';
         echo '</div>';
         echo '</div>';
     }
+
+    // Add spacing between message groups
+    if ($result->num_rows > 1) {
+        echo '<div style="height: 8px;"></div>';
+    }
+}
+
+// If no messages, show a welcome message
+if ($result->num_rows == 0) {
+    echo '<div class="text-center text-muted mt-4">';
+    echo '<i class="fas fa-comments fa-3x mb-3"></i>';
+    echo '<p>No messages yet. Start the conversation!</p>';
+    echo '</div>';
 }
 ?>

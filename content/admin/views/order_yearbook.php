@@ -13,7 +13,7 @@ include('../../connect.php');
                     $recipient_phone = $row['number'];
                     $delivery_address = $row['address'];
                     $latitude = $row['latitude'];
-                    $longitude = $row['longitude'];  // Fixed
+                    $longitude = $row['longitude']; 
 
                     // Lalamove API configuration
                     $key = 'pk_test_572395d05c7a438f5a462402ea91f5cb';
