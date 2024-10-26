@@ -47,20 +47,24 @@
     </div>
 </div>
 
-<div class="not-container mt-5">
- <div class="row justify-content-center mt-4">
-            <div class="col-md-4 text-center">
-                <button class="btn btn-warning btn-l mb-3 w-50" data-bs-toggle="modal" data-bs-target="#howToUseModal">
+<div class="not-container mt-5 mx-5">
+    <div class="not-container py-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="primary-text mb-3">Request Your Alumni Privilege Card</h1>
+                <p class="text-muted">Enjoy exclusive benefits and privileges with our Alumni Privilege Card. Request your card today!</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <button type="button" class="btn btn-warning action-button me-2 mb-2 mb-md-0" data-bs-toggle="modal" data-bs-target="#howToUseModal">
                     <i class="fas fa-info-circle me-2"></i> How to Use APC
                 </button>
-            </div>
-            <div class="col-md-4 text-center">
-                <button class="btn btn-secondary btn-l mb-3 w-50" data-bs-toggle="modal" data-bs-target="#applicationFormModal">
+                <button type="button" class="btn btn-dark action-button" data-bs-toggle="modal" data-bs-target="#applicationFormModal">
                     <i class="fas fa-file-alt me-2"></i> APC Application Form
                 </button>
             </div>
         </div>
-        <hr class="mb-4 w-50 mx-auto">
+    </div>
+    <hr class="mb-4">
 </div>
 
 <div class="not-container m-5 mt-4">
@@ -151,9 +155,7 @@
             <div class="col-6 col-md-4 col-lg-3 mb-4">
                 <img src="../images/chowking.png" alt="Sponsor 2" class="img-fluid" style="width: 100px; height: 100px" />
             </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <img src="../images/sentinels.png" alt="Sponsor 3" class="img-fluid" style="width: 100px; height: 100px" />
-            </div>
+           
             
             <!-- Add more sponsors later HA-->
         </div>

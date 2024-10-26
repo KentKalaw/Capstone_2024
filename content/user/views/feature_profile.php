@@ -49,15 +49,8 @@
     </div>
 </div>
 
-    <div class="container-fluid p-4 text-center">
-            <img src="<?php echo $file ?>" id="img1" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
-            <div>
-                <form action="#" method="POST">
-            </div>
-
             <?php
 				if(isset($_POST['submit'])) {
-					include('../connect.php');
 					$name = mysqli_real_escape_string($conn,$_POST['name']);
 					$position = mysqli_real_escape_string($conn,$_POST['position']);
 					$company = mysqli_real_escape_string($conn,$_POST['company']);
@@ -72,10 +65,10 @@
 					mysqli_query($conn,"DELETE FROM profile1 WHERE username = '$username'");
 		mysqli_query($conn, "INSERT INTO profile1 (name,position,company,course,year,a1,a2,a3,a4,username,image)VALUES ('$name','$position','$company','$course','$year','$a1','$a2','$a3','$a4','$username','$image')");
 					date_default_timezone_set('Asia/Manila');
-					$message = 'Alumni updated profile';
+					$message = 'Alumni submitted a feature alumni';
 					$date = date('F d, Y h:i A');
 				$save = $conn->query("INSERT INTO audit (username,action, timestamp)VALUES ('$username','$message','$date')");
-		echo '<script>alert("Profile has been updated");window.location="profile.php";</script>';
+		echo '<script>alert("Alumni has submitted a feature alumni.");window.location="profile.php";</script>';
 				}
 				
 				
@@ -110,71 +103,73 @@
 				?>
                 
                 
-                <div class="row">
-    <div class="col-md-6 mb-3 text-start">
-        <label for="name" class="form-label">Name:</label>
-        <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" required>
-    </div>
-    <div class="col-md-6 mb-3 text-start">
-        <label for="position" class="form-label">Position:</label>
-        <input type="text" class="form-control" id="position" name="position" value="<?php echo $position; ?>" required>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 mb-3 text-start">
-        <label for="company" class="form-label">Company:</label>
-        <input type="text" class="form-control" id="company" name="company" value="<?php echo $company; ?>" required>
-    </div>
-    <div class="col-md-6 mb-3 text-start">
-        <label for="course" class="form-label">Course:</label>
-        <input type="text" class="form-control" id="course" name="course" value="<?php echo $course; ?>" required>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 mb-3 text-start">
-        <label for="year_graduated" class="form-label">Year Graduated:</label>
-        <input type="text" class="form-control" id="year" name="year" value="<?php echo $year ?>" required>
-    </div>
-</div>
+                <form action="#" method="POST">
+                <div class="profile-header text-center mx-2">
+                    <img src="../../assets/img/favicon/logo.png" id="img1" class="profile-picture">
+                    <div class="file-upload mb-3">
+                        <input type="file" name="upload" id="upload" accept="image/png, image/gif, image/jpeg" style="display: none">
+                        <label for="upload" class="mb-0">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p class="mb-0">Click to upload your featured photo</p>
+                            <span class="text-muted small">PNG, JPG or GIF files are allowed</span>
+                        </label>
+                        <textarea id="file" name="image" style="display:none"></textarea>
+                    </div>
+                </div>
 
+                <div class="form-container mx-2">
+                    <h5 class="section-title">Personal Information</h5>
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Position</label>
+                            <input type="text" class="form-control" name="position" value="<?php echo $position; ?>" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Company</label>
+                            <input type="text" class="form-control" name="company" value="<?php echo $company; ?>" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Course</label>
+                            <input type="text" class="form-control" name="course" value="<?php echo $course; ?>" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Year Graduated</label>
+                            <input type="text" class="form-control" name="year" value="<?php echo $year ?>" required>
+                        </div>
+                    </div>
 
-<div class="row">
-    <div class="col-12 mb-3 text-start">
-        <label for="question1" class="form-label">1. How did you come by choosing University of Batangas?</label>
-        <textarea class="form-control" id="question1" name="a1" rows="3" required><?php echo $a1 ?></textarea>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 mb-3 text-start">
-        <label for="question2" class="form-label">2. What do you think is the greatest contribution UB has imparted to your holistic growth?</label>
-        <textarea class="form-control" id="question2" name="a2" rows="3" required><?php echo $a2 ?></textarea>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 mb-3 text-start">
-        <label for="question3" class="form-label">3. How did your overall experience in UB take part in your self-formation as you strive through the path of your profession?</label>
-        <textarea class="form-control" id="question3" name="a3" rows="3" required><?php echo $a3 ?></textarea>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 mb-3 text-start">
-        <label for="question4" class="form-label">4. After reaching numerous milestones in your career, what piece of advice can you give to the students who are aspiring to be successful in the path they choose?</label>
-        <textarea class="form-control" id="question4" name="a4" rows="3" required><?php echo $a4 ?></textarea>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 mb-3 text-start">
-        <label for="file" class="form-label">Attach Picture for Featured Alumni:</label>
-        <input type="file" name="upload" id="upload"  accept="image/png, image/gif, image/jpeg" required class="form-control"><br>
-        <textarea id="file" name="image" style="display:none"></textarea>
-    </div>
-</div>
+                    <h5 class="section-title mt-5">Alumni Questions</h5>
+                    <div class="question-card">
+                        <label class="question-label">1. How did you come by choosing University of Batangas?</label>
+                        <textarea class="form-control" name="a1" required><?php echo $a1 ?></textarea>
+                    </div>
 
-<div class="d-flex justify-content-end">
-    <button type="submit" name="submit" class="btn btn-primary me-2">Save</button>
-    <button type="button" class="btn btn-secondary" onclick="window.location='index.php';">Cancel</button>
-</div>
-               
+                    <div class="question-card">
+                        <label class="question-label">2. What do you think is the greatest contribution UB has imparted to your holistic growth?</label>
+                        <textarea class="form-control" name="a2" required><?php echo $a2 ?></textarea>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">3. How did your overall experience in UB take part in your self-formation as you strive through the path of your profession?</label>
+                        <textarea class="form-control" name="a3" required><?php echo $a3 ?></textarea>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">4. After reaching numerous milestones in your career, what piece of advice can you give to the students who are aspiring to be successful in the path they choose?</label>
+                        <textarea class="form-control" name="a4" required><?php echo $a4 ?></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="button" class="btn btn-secondary me-2" onclick="window.location='index.php';">Cancel</button>
+                        <button type="submit" name="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Submit Feature Form
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

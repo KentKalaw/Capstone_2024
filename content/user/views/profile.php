@@ -47,84 +47,103 @@
     </div>
 </div>
 
-    <div class="container-fluid p-4 text-center">
-            <img src="<?php echo $file ?>" id="img1" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
-            <div>
-                <label for="upload" class="btn btn-light">
-                    <i class="fa-solid fa-pen-to-square" style="font-size: 20px;"></i> Edit Profile Picture
-                </label>
-                <form action="#" method="POST">
-                <input type="file" name="upload" id="upload" style="display:none" accept="image/png, image/gif, image/jpeg">
-                <textarea id="file" name="file" style="display:none"></textarea>
-            </div>
+<?php include_once('./backend/profile_sql.php'); ?>
 
-            <?php include_once('./backend/profile_sql.php'); ?>
-                
-                
-                <div class="mb-3 text-start">
-                    <label for="fname" class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="fname" value="<?php echo $fname; ?>" required>
+<form action="#" method="POST">
+                <div class="profile-header text-center mx-2">
+                    <div class="profile-picture-container">
+                        <img src="<?php echo $file ?>" id="img1" class="profile-picture">
+                        <label for="upload" class="edit-picture-btn">
+                            <i class="fa-solid fa-camera"></i>
+                        </label>
+                        <input type="file" name="upload" id="upload" style="display:none" accept="image/png, image/gif, image/jpeg">
+                        <textarea id="file" name="file" style="display:none"></textarea>
+                    </div>
+                    <h4 class="mt-3 mb-1"><?php echo $fname . ' ' . $lname ?></h4>
+                    <p class="text-muted"><?php echo $occupation ?></p>
                 </div>
-                <div class="mb-3 text-start">
-                    <label for="lname" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="lname" value="<?php echo $lname; ?>" required>
-                </div>
-                <div class="mb-3 text-start">
-                    <label for="birthday" class="form-label">Birthday</label>
-                    <input type="date" class="form-control" name="birthday" value="<?php echo $birthday; ?>" required>
-                </div>
-                <div class="mb-3 text-start">
-                    <label for="occupation" class="form-label">Occupation</label>
-                    <input type="text" class="form-control" name="occupation" value="<?php echo $occupation; ?>" required>
-                </div>
-                <div class="mb-3 text-start">
-                    <label for="company" class="form-label">Company</label>
-                    <input type="text" class="form-control" name="company" value="<?php echo $company; ?>" required>
-                </div>
-                <div class="mb-3 text-start">
-                    <label for="region" class="form-label">Region</label>
-                    <select name="region" class="form-select" required>
-                        <option><?php echo $region; ?></option>
-                        <option>Region I – Ilocos Region</option>
-                        <option>Region II – Cagayan Valley</option>
-                        <option>Region III – Central Luzon</option>
-                        <option>Region IV A – CALABARZON</option>
-                        <option>MIMAROPA Region</option>
-                        <option>Region V – Bicol Region</option>
-                        <option>Region VI – Western Visayas</option>
-                        <option>Region VII – Central Visayas</option>
-                        <option>Region VIII – Eastern Visayas</option>
-                        <option>Region IX – Zamboanga Peninsula</option>
-                        <option>Region X – Northern Mindanao</option>
-                        <option>Region XI – Davao Region</option>
-                        <option>Region XII – SOCCSKSARGEN</option>
-                        <option>Region XIII – Caraga</option>
-                        <option>NCR – National Capital Region</option>
-                        <option>CAR – Cordillera Administrative Region</option>
-                        <option>BARMM – Bangsamoro Autonomous Region in Muslim Mindanao</option>
-                    </select>
-                </div>
-                <div class="mb-3 text-start">
-                    <label for="city" class="form-label">Province</label>
-                    <input type="text" class="form-control" name="city" value="<?php echo $city; ?>" required>
-                </div>
-                <input type="hidden" name="program" value="<?php echo $program; ?>">
-                <div class="d-flex justify-content-end">
-    <button type="submit" name="submit" class="btn btn-primary me-2">Save</button>
-    <button type="button" class="btn btn-secondary" onclick="window.location='index.php';">Cancel</button>
-</div>
 
-</form>
-            </form>
-        
-  
-    
-    <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-warning mt-2" onclick="window.location='feature_profile.php';">Featured Alumni Form</button>
-      </div>
+                <div class="profile-form mx-2 mb-4">
+                    <h5 class="section-title">Personal Information</h5>
+                    <div class="form-group-row mb-4">
+                        <div class="mb-3">
+                            <label for="fname" class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="fname" value="<?php echo $fname; ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lname" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="lname" value="<?php echo $lname; ?>" required>
+                        </div>
+                    </div>
 
+                    <div class="form-group-row mb-4">
+                        <div class="mb-3">
+                            <label for="birthday" class="form-label">Birthday</label>
+                            <input type="date" class="form-control" name="birthday" value="<?php echo $birthday; ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="occupation" class="form-label">Occupation</label>
+                            <input type="text" class="form-control" name="occupation" value="<?php echo $occupation; ?>" required>
+                        </div>
+                    </div>
+
+                    <h5 class="section-title mt-4">Professional Information</h5>
+                    <div class="mb-4">
+                        <label for="company" class="form-label">Company</label>
+                        <input type="text" class="form-control" name="company" value="<?php echo $company; ?>" required>
+                    </div>
+
+                    <h5 class="section-title mt-4">Location</h5>
+                    <div class="form-group-row mb-4">
+                        <div class="mb-3">
+                            <label for="region" class="form-label">Region</label>
+                            <select name="region" class="form-select" required>
+                                <option><?php echo $region; ?></option>
+                                <option><?php echo $region; ?></option>
+                                <option>Region I – Ilocos Region</option>
+                                <option>Region II – Cagayan Valley</option>
+                                <option>Region III – Central Luzon</option>
+                                <option>Region IV A – CALABARZON</option>
+                                <option>MIMAROPA Region</option>
+                                <option>Region V – Bicol Region</option>
+                                <option>Region VI – Western Visayas</option>
+                                <option>Region VII – Central Visayas</option>
+                                <option>Region VIII – Eastern Visayas</option>
+                                <option>Region IX – Zamboanga Peninsula</option>
+                                <option>Region X – Northern Mindanao</option>
+                                <option>Region XI – Davao Region</option>
+                                <option>Region XII – SOCCSKSARGEN</option>
+                                <option>Region XIII – Caraga</option>
+                                <option>NCR – National Capital Region</option>
+                                <option>CAR – Cordillera Administrative Region</option>
+                                <option>BARMM – Bangsamoro Autonomous Region in Muslim Mindanao</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">Province</label>
+                            <input type="text" class="form-control" name="city" value="<?php echo $city; ?>" required>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="program" value="<?php echo $program; ?>">
+                    
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 mt-4">
+    <button type="button" onclick="window.location='feature_profile.php';" class="btn btn-warning h-100 d-flex align-items-center justify-content-center" style="max-width: 250px; height: 38px;">
+        <i class="fas fa-star me-2"></i>Featured Alumni Form
+    </button>
+    <div class="d-flex gap-2">
+        <button type="button" onclick="window.location='index.php';" class="btn btn-secondary d-flex align-items-center justify-content-center" style="min-width: 100px; height: 38px;">
+            Cancel
+        </button>
+        <button type="submit" name="submit" class="btn btn-primary d-flex align-items-center justify-content-center" style="min-width: 140px; height: 38px;">
+            <i class="fas fa-save me-2"></i>Save Changes
+        </button>
     </div>
-  </div>
+</div>
+                </div>
+            </form>
+        </div>
+    </div>
     <script>
           const fileInput = document.getElementById('upload');
           fileInput.addEventListener('change', (e) => {

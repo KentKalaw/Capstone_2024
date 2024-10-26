@@ -50,7 +50,7 @@
     <div class="container my-5">
     <h3 class="text-center mb-4" style="color:#752738;">Graduate Tracer Survey</h3>
     </div>
-    <div class="p-4 bg-white rounded-5 mb-4">
+    <div class="p-4 bg-white rounded-5 mb-4 mx-3 rounded">
   <p class="mb-0">
     Please complete this GTS questionnaire as accurately & frankly as possible. Your answer will be used for research purposes in order to assess graduate employability and eventually, improve course offerings of your alma mater & other universities/colleges in the Philippines. Your answers to this survey will be treated with strictest confidentiality.
   </p>
