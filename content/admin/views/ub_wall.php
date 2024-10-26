@@ -9,7 +9,7 @@
   <title>Admin - Alumnite</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/ub_wall.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="icon" type="image/png" sizes="512x512" href="../../assets/img/favicon/logo.png">
 </head>
@@ -103,14 +103,16 @@ if ($initialNewsResult && mysqli_num_rows($initialNewsResult) > 0) :
                 <div class="card mb-3 shadow-sm">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="<?php echo htmlspecialchars($news['postImage']); ?>" class="img-fluid rounded-start h-100 w-100" alt="<?php echo htmlspecialchars($news['postTitle']); ?>">
+                            <img src="<?php echo htmlspecialchars($news['postImage']); ?>" class="img-fluid rounded-start" alt="<?php echo htmlspecialchars($news['postTitle']); ?>">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($news['postTitle']); ?></h5>
-                                <p class="card-text"><?php echo htmlspecialchars($news['postSubTitle']); ?></p>
+                                <p class="card-subtitle mb-2"><?php echo htmlspecialchars($news['postSubTitle']); ?></p>
                                 <p class="card-text"><small class="text-muted">Posted <?php echo timeAgo($news['postDate']); ?></small></p>
+                                <div class="d-flex justify-content-between">
                                 <a href="news_detail.php?id=<?php echo $news['id']; ?>" class="btn btn-sm" style="background-color: #752738; color: white;">Read More</a>
+                                <div class="">
                                 <a href="" 
                                 class="btn btn-link text-secondary" 
                                 data-bs-toggle="modal" data-bs-target="#updateModal-<?php echo $news['id']; ?>">
@@ -122,6 +124,8 @@ if ($initialNewsResult && mysqli_num_rows($initialNewsResult) > 0) :
                                 onclick="return confirm('Are you sure you want to delete this news?');">
                                 <i class="fa fa-trash-alt"></i>
                                 </a>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>

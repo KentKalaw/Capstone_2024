@@ -11,7 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="512x512" href="../../assets/img/favicon/logo.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="../css/alumni.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/ub_wall.css"/>
 </head>
 
 <body>
@@ -95,12 +95,12 @@ if ($initialNewsResult && mysqli_num_rows($initialNewsResult) > 0) :
                 <div class="card mb-3 shadow-sm">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="<?php echo htmlspecialchars($news['postImage']); ?>" class="img-fluid rounded-start h-100 w-100" alt="<?php echo htmlspecialchars($news['postTitle']); ?>">
+                            <img src="<?php echo htmlspecialchars($news['postImage']); ?>" class="img-fluid rounded-start" alt="<?php echo htmlspecialchars($news['postTitle']); ?>">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($news['postTitle']); ?></h5>
-                                <p class="card-text"><?php echo htmlspecialchars($news['postSubTitle']); ?></p>
+                                <p class="card-subtitle mb-2"><?php echo htmlspecialchars($news['postSubTitle']); ?></p>
                                 <p class="card-text"><small class="text-muted">Posted <?php echo timeAgo($news['postDate']); ?></small></p>
                                 <a href="news_detail.php?id=<?php echo $news['id']; ?>" class="btn btn-sm" style="background-color: #752738; color: white;">Read More</a>
                             </div>
