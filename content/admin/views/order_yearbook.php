@@ -36,7 +36,7 @@ include('../../connect.php');
                                 "item": {
                                     "quantity": "1",
                                     "weight": "LESS_THAN_3KG",
-                                    "categories": ["FOOD_DELIVERY","OFFICE_ITEM"],
+                                    "categories": ["OFFICE_ITEM"],
                                     "handlingInstructions": ["KEEP_UPRIGHT","FRAGILE"] 
                                 },
                                 "stops": [
