@@ -478,6 +478,18 @@
       el.classList.toggle("toggled");
     };
   </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  var containers = document.querySelectorAll('.container');
+  containers.forEach(function(container) {
+    container.addEventListener('click', function() {
+      this.classList.toggle('hover');
+    });
+  });
+});
+
+</script>
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>

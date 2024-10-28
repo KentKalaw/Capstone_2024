@@ -105,7 +105,7 @@
         echo '</div>';
 
         // Right column for information
-        echo '<div class="col-md-7 d-flex flex-column align-items-center justify-content-center p-4" style="background-color: #F8F9FA;">';
+        echo '<div class="dev-carousel col-md-7 d-flex flex-column align-items-center justify-content-center p-4" style="background-color: #F8F9FA;">';
         echo '<h1 class="text-center" style="font-weight:bold;">' . $name . '</h1>';
         echo '<p class="text-center">' . $a4 . '</p>';
         echo '<h5 class="text-center positioncompany" style="font-weight:bold;">' . $position . ' - ' . $company . '</h5>';

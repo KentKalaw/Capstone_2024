@@ -106,6 +106,7 @@ background-size: cover;
   transform: rotateY(-180deg);
 }
 
+
 .card {
   transition: 0.6s;
   transform-style: preserve-3d;
@@ -182,15 +183,16 @@ background-size: cover;
         padding-bottom: 58.33%; /* Keep aspect ratio (400px width and ~233px height) */
     }
 
-    .container:hover .card, 
-    .container.hover {
-        transform: rotateY(-180deg);
-    }
+    .container.hover .card {
+      transform: rotateY(180deg);
+  }
     
 }
 
 /* Adjustments for larger screens */
 @media (min-width: 768px) {
 
-    
+  .container:hover .card {
+    transform: rotateY(180deg);
+}
 }
