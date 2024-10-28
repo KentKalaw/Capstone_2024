@@ -199,11 +199,11 @@
   </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.facebox/1.4.1/jquery.facebox.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('a[rel*=facebox]').facebox();
-    });
+    jQuery(document).ready(function($) {
+  $('a[rel*=facebox]').facebox()
+})
 </script>
 
 

@@ -196,7 +196,7 @@
     <div class="d-flex justify-content-start mb-3 button-group">
         <button class="btn btn-outline-secondary me-2 active" style="box-shadow: none;" onclick="window.location='index.php'">Alumnite</button>
         <button class="btn btn-outline-secondary me-2" style="box-shadow: none;" onclick="window.location='gts.php'">GTS Reports</button>
-        <button class="btn btn-outline-secondary me-2" style="box-shadow: none;">Initiative Program</button>
+        <button class="btn btn-outline-secondary me-2" style="box-shadow: none;" onclick="window.location='programs.php'">Initiative Program</button>
         <button class="btn btn-outline-secondary me-2" style="box-shadow: none;" onclick="window.location='approval.php'">For Approval [<?php echo $count1aa ?>] </button>
         <select name="department" id="username" required id="department" class="form-select form-select-lg" onchange="go(this.value)" style="width: 100%; max-width: 400px; font-size:1rem; outline=none;">
         <option value="" disabled selected>Select Department</option>
@@ -287,11 +287,11 @@
   </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.facebox/1.4.1/jquery.facebox.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('a[rel*=facebox]').facebox();
-    });
+    jQuery(document).ready(function($) {
+  $('a[rel*=facebox]').facebox()
+})
 </script>
 
 
