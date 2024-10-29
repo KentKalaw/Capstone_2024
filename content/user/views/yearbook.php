@@ -90,15 +90,14 @@
               <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo $global_name ?>"readonly>
             </div>
 
-            
             <div class="mb-3">
-              <label for="address" class="form-label">Delivery Address (your accurate delivery address)</label>
-              <input type="text" class="form-control" id="address" name="address" required readonly>
+            <label class="form-label">Select your accurate address here</label>
+            <div id="map" style="height: 400px; width: 100%; display: block;"></div>
             </div>
 
             <div class="mb-3">
-            <label class="form-label">Select your accurate address here (for latitude and longitude)</label>
-            <div id="map" style="height: 400px; width: 100%; display: block;"></div>
+              <label for="address" class="form-label">Delivery Address (change the address if the given address is not accurate)</label>
+              <input type="text" class="form-control" id="address" name="address" required>
             </div>
 
             <div class="mb-3">
