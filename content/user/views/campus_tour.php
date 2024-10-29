@@ -48,22 +48,23 @@
     </div>
 
     <div class="container mt-5">
-      <div class="container py-4">
-        <div class="row align-items-center">
-          <div class="col-md-8">
+    <div class="container py-4">
+    <div class="row align-items-center py-4">
+        <div class="col-md-8">
             <h1 class="primary-text mb-3">Request a Campus Tour</h1>
             <p class="text-muted">Revisit your alma mater and relive your college memories. Request a campus tour today!</p>
-          </div>
-          <div class="col-md-4 text-end">
+        </div>
+        <div class="col-md-4 text-md-end text-center mb-3 mb-md-0">
             <button type="button" class="btn btn-warning action-button me-2" data-bs-toggle="modal" data-bs-target="#infoModal">
-              <i class="fas fa-info-circle me-2"></i>Tour Info
+                <i class="fas fa-info-circle me-2"></i>Tour Info
             </button>
             <button type="button" class="btn btn-dark action-button" data-bs-toggle="modal" data-bs-target="#tourModal">
-              <i class="fas fa-map-marked-alt me-2"></i>Request Tour
+                <i class="fas fa-map-marked-alt me-2"></i>Request Tour
             </button>
-          </div>
         </div>
-      </div>
+        </div>
+    </div>
+</div>
       <hr class="mb-4">
       
       <div class="container my-5">
@@ -215,17 +216,17 @@
                 
                 <div class="mb-3">
                   <label for="student_number" class="form-label">Student Number</label>
-                  <input type="text" class="form-control" id="student_number" name="student_number" required autocomplete="off">
+                  <input type="text" class="form-control" id="student_number" name="student_number" value="<?php echo $global_studentnum ?>"readonly>
                 </div>
                 
                 <div class="mb-3">
                   <label for="fullname" class="form-label">Full Name</label>
-                  <input type="text" class="form-control" id="fullname" name="fullname" required autocomplete="off">
+                  <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo $global_name ?>"readonly>
                 </div>
                 
                 <div class="mb-3">
                   <label for="email" class="form-label">Email Address</label>
-                  <input type="email" class="form-control" id="email" name="email" required autocomplete="off">
+                  <input type="email" class="form-control" id="email" name="email" value="<?php echo $global_email ?>"readonly>
                 </div>
                 
                 <div class="mb-3">

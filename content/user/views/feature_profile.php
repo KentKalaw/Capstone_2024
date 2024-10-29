@@ -122,19 +122,19 @@
                     <div class="row mb-4">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Full Name</label>
-                            <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" required>
+                            <input type="text" class="form-control" name="name" value="<?php echo $global_name; ?>"readonly>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Position</label>
-                            <input type="text" class="form-control" name="position" value="<?php echo $position; ?>" required>
+                            <label class="form-label">Occupation</label>
+                            <input type="text" class="form-control" name="position" value="<?php echo $global_occupation; ?>"readonly>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Company</label>
-                            <input type="text" class="form-control" name="company" value="<?php echo $company; ?>" required>
+                            <input type="text" class="form-control" name="company" value="<?php echo $global_company; ?>"readonly>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Course</label>
-                            <input type="text" class="form-control" name="course" value="<?php echo $course; ?>" required>
+                            <input type="text" class="form-control" name="course" value="<?php echo $global_course; ?>"readonly>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Year Graduated</label>

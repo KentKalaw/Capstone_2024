@@ -82,18 +82,18 @@
             
             <div class="mb-3">
               <label for="student_number" class="form-label">Student Number</label>
-              <input type="text" class="form-control" id="student_number" name="student_number" required autocomplete="off">
+              <input type="text" class="form-control" id="student_number" name="student_number" value="<?php echo $global_studentnum ?>"readonly>
             </div>
             
             <div class="mb-3">
               <label for="fullname" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="fullname" name="fullname" required autocomplete="off">
+              <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo $global_name ?>"readonly>
             </div>
 
             
             <div class="mb-3">
               <label for="address" class="form-label">Delivery Address (your accurate delivery address)</label>
-              <input type="text" class="form-control" id="address" name="address" required autocomplete="off">
+              <input type="text" class="form-control" id="address" name="address" required readonly>
             </div>
 
             <div class="mb-3">
@@ -143,10 +143,41 @@
       // Add a marker with drag and drop functionality
       const marker = L.marker([12.8797, 121.7740], { draggable: true }).addTo(map);
 
+      function updateAddress(lat, lng) {
+      const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`;
+      
+      fetch(url)
+          .then(response => response.json())
+          .then(data => {
+              if (data && data.display_name) {
+                let address = data.display_name;
+                // List of regions in the Philippines
+                const regions = [
+                    'Ilocos Region', 'Cagayan Valley', 'Central Luzon', 'CALABARZON', 'MIMAROPA', 'Bicol Region',
+                    'Western Visayas', 'Central Visayas', 'Eastern Visayas', 'Zamboanga Peninsula', 'Cordillera Administrative Region', 'Negros Island Region', 'Northern Mindanao',
+                    'Davao Region', 'SOCCSKSARGEN', 'Caraga', 'BARMM', 'NCR', 'CAR'
+                ];
+                // Remove any region from the address
+                regions.forEach(region => {
+                    const regex = new RegExp(`,?\\s*${region}`, 'gi');
+                    address = address.replace(regex, '');
+                });
+                document.getElementById("address").value = address;
+            } else {
+                document.getElementById("address").value = "Address not found";
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching address:", error);
+            document.getElementById("address").value = "Unable to fetch address";
+        });
+}
+
       marker.on('dragend', function(e) {
           const position = marker.getLatLng();
           document.getElementById("latitude").value = event.latLng.lat().toFixed(6);
           document.getElementById("longitude").value = event.latLng.lng().toFixed(6);
+          updateAddress(position.lat, position.lng);
       });
 
       map.on('click', function(e) {
@@ -154,6 +185,7 @@
       marker.setLatLng(e.latlng); // Move the marker to the clicked location
       document.getElementById("latitude").value = lat.toFixed(6);
       document.getElementById("longitude").value = lng.toFixed(6);
+      updateAddress(lat, lng);
   });
 
   document.getElementById('yearbookModal').addEventListener('shown.bs.modal', function () {

@@ -249,11 +249,11 @@
                     <!-- Example fields -->
                     <div class="mb-3">
                         <label class="form-label">Full Name</label>
-                        <input type="text" class="form-control" name="fullname" required>
+                        <input type="text" class="form-control" name="fullname" value="<?php echo $global_name ?>"readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Student Number</label>
-                        <input type="text" class="form-control" name="student_number" required>
+                        <input type="text" class="form-control" name="student_number" value="<?php echo $global_studentnum ?>"readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Department</label>
@@ -497,6 +497,3 @@
 </body>
 
 </html>
-
-
-

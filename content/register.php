@@ -76,6 +76,7 @@
 	  include('./connect.php');
 	  $fname = $_POST['fname'];
 	  $lname = $_POST['lname'];
+      $studentnumber = $_POST['studentnumber'];
 	  $username = $_POST['username'];
 	  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
       $birthday = $_POST['birthday'];
@@ -91,7 +92,7 @@
 	  if($count > 0) {
 		echo '<script>alert("The alumni account you are trying to register is already on the database. Please wait or check your email for the status of your request.");window.location="index.php"</script>';  
 	  } else {
-	  $sql = "INSERT INTO alumni (fname, lname, username,birthday,year,department,course,file) VALUES ('$fname', '$lname', '$username', '$birthday', '$year', '$department', '$course', '$file')";
+	  $sql = "INSERT INTO alumni (fname, lname,studentnumber,username,birthday,year,department,course,file) VALUES ('$fname', '$lname','$studentnumber', '$username', '$birthday', '$year', '$department', '$course', '$file')";
 		$conn->query($sql);
 	  $sql1 = "INSERT INTO users (username, password, type,status) VALUES ('$username', '$password', '$type', '$status')";
 		$conn->query($sql1);
@@ -139,6 +140,12 @@
                                                     <div class="form-floating mb-3">
                                                         <input type="text" class="form-control" name="lname" id="last_name" placeholder="Last Name" pattern="[a-zA-Z ]+"  title="You can only use alphabet letters" required autocomplete="off">
                                                         <label for="last_name" class="form-label">Last Name</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" name="studentnumber" id="username" placeholder="1500000" required autocomplete="off">
+                                                        <label for="text" class="form-label">Student Number</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">

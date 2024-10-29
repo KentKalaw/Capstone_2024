@@ -83,6 +83,7 @@ span {
     background-color: #f8f9fa;
 }
 
+
 /* Adjustments for smaller screens */
 @media (max-width: 767px) {
     .alumni-text {
@@ -104,6 +105,10 @@ span {
     }
     .carousel-item img {
         height: 500px; /* Increase height for larger screens */
+    }
+
+    .action-button {
+        margin: 5px !important;
     }
     
 }
