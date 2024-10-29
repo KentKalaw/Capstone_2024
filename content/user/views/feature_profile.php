@@ -107,7 +107,7 @@
                 <div class="profile-header text-center mx-2">
                     <img src="../../assets/img/favicon/logo.png" id="img1" class="profile-picture">
                     <div class="file-upload mb-3">
-                        <input type="file" name="upload" id="upload" accept="image/png, image/gif, image/jpeg" style="display: none">
+                        <input type="file" name="upload" id="upload" accept="image/png, image/gif, image/jpeg" required style="display: none">
                         <label for="upload" class="mb-0">
                             <i class="fas fa-cloud-upload-alt"></i>
                             <p class="mb-0">Click to upload your featured photo</p>
@@ -138,7 +138,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Year Graduated</label>
-                            <input type="text" class="form-control" name="year" value="<?php echo $year ?>" required>
+                            <input type="text" class="form-control" name="year" value="<?php echo $year ?>" <?php echo !empty($year) ? 'readonly' : ''; ?> required>
                         </div>
                     </div>
 

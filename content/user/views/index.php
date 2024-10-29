@@ -235,8 +235,8 @@
                         // Loop through each visitor
                         while ($row = mysqli_fetch_assoc($loginResult)) {
                             echo "<tr>";
-                            echo "<td>" . $rank . ".</td>"; // Display rank
-                            echo "<td>" . $row['fname'] . ' '. $row['lname'] . "</td>"; // Display visitor username
+                            echo "<td style='text-align:center!important;'>" . $rank . ".</td>"; // Display rank
+                            echo "<td style='text-align:left!important;'>" . $row['fname'] . ' '. $row['lname'] . "</td>"; // Display visitor username
                             echo "</tr>";
                             $rank++;
                         }
