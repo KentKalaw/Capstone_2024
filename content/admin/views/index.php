@@ -69,7 +69,7 @@
 
 <h2 class="fs-4 my-5 b-0 pt-4 px-3" style="color:#752738">Announcements</h2>
 
-<div class="container-fluid px-3">
+<div class="container-fluid px-5">
   <form action="#" method="POST" class="row g-3">
     <div class="col-12">
       <label for="post" class="form-label">Enter announcement here:</label>
