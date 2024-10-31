@@ -59,7 +59,7 @@
                     <i class="fas fa-info-circle me-2"></i> How to Use APC
                 </button>
                 <button type="button" class="btn btn-dark action-button" data-bs-toggle="modal" data-bs-target="#applicationFormModal">
-                    <i class="fas fa-file-alt me-2"></i> APC Application Form
+                    <i class="fas fa-file-alt me-2"></i> APC Application
                 </button>
             </div>
         </div>

@@ -285,13 +285,15 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="infoModalLabel">How to get Latitude and Longitude of your delivery address?</h5>
+          <h5 class="modal-title" id="infoModalLabel">How to get your accurate delivery address?</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          1. In the form, Type in your accurate delivery address first.</a> <br> <br>
-          2. Adjust the pinpoint to your delivery address location for accuracy. <br> <br>
+          1. Select your accurate address by using the map embed in the form.</a> <br> <br>
+          2. Click within the map using the marker to pinpoint location.<br> <br>
           3. It will automatically give you the latitude and longitude of your address. <br> <br>
+          4. It will also automatically give you the address name in the address field. <br> <br>
+          5. If the address is not accurate, you can manually input the address in the address field. <br> <br>
         </div>
       </div>
     </div>
