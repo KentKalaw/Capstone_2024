@@ -56,40 +56,40 @@
 <div class="container my-5">
 <h3 class="text-center mb-4" style="color:#752738;">Top Online Visitor</h3>
 <hr class="mb-4">
-  <div class="row justify-content-center me-4">
+<div class="row mx-auto justify-content-center">
     <div class="col-md-7">
-      <div class="table-container mx-auto">
-        <table class="table table-bordered">
-          <thead>
-            <tr></tr> 
-          </thead>
-          <tbody>
-            <tr>
-            <td colspan='2' class="text-center" style="color: #752738;">Today's Top Online Visitors<br>(<?php echo date('F j, Y'); ?>) </td>
-            </tr>
-            
-            <?php
-            if (mysqli_num_rows($loginResult) > 0) {
-                $rank = 1; // Initialize rank counter
+        <div class="table-container mx-auto">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr></tr> 
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan='2' style="color: #752738;">Today's Top Online Visitors<br>(<?php echo date('F j, Y'); ?>) </td>
+                    </tr>
+                    
+                    <?php
+                    if (mysqli_num_rows($loginResult) > 0) {
+                        $rank = 1; // Initialize rank counter
 
-                // Loop through each visitor
-                while ($row = mysqli_fetch_assoc($loginResult)) {
-                    echo "<tr>";
-                    echo "<td>" . $rank . ".</td>"; // Display rank
-                    echo "<td>" . $row['fname'] . ' '. $row['lname'] . "</td>"; // Display visitor username
-                    echo "</tr>";
-                    $rank++;
-                }
-            } else {
-                // If no visitors, display a message
-                echo "<tr><td colspan='2' class='text-center'>No Top Online Visitors this week</td></tr>";
-            }
-            ?>
-          </tbody>
-        </table>
-      </div>
+                        // Loop through each visitor
+                        while ($row = mysqli_fetch_assoc($loginResult)) {
+                            echo "<tr>";
+                            echo "<td style='text-align:center!important;'>" . $rank . ".</td>"; // Display rank
+                            echo "<td style='text-align:left!important;'>" . $row['fname'] . ' '. $row['lname'] . "</td>"; // Display visitor username
+                            echo "</tr>";
+                            $rank++;
+                        }
+                    } else {
+                        // If no visitors, display a message
+                        echo "<tr><td colspan='2' class='text-center'>No Current Top Online Visitors today.</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
+</div>
 </div>
 
     <!-- System Logs Table Record -->
@@ -157,14 +157,6 @@
       el.classList.toggle("toggled");
     };
   </script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('a[rel*=facebox]').facebox();
-    });
-</script>
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
