@@ -218,7 +218,7 @@
 							}
 						</script>
 
-      <div class="table-responsive">
+      <div class="table-responsive" id="record-table">
       <div class="col-lg-12 d-flex align-items-stretch" class="card w-100" style="border-radius:10px">
       <div class="card w-100" style="border-radius:10px;padding:10px">
         <table class="table vm no-th-brd pro-of-month" style="border-radius:10px" id="example">

@@ -150,7 +150,7 @@
     <div class="dashboard-container">
     <div class="dashboard-grid">
         <!-- Registered Alumni Card -->
-        <div class="dashboard-card" onclick="window.location.href=''">
+        <div class="dashboard-card" onclick="window.location.href='index.php#record-table'">
             <div class="card-content">
                 <div class="card-icon">
                     <i class="fas fa-users icon"></i>
