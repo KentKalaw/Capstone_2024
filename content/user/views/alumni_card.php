@@ -279,7 +279,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Year Graduated</label>
-                        <input type="text" class="form-control" name="year_graduated" required>
+                        <input type="text" class="form-control" name="year_graduated" value="<?php echo $global_year ?>"readonly>
                     </div>
             </div>
             <div class="modal-footer">

@@ -12,6 +12,7 @@ while($row1 = $result1->fetch_assoc()) {
     $lname = $row1['lname'];
     $studentnumber = $row1['studentnumber'];
     $birthday = $row1['birthday'];
+    $year = $row1['year'];
     $department = $row1['department'];
     $course = $row1['course'];
     $occupation = $row1['occupation'];
@@ -31,4 +32,5 @@ while($row1 = $result1->fetch_assoc()) {
     $global_course = $course;
     $global_company = $company;
     $global_occupation = $occupation;
+    $global_year = $year;
 ?>

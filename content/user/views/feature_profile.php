@@ -138,7 +138,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Year Graduated</label>
-                            <input type="text" class="form-control" name="year" value="<?php echo $year ?>" <?php echo !empty($year) ? 'readonly' : ''; ?> required>
+                            <input type="text" class="form-control" name="year" value="<?php echo $global_year ?>" readonly>
                         </div>
                     </div>
 
