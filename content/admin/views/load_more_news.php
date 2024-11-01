@@ -50,7 +50,7 @@ if ($newsResult && mysqli_num_rows($newsResult) > 0) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="updateModalLabel">Update Event Status</h5>
+                <h5 class="modal-title" id="updateModalLabel">Update</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
