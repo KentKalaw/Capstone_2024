@@ -74,7 +74,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $sql2 = "SELECT * FROM yearbook WHERE request_status = 'Approved'";
+                                $sql2 = "SELECT * FROM yearbook WHERE request_status = 'Approved' ORDER BY id DESC";
                                 $result2 = $conn->query($sql2);
                                 while($row2 = $result2->fetch_assoc()) {
                                     $yearbook_id = $row2['id'];
@@ -131,7 +131,8 @@
 <script>
     $(document).ready(function() {
         $('#example').DataTable({
-            responsive: true
+            responsive: true,
+            order: [[0, 'desc']]
         });
     });
 </script>
