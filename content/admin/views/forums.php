@@ -156,6 +156,13 @@
         </nav>
       <?php endif; ?>
 
+      <div id="spacing"></div>
+<style>
+  #spacing {
+    height: 25px;
+  }
+</style>
+
 <?php $category_result = mysqli_query($conn, "SELECT * FROM forum_category"); ?>
       <!-- Modal -->
 <div class="modal fade" id="createThreadModal" tabindex="-1" aria-labelledby="createThreadModalLabel" aria-hidden="true">
@@ -197,6 +204,7 @@
     </div>
   </div>
 </div>
+
 
   </div> <!-- End of page-content-wrapper -->
 

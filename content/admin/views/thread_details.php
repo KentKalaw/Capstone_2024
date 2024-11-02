@@ -78,6 +78,12 @@
     </div>
 </div>
     </div>
+    <div id="spacing"> </div>
+<style>
+  #spacing {
+    height: 25px;
+  }
+</style>
 
   </div> <!-- End of page-content-wrapper -->
 

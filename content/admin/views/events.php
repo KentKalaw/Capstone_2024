@@ -349,10 +349,9 @@
   <!-- include for pop up modal in adding events -->
 <?php include_once('add_event.php'); ?>      
 
-
 <!-- Pagination of events (the previous and next button with numbers) -->
 <?php if ($total_events > 0): ?>
-<nav aria-label="Event page navigation" class="mt-2">
+<nav aria-label="Event page navigation" class="eventpagination mt-2">
   <ul class="pagination justify-content-center">
     <!-- Previous Button -->
     <li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
@@ -373,9 +372,17 @@
   </ul>
 </nav>
 <?php endif; ?>
+<div id="spacing"> </div>
+<style>
+  #spacing {
+    height: 25px;
+  }
+</style>
       </div>
+      
     </div>
   </div>
+
 
 
   <!-- script for participation table and volunteer table pop up modal -->
