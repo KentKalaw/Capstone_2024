@@ -1,0 +1,26 @@
+
+nav#top-bar {
+    border-bottom: 1px solid #DDD3CD !important;
+    margin-bottom: -2px !important; /* Negative margin to pull the top bar up */
+    padding-bottom: 12px !important;
+}
+
+nav#top-bar .d-flex img {
+    width: 40px;
+    height: 40px;
+}
+
+nav#top-bar .d-flex span {
+    font-size: 16px;
+    color: #000000;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+/* #top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1150; 
+      background-color: #EBDFD7; 
+    } */
+

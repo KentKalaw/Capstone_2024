@@ -22,20 +22,7 @@
 
   <div id="page-content-wrapper">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4 border-bottom" id="top-bar">
-      <div class="d-flex align-items-center justify-content-between w-100">
-        <div class="d-flex align-items-center">
-          <i class="fa fa-bars primary-text fs-4 me-3" id="menu-toggle" aria-hidden="true"></i>
-          <h2 class="fs-4 m-0" style="color:#752738"></h2>
-        </div>
-        <li class="d-flex align-items-center">
-          <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="<?php echo $file ?>" alt="Admin Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;" onclick="window.location='profile.php'">
-            <span class="fs-6 alumni-text" onclick="window.location='profile.php'"><?php echo $fname . ' ' . $lname ?> &nbsp; </span>
-          </a>
-        </li>
-      </div>
-    </nav>
+  <?php include_once('./navbar/navbar.php'); ?>
 
     <div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
     <img src="<?php echo $file ?>" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
