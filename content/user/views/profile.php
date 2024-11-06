@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="512x512" href="../../assets/img/favicon/logo.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/profiles.css"/>
 </head>
 
@@ -47,7 +50,7 @@
                         <textarea id="file" name="file" style="display:none"></textarea>
                     </div>
                     <h4 class="mt-3 mb-1"><?php echo $fname . ' ' . $lname ?></h4>
-                    <p class="text-muted"><?php echo $occupation ?></p>
+                    <p class="text-muted fs-5"><?php echo $occupation ?></p>
                 </div>
 
                 <div class="profile-form mx-2 mb-4">
@@ -69,9 +72,19 @@
                             <input type="date" class="form-control" name="birthday" value="<?php echo $birthday; ?>" required>
                         </div>
                         <div class="mb-3">
-                            <label for="occupation" class="form-label">Occupation</label>
-                            <input type="text" class="form-control" name="occupation" value="<?php echo $occupation; ?>" required>
+                            <label for="studentnumber" class="form-label">Student Number</label>
+                            <input type="text" class="form-control" name="studentnumber" value="<?php echo $studentnumber; ?>" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="occupation" class="form-label">Occupation</label>
+                            <select id="occupation" name="occupation" class="form-select" required> 
+                                <optgroup label="Current occupation">
+                                <option><?php echo $occupation?></option>
+                                <?php include_once('profile_job.php'); ?>
+                            </select>
+                            </div>
+
+                        <!-- here -->
                     </div>
 
                     <h5 class="section-title mt-4">Professional Information</h5>
@@ -106,208 +119,21 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="city" class="form-label">Province</label>
-                            <select class="form-select" name="city" id="province1" required>
-                                <option><?php echo $city; ?></option>
+                            <label for="province" class="form-label">Province</label>
+                            <select class="form-select" name="province" id="province1" required onchange="loadcity(this.value)">
+                                <option><?php echo $province; ?></option>
                             </select>
                         </div>
                     </div>
 
-                    <script>
-                    function loadProvinces(value) {
-                        var region = value;
-                        
-                        if (region == 'Region I – Ilocos Region') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Ilocos Norte</option>' +
-                                '<option>Ilocos Sur</option>' +
-                                '<option>La Union</option>' +
-                                '<option>Pangasinan</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region II – Cagayan Valley') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Batanes</option>' +
-                                '<option>Cagayan</option>' +
-                                '<option>Isabela</option>' +
-                                '<option>Nueva Vizcaya</option>' +
-                                '<option>Quirino</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region III – Central Luzon') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Aurora</option>' +
-                                '<option>Bataan</option>' +
-                                '<option>Bulacan</option>' +
-                                '<option>Nueva Ecija</option>' +
-                                '<option>Pampanga</option>' +
-                                '<option>Tarlac</option>' +
-                                '<option>Zambales</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region IV A – CALABARZON') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Batangas</option>' +
-                                '<option>Laguna</option>' +
-                                '<option>Quezon</option>' +
-                                '<option>Rizal</option>' +
-                                '<option>Cavite</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'MIMAROPA Region') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Marinduque</option>' +
-                                '<option>Occidental Mindoro</option>' +
-                                '<option>Oriental Mindoro</option>' +
-                                '<option>Palawan</option>' +
-                                '<option>Romblon</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region V – Bicol Region') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Albay</option>' +
-                                '<option>Camarines Norte</option>' +
-                                '<option>Camarines Sur</option>' +
-                                '<option>Catanduanes</option>' +
-                                '<option>Sorsogon</option>' +
-                                '<option>Masbate</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region VI – Western Visayas') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Aklan</option>' +
-                                '<option>Antique</option>' +
-                                '<option>Capiz</option>' +
-                                '<option>Iloilo</option>' +
-                                '<option>Negros Occidental</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region VII – Central Visayas') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Bohol</option>' +
-                                '<option>Cebu</option>' +
-                                '<option>Negros Oriental</option>' +
-                                '<option>Siquijor</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region VIII – Eastern Visayas') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Biliran</option>' +
-                                '<option>Eastern Samar</option>' +
-                                '<option>Leyte</option>' +
-                                '<option>Northern Samar</option>' +
-                                '<option>Southern Leyte</option>' +
-                                '<option>Western Samar</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region IX – Zamboanga Peninsula') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Zamboanga del Norte</option>' +
-                                '<option>Zamboanga del Sur</option>' +
-                                '<option>Zamboanga Sibugay</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region X – Northern Mindanao') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Camiguin</option>' +
-                                '<option>Misamis Occidental</option>' +
-                                '<option>Misamis Oriental</option>' +
-                                '<option>Bukidnon</option>' +
-                                '<option>Lanao del Norte</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region XI – Davao Region') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Davao del Norte</option>' +
-                                '<option>Davao del Sur</option>' +
-                                '<option>Davao Oriental</option>' +
-                                '<option>Davao Occidental</option>' +
-                                '<option>Compostela Valley</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region XII – SOCCSKSARGEN') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>South Cotabato</option>' +
-                                '<option>Sultan Kudarat</option>' +
-                                '<option>General Santos City</option>' +
-                                '<option>Cotabato</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'Region XIII – Caraga') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Agusan del Norte</option>' +
-                                '<option>Agusan del Sur</option>' +
-                                '<option>Surigao del Norte</option>' +
-                                '<option>Surigao del Sur</option>' +
-                                '<option>Dinagat Islands</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'NCR – National Capital Region') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Metro Manila</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'CAR – Cordillera Administrative Region') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Abra</option>' +
-                                '<option>Apayao</option>' +
-                                '<option>Bineng</option>' +
-                                '<option>Mountain Province</option>' +
-                                '<option>Ifugao</option>' +
-                                '<option>Kalinga</option>' +
-                                '</select>';
-                        }
-                        else if (region == 'BARMM – Bangsamoro Autonomous Region in Muslim Mindanao') {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '<option>Basilan</option>' +
-                                '<option>Lanao del Sur</option>' +
-                                '<option>Maguindanao</option>' +
-                                '<option>Sulu</option>' +
-                                '<option>Tawi-Tawi</option>' +
-                                '</select>';
-                        }
-                        else {
-                            document.getElementById('province1').innerHTML = '' +
-                                '<select placeholder="Province" name="province" id="province">' +
-                                '<option selected disabled>Choose province...</option>' +
-                                '</select>';
-                        }
-                    }
-                    </script>
+                    <?php include_once('profile_location.php'); ?>
+
+                    <div class="mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <select class="form-select" name="city" id="city1" required>
+                                <option><?php echo $city; ?></option>
+                            </select>
+                        </div>
 
                     <input type="hidden" name="program" value="<?php echo $program; ?>">
                     
@@ -359,7 +185,16 @@
       el.classList.toggle("toggled");
     };
   </script>
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#occupation').select2({
+            placeholder: "Select or search an occupation"
+        });
+    });
+
+    console.log(typeof jQuery); // Should output "function"
+</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
 

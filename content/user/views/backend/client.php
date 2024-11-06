@@ -17,6 +17,7 @@ while($row1 = $result1->fetch_assoc()) {
     $course = $row1['course'];
     $occupation = $row1['occupation'];
     $company = $row1['company'];
+    $province = $row1['province'];
     $city = $row1['city'];
     $region = $row1['region'];
     $program = $row1['program'];

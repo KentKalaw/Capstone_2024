@@ -15,6 +15,20 @@
   <link rel="stylesheet" type="text/css" href="../css/yearbook.css" />
 </head>
 
+<style>
+  #suggestions a {
+    display: block;
+    padding: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    overflow: hidden;
+  }
+  #suggestions a:hover {
+    background-color: #f1f1f1;
+  }
+</style>
+
 <body>
   <?php include_once('./loader/loader.php'); ?>
   <?php include_once('./sidebar/sidebar.php'); ?>
@@ -83,8 +97,15 @@
             </div>
 
             <div class="mb-3">
-              <label for="address" class="form-label">Delivery Address (change the address if the given address is not accurate)</label>
-              <input type="text" class="form-control" id="address" name="address" required>
+              <label for="address" class="form-label">Delivery Address</label>
+              <div class="input-group position-relative">
+                <input type="text" class="form-control" id="address" name="address" oninput="fetchSuggestions()" placeholder="Start typing address..." required>
+                <button type="button" class="btn btn-outline-secondary" onclick="searchAddress()">Search</button>
+                
+                <!-- Custom suggestions dropdown -->
+                <div id="suggestions" class="dropdown-menu" style="display: none; position: absolute; top: 100%; left: 0; width: 100%; z-index: 1000;">
+                </div>
+              </div>
             </div>
 
             <div class="mb-3">
@@ -98,12 +119,28 @@
             </div>
             
             <div class="mb-3">
-              <label for="number" class="form-label">Phone Number (use +63)</label>
-              <input type="text" id="number" name="number" class="form-control"
-                      pattern="^\+63[0-9]{10}$" 
-                      placeholder="+63XXXXXXXXXX"
-                      maxlength="13" 
-                      required autocomplete=off>
+              <label for="number" class="form-label">Phone Number</label>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/PH.svg" alt="PH flag" style="width: 20px; height: 15px; margin-right: 5px;">
+                  +63
+                </span>
+                <input type="text" id="number" name="number" class="form-control"
+                    pattern="^9[0-9]{9}$"
+                    placeholder="XXXXXXXXXX"
+                    maxlength="10" 
+                    required autocomplete="off">
+              </div>
+
+              <script>
+                document.querySelector('form').addEventListener('submit', function(event) {
+                  var numberInput = document.getElementById('number');
+                  if (!numberInput.value.startsWith('+63')) {
+                    numberInput.value = '+63' + numberInput.value;
+                  }
+                });
+              </script>
+
             </div>
             
             <div class="modal-footer justify-content-center">
@@ -121,6 +158,13 @@
   <script>
       const map = L.map('map').setView([12.8797, 121.7740], 6); // Set default location
 
+      const regions = [
+    'Ilocos Region', 'Cagayan Valley', 'Central Luzon', 'CALABARZON', 'MIMAROPA', 'Bicol Region',
+    'Western Visayas', 'Central Visayas', 'Eastern Visayas', 'Zamboanga Peninsula', 
+    'Cordillera Administrative Region', 'Negros Island Region', 'Northern Mindanao',
+    'Davao Region', 'SOCCSKSARGEN', 'Caraga', 'BARMM', 'NCR', 'CAR'
+];
+
       // Load and display the tile layer from OpenStreetMap
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -137,18 +181,9 @@
           .then(data => {
               if (data && data.display_name) {
                 let address = data.display_name;
-                // List of regions in the Philippines
-                const regions = [
-                    'Ilocos Region', 'Cagayan Valley', 'Central Luzon', 'CALABARZON', 'MIMAROPA', 'Bicol Region',
-                    'Western Visayas', 'Central Visayas', 'Eastern Visayas', 'Zamboanga Peninsula', 'Cordillera Administrative Region', 'Negros Island Region', 'Northern Mindanao',
-                    'Davao Region', 'SOCCSKSARGEN', 'Caraga', 'BARMM', 'NCR', 'CAR'
-                ];
-                // Remove any region from the address
-                regions.forEach(region => {
-                    const regex = new RegExp(`,?\\s*${region}`, 'gi');
-                    address = address.replace(regex, '');
-                });
-                document.getElementById("address").value = address;
+                const cleanedAddress = removeRegions(data.display_name);
+               
+                document.getElementById("address").value = cleanedAddress;
             } else {
                 document.getElementById("address").value = "Address not found";
             }
@@ -172,6 +207,130 @@
       document.getElementById("latitude").value = lat.toFixed(6);
       document.getElementById("longitude").value = lng.toFixed(6);
       updateAddress(lat, lng);
+  });
+
+  function searchAddress() {
+    const address = document.getElementById("address").value;
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          const { lat, lon } = data[0];
+          const latFloat = parseFloat(lat);
+          const lonFloat = parseFloat(lon);
+
+          // Update map view and marker position
+          map.setView([latFloat, lonFloat], 15);
+          marker.setLatLng([latFloat, lonFloat]);
+
+          // Set latitude and longitude fields
+          document.getElementById("latitude").value = latFloat.toFixed(6);
+          document.getElementById("longitude").value = lonFloat.toFixed(6);
+        } else {
+          alert("Address not found. Please enter a different address.");
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching coordinates:", error);
+        alert("An error occurred while searching for the address.");
+      });
+  }
+
+  function removeRegions(address) {
+    let cleanedAddress = address;
+    regions.forEach(region => {
+        const regex = new RegExp(`,?\\s*${region}`, 'gi');
+        cleanedAddress = cleanedAddress.replace(regex, '');
+    });
+    return cleanedAddress;
+}
+
+  function fetchSuggestions() {
+    const address = document.getElementById("address").value;
+    const suggestionsContainer = document.getElementById("suggestions");
+
+    // Hide suggestions if input is less than 3 characters
+    if (address.length < 3) {
+      suggestionsContainer.style.display = "none";
+      return;
+    }
+
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&addressdetails=1&limit=5`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        suggestionsContainer.innerHTML = ""; // Clear previous suggestions
+
+        if (data.length > 0) {
+          data.forEach(place => {
+            const suggestionItem = document.createElement("a");
+            suggestionItem.className = "dropdown-item";
+            suggestionItem.textContent = removeRegions(place.display_name);
+            const cleanedPlace = {
+                        ...place,
+                        display_name: removeRegions(place.display_name)
+                    };
+                    suggestionItem.onclick = () => selectSuggestion(cleanedPlace);
+                    suggestionsContainer.appendChild(suggestionItem);
+                });
+          suggestionsContainer.style.display = "block"; // Show suggestions dropdown
+        } else {
+          suggestionsContainer.style.display = "none"; // Hide if no results
+        }
+      })
+      .catch(error => console.error("Error fetching suggestions:", error));
+  }
+
+  function selectSuggestion(place) {
+    const { display_name, lat, lon } = place;
+
+    // Set the selected address in the input
+    document.getElementById("address").value = display_name;
+
+    // Set the latitude and longitude fields
+    document.getElementById("latitude").value = parseFloat(lat).toFixed(6);
+    document.getElementById("longitude").value = parseFloat(lon).toFixed(6);
+
+    // Update the map and marker position
+    map.setView([lat, lon], 15);
+    marker.setLatLng([lat, lon]);
+
+    // Hide the suggestions dropdown
+    document.getElementById("suggestions").style.display = "none";
+  }
+
+  // Search function to update map and marker based on selected address
+  function searchAddress() {
+    const address = document.getElementById("address").value;
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          const cleanedResult = {
+                    ...data[0],
+                    display_name: removeRegions(data[0].display_name)
+                };
+                selectSuggestion(cleanedResult);
+        } else {
+          alert("Address not found. Please enter a different address.");
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching coordinates:", error);
+        alert("An error occurred while searching for the address.");
+      });
+  }
+
+  // Hide suggestions if clicked outside
+  document.addEventListener("click", function(event) {
+    if (!document.getElementById("address").contains(event.target)) {
+      document.getElementById("suggestions").style.display = "none";
+    }
   });
 
   document.getElementById('yearbookModal').addEventListener('shown.bs.modal', function () {

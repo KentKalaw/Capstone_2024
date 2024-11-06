@@ -24,9 +24,9 @@
   <?php include_once('./navbar/navbar.php'); ?>
 
     <div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
-    <img src="<?php echo $file ?>" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
+    <img src="<?php echo $file ?>" style="width:80px; height:65px; border-radius:50%; margin-right: 15px;">
     <div class="col-md-5">
-        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">Alumni Privilege Card</h3>
+        <h3 class="text-themecolor" style="font-size: 1.2em; color:#752738 !important; margin-bottom: 5px;">Alumni Privilege Card</h3>
         <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#000 !important;">Home</a></li>
             <li class="breadcrumb-item active">Alumni Privilege Card</li>
@@ -244,25 +244,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Department</label>
-                        <select class="form-select" name="department" id="department" required onchange="dept(this.value)">
-                            <option selected disabled>Choose department...</option>
-                            <option>Senior High School</option>
-                            <option>College of Allied Medical Sciences</option>
-                            <option>College of Arts and Sciences</option>
-                            <option>College of Business, Accountancy, and Hospitality Management</option>
-                            <option>College of Criminal Justice Education</option>
-                            <option>College of Education</option>
-                            <option>College of Engineering</option>
-                            <option>College of Information and Communications Technology</option>
-                            <option>College of Nursing and Midwifery</option>
-                            <option>College of Technical Education</option>
-                            </select>
+                        <input type="text" class="form-control" name="department" value="<?php echo $global_department ?>"readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Course</label>
-                        <select class="form-select" name="course" id="course1" required>
-                        <option selected disabled>Choose course...</option>
-                    </select>
+                        <input type="text" class="form-control" name="course" value="<?php echo $global_course ?>"readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Year Graduated</label>

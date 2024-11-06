@@ -24,11 +24,11 @@
   <?php include_once('./navbar/navbar.php'); ?>
 
     <div class="d-flex px-3 py-3 align-items-center" style="margin-bottom: 20px;">
-      <img src="<?php echo $file ?>" style="width:90px; height:75px; border-radius:50%; margin-right: 15px;">
+      <img src="<?php echo $file ?>" style="width:80px; height:65px; border-radius:50%; margin-right: 15px;">
       <div class="col-md-5">
-        <h3 class="text-themecolor" style="font-size: 1.5em; color:#752738 !important; margin-bottom: 5px;">Campus Tour Request</h3>
+        <h3 class="text-themecolor" style="font-size: 1.1em; color:#752738 !important; margin-bottom: 5px;">Campus Tour Request</h3>
         <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#000 !important;">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#000 !important; font-size:14px;">Home</a></li>
           <li class="breadcrumb-item active">Campus Tour Request</li>
         </ol>
       </div>
