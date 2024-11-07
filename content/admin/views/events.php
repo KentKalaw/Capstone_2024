@@ -49,6 +49,7 @@
 
       <!-- Adding new category and new events button -->
   <div class="col-md-12 d-flex justify-content-end">
+    <a href="#" class="btn btn-dark px-4 py-2 me-1 open-modal" data-bs-toggle="modal" data-bs-target="#activeModal">View Active Participants & Volunteers</a>
     <button data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="btn btn-secondary me-3">Add New Category</button>
     
     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createEventModal">
@@ -184,6 +185,26 @@
               </div>
             </div>
           </div>
+
+  <div class="modal fade" id="activeModal" tabindex="-1" aria-labelledby="activeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="activeModalLabel">Select an Action</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Select which table you want to view:</p>
+        <div class="d-grid gap-2">
+          <!-- Active Participation Button -->
+          <button id="activeParticipationBtn" class="btn btn-primary">View Active Participation Table</button>
+          <!-- Active Volunteer Button -->
+          <button id="activeVolunteerBtn" class="btn btn-secondary">View Active Volunteer Table</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
           <!-- Pop up modal for Participation and Volunteer Table button -->
   <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
@@ -405,6 +426,16 @@
     // Redirect to the volunteer table PHP page with the correct event_id
     document.getElementById('volunteerBtn').addEventListener('click', function() {
         window.location.href = 'view_event_volunteer.php?event_id=' + eventId;
+    });
+</script>
+
+<script>
+   document.getElementById('activeParticipationBtn').addEventListener('click', function() {
+        window.location.href = 'active_events_participation.php';
+    });
+
+    document.getElementById('activeVolunteerBtn').addEventListener('click', function() {
+        window.location.href = 'active_events_volunteer.php?';
     });
 </script>
 

@@ -29,19 +29,19 @@
     }
     document.getElementById('province1').innerHTML = '<select placeholder="Province" name="province" id="province" onchange="loadcity(this.value)">' + provinceOptions + '</select>';
 }
-                    </script>
+</script>
 
-                    <script>
-                       function loadcity(value) {
+<script>
+function loadcity(value) {
     var province = value;
     var cities = {
-    'Batangas': ['Batangas City', 'Lipa City', 'Tanauan City', 'Calaca City', 'Santo Tomas City'],
-    'Laguna': ['Calamba City', 'San Pablo City', 'Santa Rosa City', 'San Pedro City', 'Biñan City', 'Cabuyao City'],
-    'Quezon': ['Lucena City', 'Tayabas City'],
-    'Rizal': ['Antipolo City'],
-    'Cavite': ['Bacoor City', 'Cavite City', 'Dasmariñas City', 'Imus City', 'Tagaytay City', 'Trece Martires City', 'General Trias City'],
+    'Batangas': ['Batangas City', 'Lipa City', 'Tanauan City', 'Calaca', 'Calatagan', 'Cuenca', 'Ibaan', 'Laurel', 'Lian', 'Lobo', 'Mabini', 'Malvar', 'Mataas na kahoy', 'Nasugbu', 'Padre Garcia', 'Rosario', 'San Jose', 'San Juan', 'San Luis', 'San Nicolas', 'San Pascual', 'Santa Teresita', 'Santo Tomas', 'Taal', 'Talisay', 'Tingloy', 'Tuy'],
+    'Laguna': ['Alaminos', 'Bay', 'Biñan', 'Cabuyao', 'Calamba', 'Calauan', 'Candelaria', 'Famy', 'Kalayaan', 'Liliw', 'Los Baños', 'Luisiana', 'Lumban', 'Mabitac', 'Magdalena', 'Majayjay', 'Nagcarlan', 'Paete', 'Pagsanjan', 'Pakil', 'Pila', 'Rizal', 'San Pablo', 'San Pedro', 'Santa Cruz', 'Santa Maria', 'Santo Tomas', 'Siniloan', 'Victoria'],
+    'Quezon': ['Agdangan', 'Alabat', 'Atimonan', 'Buenavista', 'Burdeos', 'Candelaria', 'Catanauan', 'Dolores', 'General Luna', 'General Nakar', 'Guinayangan', 'Infanta', 'Jomalig', 'Luisiana', 'Macalelon', 'Mauban', 'Mulanay', 'Padre Burgos', 'Pagbilao', 'Panukulan', 'Patnanungan', 'Pitogo', 'Plaridel', 'Quezon', 'Real', 'Sampaloc', 'San Andres', 'San Antonio', 'San Francisco', 'San Narciso', 'San Pascual', 'Sariaya', 'Tagkawayan', 'Tiaong', 'Unisan'],
+    'Rizal': ['Angono', 'Antipolo', 'Baras', 'Binangonan', 'Cainta', 'Cardona', 'Jala-Jala', 'Morong', 'San Isidro', 'San Juan', 'San Mateo', 'Tanay', 'Taytay', 'Teresa'],
+    'Cavite': ['Amadeo', 'Bacoor', 'Carmona', 'Cavite City', 'Dasmariñas', 'General Emilio Aguinaldo', 'General Trias', 'Imus', 'Indang', 'Kawit', 'Magallanes', 'Maragondon', 'Mendez', 'Naic', 'Noveleta', 'Rosario', 'Silang', 'Tagaytay', 'Tanza', 'Ternate'],
     'Metro Manila': ['Caloocan City', 'Las Piñas City', 'Makati City', 'Malabon City', 'Mandaluyong City', 'Manila City', 'Marikina City', 'Muntinlupa City', 'Navotas City', 'Parañaque City', 'Pasay City', 'Pasig City', 'Pateros', 'Quezon City', 'San Juan City', 'Taguig City', 'Valenzuela City'],
-    'Pampanga': ['Angeles City', 'San Fernando City'],
+    'Pampanga': ['Angeles City', 'San Fernando City', 'Mabalacat City', 'Apalit', 'Arayat', 'Bacolor', 'Candaba', 'Floridablanca', 'Guagua', 'Lubao', 'Macabebe', 'Magalang', 'Masantol', 'Mexico', 'Minalin', 'Porac', 'San Luis', 'San Simon', 'Santa Ana', 'Santa Rita', 'Santo Tomas', 'Sasmuan'],
     'Bulacan': ['Malolos City', 'Meycauayan City', 'San Jose del Monte City'],
     'Nueva Ecija': ['Cabanatuan City', 'Gapan City', 'Science City of Muñoz', 'Palayan City', 'San Jose City'],
     'Tarlac': ['Tarlac City'],
@@ -86,14 +86,19 @@
     'Davao Oriental': ['Mati City'],
     'South Cotabato': ['General Santos City', 'Koronadal City'],
     'North Cotabato': ['Kidapawan City'],
-    'Sultan Kudarat': ['Tacurong City'],
     'Agusan del Norte': ['Butuan City', 'Cabadbaran City'],
     'Agusan del Sur': ['Bayugan City'],
     'Surigao del Norte': ['Surigao City'],
     'Surigao del Sur': ['Tandag City', 'Bislig City'],
     'Lanao del Sur': ['Marawi City'],
     'Maguindanao': ['Cotabato City'],
-    'Basilan': ['Isabela City', 'Lamitan City']
+    'Basilan': ['Isabela City', 'Lamitan City'],
+    'Lanao del Norte': ['Iligan City', 'Bacolod', 'Kapatagan', 'Sultan Naga Dimaporo', 'Pantao Ragat', 'Poona Piagapo', 'Baroy', 'Kauswagan', 'Linamon', 'Matungao', 'Salvador', 'Sapad', 'Tagoloan', 'Tangcal', 'Tubod'],
+    'Compostela Valley': ['Nabunturan', 'Maco', 'Mawab', 'Montevista', 'New Bataan', 'Pantukan'],
+    'Davao Occidental': ['Malita', 'Santa Maria', 'Sarangani', 'Don Marcelino', 'Jose Abad Santos'],
+    'Sarangani': ['Alabel', 'Glan', 'Kiamba', 'Maasim', 'Maitum', 'Malapatan'],
+    'Sultan Kudarat': ['Isulan', 'Tacurong City', 'Bagumbayan', 'Columbio', 'Esperanza', 'Kalamansig', 'Lambayong', 'Lebak', 'Lutayan', 'Palimbang', 'President Quirino', 'Sen. Ninoy Aquino'],
+    'Camiguin:': ['Mambajao', 'Mahinog', 'Sagay', 'Guinsiliban', 'Catarman'],
 };
 
     var cityOptions = '<option selected disabled>Choose city...</option>';
@@ -105,4 +110,5 @@
     document.getElementById('city1').innerHTML = '<select placeholder="City" name="city" id="city">' + cityOptions + '</select>';
 }
 </script>
-                    </script>
+
+

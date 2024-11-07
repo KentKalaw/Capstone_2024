@@ -1,6 +1,6 @@
 <?php
 
-$sql = "SELECT student_number, fullname, request_status, address, order_id FROM yearbook WHERE alumni_id = ?";
+$sql = "SELECT student_number, fullname, request_status, address, order_id, remarks FROM yearbook WHERE alumni_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $alumni_id);
 $stmt->execute();
@@ -14,6 +14,7 @@ if ($result->num_rows > 0) {
   $request_status = $row['request_status'] ? $row['request_status'] : 'No request submitted yet';
   $address = $row['address'] ? $row['address'] : 'N/A';
   $order_id = $row['order_id'] ? $row['order_id'] : 'N/A';
+  $remarks = $row['remarks'];
 } else {
   // Set default values if no data found
   $student_number = 'N/A';

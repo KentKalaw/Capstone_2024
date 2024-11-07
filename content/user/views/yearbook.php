@@ -375,6 +375,7 @@
                                     <i class="fas fa-info-circle me-2"></i>Your request has been approved. The admin will generate your order ID soon.
                                 </div>
                             <?php endif; ?>
+                            <p><strong>Remarks:</strong> <span id="remarks"><?php echo htmlspecialchars($remarks); ?></span></p>
                         </div>
                     </div>
                 </div>

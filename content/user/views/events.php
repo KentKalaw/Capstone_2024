@@ -41,6 +41,11 @@
 
       <!-- Search and select area -->
       <div class="row justify-content-end align-items-center mb-5">
+      <div class="col-auto">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#participationVolunteerModal">
+    View All Participation and Volunteer
+</button>
+      </div>
         <!-- Select in the middle -->
         <div class="col-auto">
         <form action="events.php" method="GET">
@@ -63,7 +68,7 @@
                 echo '<option value="' . $category['id'] . '" ' . $selected . '>' . $category['name'] . '</option>';
             }
     ?>
-</select>
+        </select>
           </form>
         </div>
 
@@ -72,10 +77,117 @@
                   <form class="d-flex" action="events.php" method="GET">
             <input class="form-control me-2" type="search" name="search" placeholder="Search events..." aria-label="Search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
             <button class="btn btn-outline-secondary" type="submit">Search</button>
-          </form>
-        </div>
+            </form>
+          </div>
         </div>
       </div>
+
+<div class="modal fade" id="participationVolunteerModal" tabindex="-1" aria-labelledby="participationVolunteerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="participationVolunteerModalLabel"><?php echo $fname?>'s Participation and Volunteer List</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="participation-tab" data-bs-toggle="tab" data-bs-target="#participation" type="button" role="tab" aria-controls="participation" aria-selected="true">Participation</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="volunteer-tab" data-bs-toggle="tab" data-bs-target="#volunteer" type="button" role="tab" aria-controls="volunteer" aria-selected="false">Volunteer</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="participation" role="tabpanel" aria-labelledby="participation-tab">
+                        <ul class="list-group list-group-flush">
+                            <?php while ($participation_row = $participation_result->fetch_assoc()): ?>
+                                <li class="list-group-item d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo $participation_row['eventImage']; ?>" class="me-3" style="width: 50px; height: 50px; border-radius: 50%;" alt="Event Image">
+                                        <div>
+                                            <h6 class="mb-1"><?php echo $participation_row['eventName']; ?></h6>
+                                            <p class="mb-0">Participation Status: <span class="badge rounded-pill <?php 
+                                              if ($participation_row['participationStatus'] === 'Pending') {
+                                                echo 'bg-warning text-dark'; // Orange for Pending
+                                              } elseif ($participation_row['participationStatus'] === 'Approved') {
+                                                echo 'bg-success'; // Green for Approved
+                                              } else {
+                                                echo 'bg-danger'; // Red for any other status
+                                              }
+                                            ?>"><?php echo $participation_row['participationStatus']; ?></span></p>
+                                        </div>
+                                    </div>
+                                    <?php if ($participation_row['participationStatus'] === 'Pending'): ?>
+                                      <div class="dropdown">
+                                          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                              <i class="fas fa-ellipsis-v"></i>
+                                          </button>
+                                          <ul class="dropdown-menu dropdown-menu-end">
+                                              <li>
+                                                  <form method="POST" action="cancel_participation.php" onsubmit="return confirmCancellation('<?php echo $participation_row['eventName']; ?>')">
+                                                      <input type="hidden" name="event_id" value="<?php echo $participation_row['event_id']; ?>">
+                                                      <input type="hidden" name="alumni_id" value="<?php echo $alumni_id; ?>">
+                                                      <button type="submit" class="dropdown-item text-danger">Remove participation request</button>
+                                                  </form>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <?php endif; ?>
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="volunteer" role="tabpanel" aria-labelledby="volunteer-tab">
+                        <ul class="list-group list-group-flush">
+                            <?php while ($volunteer_row = $volunteer_result->fetch_assoc()): ?>
+                                <li class="list-group-item d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo $volunteer_row['eventImage']; ?>" class="me-3" style="width: 50px; height: 50px; border-radius: 50%;" alt="Event Image">
+                                        <div>
+                                            <h6 class="mb-1"><?php echo $volunteer_row['eventName']; ?></h6>
+                                            <p class="mb-0">Volunteer Status: <span class="badge rounded-pill <?php 
+                                              if ($volunteer_row['volunteerStatus'] === 'Pending') {
+                                                echo 'bg-warning text-dark'; // Orange for Pending
+                                              } elseif ($volunteer_row['volunteerStatus'] === 'Approved') {
+                                                echo 'bg-success'; // Green for Approved
+                                              } else {
+                                                echo 'bg-danger'; // Red for any other status
+                                              }
+                                            ?>"><?php echo $volunteer_row['volunteerStatus']; ?></span></p>
+                                        </div>
+                                    </div>
+                                    <?php if ($volunteer_row['volunteerStatus'] === 'Pending'): ?>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <form method="POST" action="cancel_volunteer.php" onsubmit="return confirmCancellation('<?php echo $volunteer_row['eventName']; ?>')">
+                                                    <input type="hidden" name="event_id" value="<?php echo $volunteer_row['event_id']; ?>">
+                                                    <input type="hidden" name="alumni_id" value="<?php echo $alumni_id; ?>">
+                                                    <button type="submit" class="dropdown-item text-danger">Remove volunteer request</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <?php endif; ?>
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function confirmCancellation(eventName) {
+    return confirm(`Are you sure you want to remove your participation for the event "${eventName}"?`);
+}
+</script>
 
       
 
@@ -231,20 +343,19 @@
             <input type="hidden" name="lname" value="<?php echo $lname; ?>">
             
             <!-- Role Selection -->
-            <div class="mb-3">
-                <label for="role" class="form-label"><strong>Select Volunteer Role (Select only if you wish to volunteer):</strong></label>
-                <select name="role" id="role" class="form-select" required>
-                    <option selected disabled>Choose your role</option>
-                    <option value="Guest Speaker">Guest Speaker</option>
-                    <option value="Beneficiary">Beneficiary</option>
-                    <option value="Host">Host</option>
-                    <!-- Add more roles as needed -->
-                </select>
-            </div>
-            
-            <div>
+            <form onsubmit="return confirmVolunteerSubmission()">
+                <div class="mb-3">
+                    <label for="role" class="form-label"><strong>Select Volunteer Role (Select only if you wish to volunteer):</strong></label>
+                    <select name="role" id="role" class="form-select">
+                        <option value="" selected disabled>Choose your role</option>
+                        <option value="Guest Speaker">Guest Speaker</option>
+                        <option value="Beneficiary">Beneficiary</option>
+                        <option value="Host">Host</option>
+                        <!-- Add more roles as needed -->
+                    </select>
+                </div>
                 <button type="submit" name="volunteer" class="btn btn-warning w-100">Submit Volunteer Request</button>
-            </div>
+            </form>
         </form>
     </div>
 </div>
@@ -306,12 +417,11 @@
 <script>
 function confirmVolunteerSubmission() {
     const selectedRole = document.getElementById("role").value;
-    if (selectedRole) {
-        return confirm("Are you sure you want to volunteer?");
-    } else {
+    if (selectedRole === "") {  // Empty string indicates "Choose your role" is selected
         alert("Please select a role before submitting.");
-        return false;
+        return false;  // Prevent form submission
     }
+    return confirm("Are you sure you want to volunteer?");
 }
 </script>
 

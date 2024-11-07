@@ -118,6 +118,7 @@
                                 <option>BARMM – Bangsamoro Autonomous Region in Muslim Mindanao</option>
                             </select>
                         </div>
+                        
                         <div class="mb-3">
                             <label for="province" class="form-label">Province</label>
                             <select class="form-select" name="province" id="province1" required onchange="loadcity(this.value)">
@@ -130,11 +131,11 @@
 
                     <div class="mb-3">
                             <label for="city" class="form-label">City</label>
-                            <select class="form-select" name="city" id="city1" required>
-                                <option><?php echo $city; ?></option>
-                            </select>
-                        </div>
-
+                                <select class="form-select" name="city" id="city1" required>
+                                    <option><?php echo $city; ?></option>
+                                </select>
+                            </div>
+                            
                     <input type="hidden" name="program" value="<?php echo $program; ?>">
                     
                     <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 mt-4">
