@@ -1,28 +1,5 @@
 <?php include_once('./backend/client.php'); ?>
-
-<?php
-// Fetch participation data for the specific event
-$participation_sql = "SELECT * FROM events_participation WHERE participationStatus = 'Approved' ORDER BY participationStatus DESC";
-$participation_result = $conn->query($participation_sql);
-
-$participant_counts = array();
-
-
-while ($row = $participation_result->fetch_assoc()) {
-    $email = $row['username'];
-    $alumni_id = $row['alumni_id'];
-    $name = $row['fname'] . ' ' . $row['lname'];
-    if (array_key_exists($name, $participant_counts)) {
-        $participant_counts[$name]++;
-    } else {
-        $participant_counts[$name] = 1;
-    }
-    $participant_emails[$name] = $email;
-}
-
-arsort($participant_counts);
-
-?>
+<?php include_once('./backend/active_participant_sql.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +9,7 @@ arsort($participant_counts);
     <title>Admin - Alumnite</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/active_participant.css"/>
     <link rel="icon" type="image/png" sizes="512x512" href="../../assets/img/favicon/logo.png">
 </head>
 <body>
@@ -74,25 +51,33 @@ arsort($participant_counts);
                             <tr>
                                 <th>No.</th>
                                 <th><center>Name</th>
-                                <th><center>No. of Participants</th>
+                                <th><center>No. of Event Participated</th>
                                 <th><center>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                                <?php
-                                $i = 1;
-                                foreach ($participant_counts as $name => $count) {
-                                    echo "<tr data-email='" . $participant_emails[$name] . "'>
-                                            <td>{$i}</td>
-                                            <td><center>{$name}</td>
-                                            <td><center>{$count}</td>
-                                            <td><center>
-                                                <button type='button' class='btn btn-secondary open-email-modal' data-bs-toggle='modal' data-bs-target='#emailModal'>Send Email</button>
-                                            </td
-                                        </tr>";
-                                    if ($i++ >= 15) break;
-                                }
-                                ?>
+                        <?php
+                    $i = 1;
+                    foreach ($participants as $participant) {
+                        $name = htmlspecialchars($participant['name']);
+                        $count = htmlspecialchars($participant['participation_count']);
+                        $alumni_id = htmlspecialchars($participant['alumni_id']);
+                        echo "<tr>
+                            <td>{$i}</td>
+                            <td><center>{$name}</center></td>
+                            <td><center>{$count}</center></td>
+                            <td><center>
+                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#eventsModal{$alumni_id}'>
+                                    View Events
+                                </button>
+                                <button type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#emailModal{$alumni_id}'>
+                                    Send Email
+                                </button>
+                            </center></td>
+                        </tr>";
+                        $i++;
+                    }
+                    ?>
                             </tbody>
                     </table>
                 </div>
@@ -101,37 +86,77 @@ arsort($participant_counts);
     </div>
 </div>
 
-<!-- Email Modal -->
-<div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+ <!-- Modals for events and email for each participant -->
+ <?php foreach ($participants as $participant): ?>
+            <!-- Events Modal -->
+            <div class="modal fade" id="eventsModal<?php echo $participant['alumni_id']; ?>" tabindex="-1" aria-labelledby="eventsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="emailModalLabel">Send Email</h5>
+                <h5 class="modal-title">Event Participated History of <?php echo htmlspecialchars($participant['name']); ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form id="emailForm">
-                    <div class="mb-3">
-                        <label for="recipient" class="col-form-label">Recipient:</label>
-                        <input type="email" class="form-control" id="recipient" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="subject" class="col-form-label">Subject:</label>
-                        <input type="text" class="form-control" id="subject" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message" rows="3" required></textarea>
-                    </div>
-                </form>
+            <div class="modal-body event-modal-body">
+                <div class="events-container">
+                    <?php foreach ($participant['events'] as $event): ?>
+                        <div class="event-item">
+                            <div class="event-thumbnail">
+                                <img src="<?php echo htmlspecialchars($event['eventImage']); ?>" alt="Event Image">
+                            </div>
+                            <div class="event-content">
+                                <h6 class="event-title"><?php echo htmlspecialchars($event['eventName']); ?></h6>
+                                <p class="event-description"><?php echo htmlspecialchars($event['eventDetails']); ?></p>
+                                <span class="event-start-date">Start: <?php echo date("F j, Y g:i A", strtotime($event['eventStartDate'])); ?></span>
+                                <span class="event-end-date">End: <?php echo date("F j, Y g:i A", strtotime($event['eventEndDate'])); ?></span>
+                                <span class="event-end-date">Request Date: <?php echo date("F j, Y g:i A", strtotime($event['submissionDate'])); ?></span>
+                                <span class="event-status" data-status="<?php echo htmlspecialchars($event['eventStatus']); ?>">
+                                    <?php echo htmlspecialchars($event['eventStatus']); ?>
+                                </span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="sendEmail">Send Email</button>
             </div>
         </div>
     </div>
 </div>
+            <!-- Email Modal -->
+            <div class="modal fade" id="emailModal<?php echo $participant['alumni_id']; ?>" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="emailModalLabel">Send Email to <?php echo htmlspecialchars($participant['name']); ?></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" action="">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="recipient_email" class="col-form-label">Recipient:</label>
+                                    <input type="email" class="form-control" name="recipient_email" value="<?php echo htmlspecialchars($participant['username']); ?>" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="col-form-label">Subject:</label>
+                                    <input type="text" class="form-control" name="subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" name="message" rows="3" required></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send Email</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
@@ -158,10 +183,12 @@ arsort($participant_counts);
             responsive: true
         });
 
-        $('.open-email-modal').click(function() {
-        var email = $(this).closest('tr').data('email');
+           // Handle email modal
+    $('.open-email-modal').click(function() {
+        var email = $(this).data('email');
         $('#recipient').val(email);
     });
+
     });
 </script>
 </body>

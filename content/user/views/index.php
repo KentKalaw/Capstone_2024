@@ -233,10 +233,10 @@
 </div>
 </div>
 
-
-
   </div> <!-- End of page-content-wrapper -->
 
+  <?php include_once('./backend/birthday_greetings.php'); ?>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>

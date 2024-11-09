@@ -43,7 +43,7 @@ $sql2 .= " ORDER BY eventStartDate DESC LIMIT $limit OFFSET $offset";
 $result2 = $conn->query($sql2);
 
 $username = $_SESSION['username']; // Assuming you have user email stored in session
-$participation_sql = "SELECT events.*, events_participation.participationStatus 
+$participation_sql = "SELECT events.*, events_participation.submissionDate, events_participation.participationStatus 
                       FROM events 
                       JOIN events_participation ON events.event_id = events_participation.event_id 
                       WHERE events_participation.username = '$username'";
@@ -54,7 +54,7 @@ if (!$participation_result) {
 }
 
 // Fetch user's volunteer events
-$volunteer_sql = "SELECT events.*, events_volunteer.volunteerStatus 
+$volunteer_sql = "SELECT events.*, events_volunteer.requestDate, events_volunteer.volunteerStatus 
                   FROM events 
                   JOIN events_volunteer ON events.event_id = events_volunteer.event_id 
                   WHERE events_volunteer.username = '$username'";

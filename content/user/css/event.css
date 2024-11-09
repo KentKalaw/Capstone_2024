@@ -46,6 +46,153 @@ body {
     transform: translateY(-5px); /* Move card up on hover */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
   }
+
+  .pagination-maroon .page-link {
+    background-color: white; /* White background */
+    color: #6B1500; /* Default text color */
+    border: 1px solid #b3b3b3 !important; /* Border color */
+    border-radius: 0.25rem;
+
+}
+
+.pagination-maroon .page-item.active .page-link {
+    background-color: #962723; /* For the active page */
+    color: white;
+}
+
+.pagination-maroon .page-item.disabled .page-link {
+    background-color: lightgray; /* For disabled pages */
+    color: white;
+}
+
+  /* Modal and Tab Styles */
+.modal-lg {
+  max-width: 800px;
+}
+
+.nav-tabs {
+  padding: 10px 10px 0 10px;
+  background: #f8f9fa;
+}
+
+.nav-link {
+  color: #606060;
+}
+
+.nav-link.active {
+  color: #030303 !important;
+}
+
+.tab-content {
+  padding: 0;
+}
+
+/* List Item Styles */
+.list-group-item {
+  padding: 12px;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* Event Image Styles */
+.list-group-item img {
+  width: 120px !important;
+  height: 90px !important;
+  border-radius: 4px !important;
+  object-fit: cover;
+}
+
+/* Content Styles */
+.list-group-item h6 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #030303;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.list-group-item p {
+  font-size: 12px;
+  color: #606060;
+  margin-bottom: 4px;
+}
+
+/* Status Badge Styles */
+.badge.rounded-pill {
+  padding: 4px 12px;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+/* Custom Status Colors */
+.badge.bg-warning {
+  background-color: #FFE0B2 !important; /* Light orange */
+  color: #E65100 !important;
+}
+
+.badge.bg-success {
+  background-color: #C8E6C9 !important; /* Light green */
+  color: #2E7D32 !important;
+}
+
+.badge.bg-danger {
+  background-color: #FFCDD2 !important; /* Light red */
+  color: #C62828 !important;
+}
+
+/* Dropdown Button Styles */
+.dropdown .btn-secondary {
+  background: transparent;
+  border: none;
+  color: #606060;
+  padding: 4px 8px;
+}
+
+.dropdown .btn-secondary:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-menu {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border: 1px solid #e5e5e5;
+}
+
+.dropdown-item {
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+.dropdown-item.text-danger:hover {
+  background-color: #fee;
+}
+
+/* Custom Scrollbar */
+.tab-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.tab-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.tab-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
   
 
 /* Adjustments for smaller screens */

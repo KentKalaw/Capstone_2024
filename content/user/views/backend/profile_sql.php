@@ -3,7 +3,7 @@
 					include('../../connect.php');
 					$lname =$_POST['lname'];
 					$fname =$_POST['fname'];
-          			$birthday =$_POST['birthday'] && !empty($birthday) ? $birthday : '0000-00-00';
+          			$birthday =$_POST['birthday'];
 					$studentnumber =$_POST['studentnumber'];
 					$occupation =$_POST['occupation'];
 					$company =$_POST['company'];

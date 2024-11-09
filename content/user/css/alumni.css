@@ -139,6 +139,63 @@ tbody tr:hover {
 }
 
 
+.birthday-message {
+    color: #333;
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.close-btn {
+    background-color: #ff4b6e;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+    background-color: #ff2d55;
+}
+
+.birthday-cake {
+    font-size: 50px;
+    margin: 15px 0;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ff4b6e;
+    animation: confetti 5s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translate(-50%, -60%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+@keyframes confetti {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+
 
 /* Adjustments for smaller screens */
 @media (max-width: 767px) {

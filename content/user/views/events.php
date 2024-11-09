@@ -82,14 +82,14 @@
         </div>
       </div>
 
-<div class="modal fade" id="participationVolunteerModal" tabindex="-1" aria-labelledby="participationVolunteerModalLabel" aria-hidden="true">
+      <div class="modal fade" id="participationVolunteerModal" tabindex="-1" aria-labelledby="participationVolunteerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="participationVolunteerModalLabel"><?php echo $fname?>'s Participation and Volunteer List</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-0">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="participation-tab" data-bs-toggle="tab" data-bs-target="#participation" type="button" role="tab" aria-controls="participation" aria-selected="true">Participation</button>
@@ -102,66 +102,72 @@
                     <div class="tab-pane fade show active" id="participation" role="tabpanel" aria-labelledby="participation-tab">
                         <ul class="list-group list-group-flush">
                             <?php while ($participation_row = $participation_result->fetch_assoc()): ?>
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <img src="<?php echo $participation_row['eventImage']; ?>" class="me-3" style="width: 50px; height: 50px; border-radius: 50%;" alt="Event Image">
-                                        <div>
+                                <li class="list-group-item">
+                                    <div class="d-flex align-items-start">
+                                        <img src="<?php echo $participation_row['eventImage']; ?>" class="me-3" alt="Event Image">
+                                        <div class="flex-grow-1">
                                             <h6 class="mb-1"><?php echo $participation_row['eventName']; ?></h6>
-                                            <p class="mb-0">Participation Status: <span class="badge rounded-pill <?php 
-                                              if ($participation_row['participationStatus'] === 'Pending') {
-                                                echo 'bg-warning text-dark'; // Orange for Pending
-                                              } elseif ($participation_row['participationStatus'] === 'Approved') {
-                                                echo 'bg-success'; // Green for Approved
-                                              } else {
-                                                echo 'bg-danger'; // Red for any other status
-                                              }
-                                            ?>"><?php echo $participation_row['participationStatus']; ?></span></p>
+                                            <p class="mb-1">Request Date:  <?php echo date("F j, Y g:i A", strtotime($participation_row['submissionDate'])); ?> </p>
+                                            <p class="mb-0">Status: 
+                                                <span class="badge rounded-pill <?php 
+                                                    if ($participation_row['participationStatus'] === 'Pending') {
+                                                        echo 'bg-warning';
+                                                    } elseif ($participation_row['participationStatus'] === 'Approved') {
+                                                        echo 'bg-success';
+                                                    } else {
+                                                        echo 'bg-danger';
+                                                    }
+                                                ?>"><?php echo $participation_row['participationStatus']; ?></span>
+                                            </p>
                                         </div>
+                                        <?php if ($participation_row['participationStatus'] === 'Pending'): ?>
+                                        <div class="dropdown ms-2">
+                                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <form method="POST" action="cancel_participation.php" onsubmit="return confirmCancellation('<?php echo $participation_row['eventName']; ?>')">
+                                                        <input type="hidden" name="event_id" value="<?php echo $participation_row['event_id']; ?>">
+                                                        <input type="hidden" name="alumni_id" value="<?php echo $alumni_id; ?>">
+                                                        <button type="submit" class="dropdown-item text-danger">Remove participation request</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <?php endif; ?>
                                     </div>
-                                    <?php if ($participation_row['participationStatus'] === 'Pending'): ?>
-                                      <div class="dropdown">
-                                          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
-                                          </button>
-                                          <ul class="dropdown-menu dropdown-menu-end">
-                                              <li>
-                                                  <form method="POST" action="cancel_participation.php" onsubmit="return confirmCancellation('<?php echo $participation_row['eventName']; ?>')">
-                                                      <input type="hidden" name="event_id" value="<?php echo $participation_row['event_id']; ?>">
-                                                      <input type="hidden" name="alumni_id" value="<?php echo $alumni_id; ?>">
-                                                      <button type="submit" class="dropdown-item text-danger">Remove participation request</button>
-                                                  </form>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                      <?php endif; ?>
                                 </li>
                             <?php endwhile; ?>
                         </ul>
                     </div>
+
                     <div class="tab-pane fade" id="volunteer" role="tabpanel" aria-labelledby="volunteer-tab">
                         <ul class="list-group list-group-flush">
                             <?php while ($volunteer_row = $volunteer_result->fetch_assoc()): ?>
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <img src="<?php echo $volunteer_row['eventImage']; ?>" class="me-3" style="width: 50px; height: 50px; border-radius: 50%;" alt="Event Image">
-                                        <div>
+                                <li class="list-group-item">
+                                    <div class="d-flex align-items-start">
+                                        <img src="<?php echo $volunteer_row['eventImage']; ?>" class="me-3" alt="Event Image">
+                                        <div class="flex-grow-1">
                                             <h6 class="mb-1"><?php echo $volunteer_row['eventName']; ?></h6>
-                                            <p class="mb-0">Volunteer Status: <span class="badge rounded-pill <?php 
-                                              if ($volunteer_row['volunteerStatus'] === 'Pending') {
-                                                echo 'bg-warning text-dark'; // Orange for Pending
-                                              } elseif ($volunteer_row['volunteerStatus'] === 'Approved') {
-                                                echo 'bg-success'; // Green for Approved
-                                              } else {
-                                                echo 'bg-danger'; // Red for any other status
-                                              }
-                                            ?>"><?php echo $volunteer_row['volunteerStatus']; ?></span></p>
+                                            <p class="mb-1">Request Date:  <?php echo date("F j, Y g:i A", strtotime($volunteer_row['requestDate'])); ?> </p>
+                                            <p class="mb-0">Status: 
+                                                <span class="badge rounded-pill <?php 
+                                                    if ($volunteer_row['volunteerStatus'] === 'Pending') {
+                                                        echo 'bg-warning';
+                                                    } elseif ($volunteer_row['volunteerStatus'] === 'Approved') {
+                                                        echo 'bg-success';
+                                                    } else {
+                                                        echo 'bg-danger';
+                                                    }
+                                                ?>"><?php echo $volunteer_row['volunteerStatus']; ?></span>
+                                            </p>
                                         </div>
-                                    </div>
-                                    <?php if ($volunteer_row['volunteerStatus'] === 'Pending'): ?>
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
+                                        <?php if ($volunteer_row['volunteerStatus'] === 'Pending'): ?>
+                                        <div class="dropdown ms-2">
+                                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
                                                 <form method="POST" action="cancel_volunteer.php" onsubmit="return confirmCancellation('<?php echo $volunteer_row['eventName']; ?>')">
@@ -378,7 +384,7 @@ function confirmCancellation(eventName) {
         </div>
         <?php if ($total_events > 0): ?>
 <nav aria-label="Event page navigation" class="mt-2">
-  <ul class="pagination justify-content-center">
+  <ul class="pagination pagination-maroon justify-content-center">
     <!-- Previous Button -->
     <li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
       <a class="page-link" href="?page=<?php echo $page - 1; ?>&status=<?php echo urlencode($status); ?>&category_id=<?php echo urlencode($category_id); ?>&search=<?php echo urlencode(isset($_GET['search']) ? $_GET['search'] : ''); ?>" tabindex="-1" aria-disabled="true">Previous</a>
