@@ -57,6 +57,7 @@
                                     <th>Status</th>
                                     <th>Order ID</th>
                                     <th>Action</th>
+                                    <th>Remarks</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,6 +96,7 @@
                                         echo 'Order Created';
                                     }
                                     echo '</td>';
+                                    echo '<td>'.$row2['remarks'].'</td>';
                                     echo '</tr>';
                                 }
                                 ?>
