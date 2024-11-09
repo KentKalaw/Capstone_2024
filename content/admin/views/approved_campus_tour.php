@@ -130,6 +130,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input type="hidden" name="approved_date" id="hidden_approved_date_' . $campus_id . '">
                                 <button type="submitDate" class="btn btn-primary btn-sm" onclick="setApprovedDate(' . $campus_id . ')">Submit Date</button>
                               </form>';
+                    } else {
+                        echo 'Date Submitted';
                     }
                     echo '</td>';
                     echo '</tr>';
