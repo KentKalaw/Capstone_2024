@@ -129,6 +129,71 @@ body {
   font-size: 12px;
 }
 
+.custom-button {
+  padding: 10px 18px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: #2c3e50;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.custom-vol-button {
+  padding: 10px 18px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: #8f7326;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-button:hover {
+  background-color: #34495e;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.custom-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  background-color: #243747;
+}
+
+.custom-vol-button:hover {
+  background-color: #796121;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.custom-vol-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  background-color: #243747;
+}
+
 /* Custom Status Colors */
 .badge.bg-warning {
   background-color: #FFE0B2 !important; /* Light orange */

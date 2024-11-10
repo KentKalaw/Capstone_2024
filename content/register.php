@@ -62,12 +62,34 @@
             transform: translateY(-50%);
         }
 
-        .info {
+        .info-text {
             cursor: pointer;
             padding-bottom: 5px;
             color: maroon;
         }
     
+        @media (max-width: 768px) {
+    .mobile-tooltip {
+        display: none;
+        position: fixed;
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+        max-width: 280px;
+        z-index: 1000;
+    }
+
+    .mobile-tooltip.show {
+        display: block;
+    }
+}
+
+
+/* Make the icon more tappable on mobile */
+.info-text i {
+    color: maroon;
+    cursor: pointer;
+}
     </style>
 </head>
 <body translate="no">
@@ -216,10 +238,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <div class="info" data-bs-toggle="popover" data-bs-container="body" data-bs-placement="left" data-bs-content="Use suggested documents like Diploma, Transcript of Records (TOR), Alumni Card, Certificate of Graduate.">
-                                                        File Upload <i class="bi bi-info-circle"></i>
-                                                    </div>
-                                                    <input type="file" placeholder="File Upload" name="file1" id="upload" required />
+                                                <div class="info-container">
+                                                <div class="info-text" 
+                                                    data-bs-toggle="tooltip" 
+                                                    data-bs-placement="left"
+                                                    data-bs-custom-class="mobile-tooltip"
+                                                    title="Upload Proof of Validation (e.g., Diploma, Transcript of Records, Alumni Card, Certificate of Graduation)">
+                                                    What to upload? <i class="bi bi-info-circle"></i>
+                                                </div>
+                                            </div>
+                                                    <input type="file" placeholder="File Upload" name="file1" id="upload" accept=".docx,.pdf,image/*" required />
                                                     <textarea id="file" name="file" style="display:none"></textarea>
                                                 </div>
                                                 <div class="col-12">
@@ -249,12 +277,40 @@
 
 
 
-    <script>
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl)
-})
-    </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Handle mobile devices
+    if ('ontouchstart' in window) {
+        document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function(element) {
+            element.addEventListener('click', function(e) {
+                var tooltip = bootstrap.Tooltip.getInstance(element);
+                if (tooltip) {
+                    tooltip.toggle();
+                }
+            });
+        });
+
+        // Close tooltip when clicking outside
+        document.addEventListener('click', function(e) {
+            var tooltipElements = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            tooltipElements.forEach(function(element) {
+                if (!element.contains(e.target)) {
+                    var tooltip = bootstrap.Tooltip.getInstance(element);
+                    if (tooltip) {
+                        tooltip.hide();
+                    }
+                }
+            });
+        });
+    }
+});
+</script>
 
     <script>
 				function dept(value) {

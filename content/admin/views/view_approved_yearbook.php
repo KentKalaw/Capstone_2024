@@ -58,6 +58,7 @@
                                     <th>Order ID</th>
                                     <th>Action</th>
                                     <th>Remarks</th>
+                                    <th>Add Remarks</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -96,7 +97,21 @@
                                         echo 'Order Created';
                                     }
                                     echo '</td>';
-                                    echo '<td>'.$row2['remarks'].'</td>';
+                                    echo '<td>';
+                                    echo '<form method="post" action="update_remarks.php" style="display:inline;">
+                                        <input type="hidden" name="yearbook_id" value="'.$yearbook_id.'">
+                                        <select name="remarks" class="form-select form-select-sm">
+                                            <option value="'.$row2["remarks"].'" selected>'.$row2["remarks"].'</option>
+                                            <option value="Not yet processed"'.($row2['remarks'] == 'Not yet processed' ? ' selected' : '').'>Not yet processed</option>
+                                            <option value="Assigning Driver"'.($row2['remarks'] == 'Assigning Driver' ? ' selected' : '').'>Assigning Driver</option>
+                                            <option value="Delivering"'.($row2['remarks'] == 'Delivering' ? ' selected' : '').'>Delivering</option>
+                                            <option value="Delivered"'.($row2['remarks'] == 'Delivered' ? ' selected' : '').'>Delivered</option>
+                                        </select>
+                                    </td>';
+                                    echo '<td>';
+                                    echo '<button type="submit" class="btn btn-primary btn-sm">Add Remarks</button>';
+                                    echo '</form>';
+                                    echo '</td>';
                                     echo '</tr>';
                                 }
                                 ?>

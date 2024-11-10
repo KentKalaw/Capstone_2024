@@ -10,6 +10,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
   <link rel="icon" type="image/png" sizes="512x512" href="../../assets/img/favicon/logo.png">
   <link rel="stylesheet" type="text/css" href="../css/alumni_card.scss"/>
 </head>
@@ -62,6 +64,29 @@
             </h5>
         </div>
         <div class="card-body">
+        <div class="mb-4 d-flex justify-content-center">
+        <?php if (!empty($idphoto) && strpos($idphoto, 'data:image') === 0): ?>
+        <div style="width: 200px; height: 200px; border: 2px solid #752738; border-radius: 4px; overflow: hidden;">
+            <img src="<?php echo $idphoto ?>" 
+                 alt="2x2 ID Photo" 
+                 style="width: 100%; 
+                        height: 100%; 
+                        object-fit: cover; 
+                        object-position: center;">
+        </div>
+    <?php else: ?>
+        <div style="width: 200px; 
+                    height: 200px; 
+                    border: 2px solid #752738; 
+                    border-radius: 4px; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    background-color: #f8f9fa;">
+            <i class="fas fa-user fa-4x" style="color: #752738;"></i>
+        </div>
+    <?php endif; ?>
+</div>
             <div class="row g-3">
                 <!-- Left Column -->
                 <div class="col-md-6 col-12">
@@ -235,6 +260,26 @@
                 <input type="hidden" name="alumni_id" value="<?php echo isset($alumni_id) ? $alumni_id : ''; ?>">
                     <!-- Example fields -->
                     <div class="mb-3">
+                    <label class="form-label">Upload 2x2 ID Photo (Optional)<br><small class="text-muted">This photo will be displayed on your Alumni Privilege Card (Optional)</small></label>
+                        <div class="photo-upload-container">
+                            <div class="photo-preview-box">
+                                <img id="preview-image" src="" alt="Preview">
+                                <div class="placeholder">
+                                    <i class="fas fa-camera"></i>
+                                    <p>Preview will appear here</p>
+                                </div>
+                            </div>
+                            <div class="photo-input-container">
+                                <label for="upload" class="photo-input-label">
+                                    <i class="fas fa-upload"></i> Choose Photo
+                                </label>
+                                <input type="file" name="upload" id="upload" accept="image/png, image/gif, image/jpeg">
+                                <textarea id="file" name="file" style="display:none"></textarea>
+                            </div>
+                            <p class="guidelines">Recommended: 2x2 ID photo format</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Full Name</label>
                         <input type="text" class="form-control" name="fullname" value="<?php echo $global_name ?>"readonly>
                     </div>
@@ -263,6 +308,28 @@
         </div>
     </div>
 </div>
+
+<script>
+const fileInput = document.getElementById('upload');
+const previewImage = document.getElementById('preview-image');
+const placeholder = document.querySelector('.placeholder');
+
+fileInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      previewImage.src = reader.result;
+      previewImage.style.display = 'block';
+      previewImage.style.width = '100%';
+      previewImage.style.height = '100%';
+      placeholder.style.display = 'none';
+      document.getElementById('file').value = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+</script>
 
 
   </div> <!-- End of page-content-wrapper -->

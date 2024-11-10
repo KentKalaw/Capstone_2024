@@ -1,6 +1,6 @@
 <?php
 
-$sql = "SELECT fullname, student_number, department, course, year_graduated, date, status FROM alumni_privilege_card WHERE alumni_id = ?";
+$sql = "SELECT fullname, student_number, department, course, year_graduated, date, file, status FROM alumni_privilege_card WHERE alumni_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $alumni_id);
 $stmt->execute();
@@ -15,6 +15,7 @@ if ($result->num_rows > 0) {
   $course = $row['course'] ? $row['course'] : 'N/A';
   $year_graduated = $row['year_graduated'] ? $row['year_graduated'] : 'N/A';
   $date = $row['date'] ? $row['date'] : 'N/A';
+  $idphoto = $row['file'] ? $row['file'] : 'N/A';
   $status = $row['status'] ? $row['status'] : 'No request submitted yet';
 
 } else {
@@ -25,6 +26,7 @@ if ($result->num_rows > 0) {
   $course = 'N/A';
   $year_graduated = 'N/A';
   $date = 'N/A';
+  $idphoto = 'N/A';
   $status = 'No request submitted yet';
 }
 

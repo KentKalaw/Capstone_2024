@@ -331,8 +331,11 @@ function confirmCancellation(eventName) {
     <input type="hidden" name="alumni_id" value="<?php echo $alumni_id; ?>">
     <input type="hidden" name="fname" value="<?php echo $fname; ?>">
     <input type="hidden" name="lname" value="<?php echo $lname; ?>">
-    <div class="mb-2">
-        <button type="submit" name="participate" class="btn btn-dark w-100">Participate</button>
+    <div class="mb-2 mt-2">
+        <label for="role" class="form-label"><strong>Participate Now:</strong></label><br>
+        <div class="btn-container">
+        <button type="submit" name="participate" class="custom-button">Submit Participate Request</button>
+        </div>
     </div>
 </form>
           </div>
@@ -360,7 +363,9 @@ function confirmCancellation(eventName) {
                         <!-- Add more roles as needed -->
                     </select>
                 </div>
-                <button type="submit" name="volunteer" class="btn btn-warning w-100">Submit Volunteer Request</button>
+                <div class="btn-container">
+        <button type="submit" name="volunteer" class="custom-vol-button">Submit Volunteer Request</button>
+        </div>
             </form>
         </form>
     </div>

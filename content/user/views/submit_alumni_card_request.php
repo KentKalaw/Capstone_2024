@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $department = $_POST['department'];      
     $course = $_POST['course'];   
     $year_graduated = $_POST['year_graduated'];   
+    $file = $_POST['file'];
 
     // Check if the alumni has already requested a yearbook
     $check_sql = "SELECT * FROM alumni_privilege_card WHERE alumni_id = $alumni_id";
@@ -16,11 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($check_result->num_rows > 0) {
         // If a record exists, show alert
-        echo '<script>alert("You have already submitted a Yearbook Delivery request."); window.location="index.php";</script>';
+        echo '<script>alert("You have already submitted a Alumni Privilege Card request."); window.location="index.php";</script>';
         exit; // Exit to prevent further processing
     } else {
         // Insert a new record with Pending status
-        $insert_sql = "INSERT INTO alumni_privilege_card (alumni_id, fullname, student_number, department, course, year_graduated, date, status) VALUES ($alumni_id, '$fullname', '$student_number', '$department', '$course', '$year_graduated', CURRENT_TIMESTAMP, 'Pending')";
+        $insert_sql = "INSERT INTO alumni_privilege_card (alumni_id, fullname, student_number, department, course, year_graduated, date, file, status) VALUES ($alumni_id, '$fullname', '$student_number', '$department', '$course', '$year_graduated', CURRENT_TIMESTAMP, '$file', 'Pending')";
         
         if ($conn->query($insert_sql) === TRUE) {
             echo '<script>alert("Alumni Privilege Card request submitted. We will verify if you are elligible or not. Please wait for further details"); window.location="alumni_card.php";</script>';
