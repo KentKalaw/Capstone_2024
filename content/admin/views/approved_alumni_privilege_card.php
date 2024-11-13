@@ -58,6 +58,7 @@
               <th>Course</th>
               <th>Year Graduated</th>
               <th>Date</th>
+              <th>File</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -75,6 +76,7 @@
                     $course = $row2['course'];
                     $year_graduated = $row2['year_graduated'];
                     $date = $row2['date'];
+                    $file = $row2['file'];
                     $status = $row2['status'];
                     $date = date('F j, Y g:ia',strtotime($date));
                     echo '<tr>';
@@ -86,13 +88,13 @@
                     echo '<td>'.$course.'</td>';
                     echo '<td>'.$year_graduated.'</td>';
                     echo '<td>'.$date.'</td>';
+                    echo ' <td><a href="view_alumni_file.php?id='.$card_id.'" rel="facebox" target="_blank" class="bg-transparent">View File</a></td>';
                     echo '<td>'.$status.'</td>';
                     echo '</tr>';
                 }
                 
                 ?>
             </tr>
-            <!-- Add more rows as necessary -->
           </tbody>
         </table>
       </div>
@@ -114,11 +116,11 @@
   </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/facebox/1.3.8/facebox.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.facebox/1.4.1/jquery.facebox.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('a[rel*=facebox]').facebox();
-    });
+    jQuery(document).ready(function($) {
+  $('a[rel*=facebox]').facebox()
+})
 </script>
 
 

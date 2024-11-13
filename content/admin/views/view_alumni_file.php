@@ -1,21 +1,16 @@
 <?php
 include('../../connect.php');
-$donation_id = $_GET['id'];
-$sql = "SELECT * FROM donations WHERE id = '$donation_id'";
+$alumni_id = $_GET['id'];
+$sql = "SELECT * FROM alumni_privilege_card WHERE id = '$alumni_id'";
     $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
-        $donation_id = $row['id'];
-        $fullname = $row['fullname'];
-        $email = $row['email'];
-        $amount = $row['amount'];
-        $number = $row['contact'];
-        $image = $row['image'];
-        $date = $row['date'];
+        $alumni_id = $row['id'];
+        $image = $row['file'];
     }
 ?>
 <h2>Attachment</h2>
-<hr style="width:500px">
-<img src="<?php echo $image ?>" style="width:100%; height:500px;">
+<hr style="width:600px">
+<img src="<?php echo $image ?>" style="width:100%; height:600px;">
 
 <style>
 	#facebox {
