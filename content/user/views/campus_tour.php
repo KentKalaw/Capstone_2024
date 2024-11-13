@@ -118,6 +118,12 @@
             ?>">
               <?php echo htmlspecialchars($status); ?>
             </span>
+            <?php if ($status === 'Pending'): ?>
+            <button class="btn btn-danger btn-sm ms-md-2" onclick="confirmCancel(<?php echo $alumni_id; ?>)">
+                <i class="fas fa-times-circle me-1"></i>Cancel
+            </button>
+
+             <?php endif; ?>
           </p>
           <p><strong>Date Range:</strong> <span><?php echo htmlspecialchars($fromDate).' '.'-'.' '.htmlspecialchars($toDate); ?></span></p>
           <p><strong>Approved Date for Tour:</strong> <span id="approved-date"><?php echo htmlspecialchars($approved_date); ?></span></p>
@@ -265,6 +271,14 @@
         var myModal = new bootstrap.Modal(document.getElementById('myModal'));
         myModal.show();
       });
+    </script>
+
+<script>
+    function confirmCancel(alumniId) {
+        if (confirm('Are you sure you want to cancel your campus tour request?')) {
+            window.location.href = 'cancel_campus_tour.php?alumni_id=' + alumniId;
+        }
+    }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

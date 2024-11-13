@@ -1,7 +1,7 @@
 <?php
 include('../../auth.php');
 include('../../connect.php');
-// Assuming you have the necessary database connection and event ID variables
+
 $event_id = $_POST['event_id'];
 $alumni_id = $_POST['alumni_id'];
 
@@ -10,7 +10,7 @@ $volunteer_sql = "SELECT volunteer_id FROM events_volunteer WHERE event_id = $ev
 $volunteer_result = $conn->query($volunteer_sql);
 
 if ($volunteer_result->num_rows > 0) {
-    // Update the volunteer status to 'Cancelled'
+
     $update_sql = "DELETE FROM events_volunteer WHERE volunteer_id = " . $volunteer_result->fetch_assoc()['volunteer_id'];
     if ($conn->query($update_sql) === TRUE) {
         echo '<script>alert("Volunteer request cancelled successfully."); window.location="events.php";</script>';

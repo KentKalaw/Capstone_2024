@@ -22,6 +22,7 @@ if ($result->num_rows > 0) {
   $request_status = 'No request submitted yet';
   $address = 'N/A';
   $order_id = 'N/A';
+  $remarks = 'N/A';
 }
 
 $stmt->close();

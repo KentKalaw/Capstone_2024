@@ -153,7 +153,8 @@ $participation_result = $conn->query($participation_sql);
 <script>
     $(document).ready(function() {
         $('#example').DataTable({
-            responsive: true
+            responsive: true,
+            order: [[0, 'desc']]
         });
     });
 </script>

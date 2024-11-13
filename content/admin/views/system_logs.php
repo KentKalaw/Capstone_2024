@@ -115,12 +115,13 @@
 	  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script>
-			$(document).ready(function() {
-			$('#example').DataTable( {
-			responsive: true
-			} );
-			} );
-			</script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            responsive: true,
+            order: [[0, 'desc']]
+        });
+    });
+</script>
 </body>
 
 </html>

@@ -368,6 +368,14 @@
                                 ?>">
                                     <?php echo htmlspecialchars($request_status); ?>
                                 </span>
+                                
+                                <?php if ($request_status === 'Pending'): ?>
+                                  <button class="btn btn-danger btn-sm ms-md-2" onclick="confirmCancel(<?php echo $alumni_id; ?>)">
+                                      <i class="fas fa-times-circle me-1"></i>Cancel
+                                  </button>
+
+                            <?php endif; ?>
+                                
                             </p>
                             <p><strong>Order ID:</strong> <span id="order-id"><?php echo htmlspecialchars($order_id); ?></span></p>
                             <?php if ($request_status === 'Approved' && ($order_id === 'N/A')): ?>
@@ -457,6 +465,14 @@
         var myModal = new bootstrap.Modal(document.getElementById('myModal'));
         myModal.show();
       });
+    </script>
+
+    <script>
+    function confirmCancel(alumniId) {
+        if (confirm('Are you sure you want to cancel your yearbook request?')) {
+            window.location.href = 'cancel_yearbook.php?alumni_id=' + alumniId;
+        }
+    }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

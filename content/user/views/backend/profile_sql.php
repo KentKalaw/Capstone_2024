@@ -31,8 +31,8 @@
 		
 					date_default_timezone_set('Asia/Manila');
 					$message = 'Alumni updated profile';
-					$date = date('F d, Y h:i A');
-				$save = $conn->query("INSERT INTO audit (username,action, timestamp)VALUES ('$username','$message','$date')");
+					$dateupdate = date('F d, Y h:i A');
+				$save = $conn->query("INSERT INTO audit (username,action, timestamp)VALUES ('$username','$message','$dateupdate')");
 		echo '<script>alert("Profile has been updated");window.location="profile.php";</script>';
 				}
 				?>
