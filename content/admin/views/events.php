@@ -50,10 +50,10 @@
       <!-- Adding new category and new events button -->
   <div class="col-md-12 d-flex justify-content-end">
     <a href="#" class="btn btn-dark px-4 py-2 me-3 open-modal" data-bs-toggle="modal" data-bs-target="#activeModal"><i class="fas fa-users"></i> View active users</a>
-    <button data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="btn btn-secondary me-3">Add New Category</button>
+    <button data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="btn btn-secondary me-3"><i class="fas fa-plus-circle me-2"></i>Add New Category</button>
     
     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createEventModal">
-  Add New Event
+  <i class="fas fa-plus-circle"></i> Add New Event
 </button>
   </div>
 </div>
@@ -178,7 +178,7 @@
                       <a href="#" class="btn btn-dark px-4 py-2 me-1 open-modal" data-event-id="<?php echo $event_id; ?>" data-bs-toggle="modal" data-bs-target="#eventModal">
     <i class="fa fa-user-plus" aria-hidden="true"></i>
 </a>
-</a>
+
                       <a href="delete_event.php?id=<?php echo $row2['event_id']; ?>" onclick="return confirm('Are you sure you want to delete this event?');" class="btn btn-danger px-4 py-2 me-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   </div>
                 </div>
@@ -373,7 +373,7 @@
 <!-- Pagination of events (the previous and next button with numbers) -->
 <?php if ($total_events > 0): ?>
 <nav aria-label="Event page navigation" class="eventpagination mt-2">
-  <ul class="pagination justify-content-center">
+  <ul class="pagination pagination-maroon justify-content-center">
     <!-- Previous Button -->
     <li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
       <a class="page-link" href="?page=<?php echo $page - 1; ?>&status=<?php echo urlencode($status); ?>&category_id=<?php echo urlencode($category_id); ?>&search=<?php echo urlencode(isset($_GET['search']) ? $_GET['search'] : ''); ?>" tabindex="-1" aria-disabled="true">Previous</a>

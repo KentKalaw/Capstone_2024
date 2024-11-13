@@ -9,7 +9,13 @@ body {
 }
 
 
-
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">>";
+  font-weight: bold;
+  color: #6c757d;
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
+}
 
  .description {
     white-space: nowrap;           /* Prevents text from wrapping to a new line */
@@ -40,6 +46,46 @@ body {
   .event-card:hover {
     transform: translateY(-5px); /* Move card up on hover */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+  }
+
+  .pagination-maroon .page-link {
+    background-color: white; /* White background */
+    color: #6B1500; /* Default text color */
+    border: 1px solid #b3b3b3 !important; /* Border color */
+    border-radius: 0.25rem;
+
+}
+
+.pagination-maroon .page-item.active .page-link {
+    background-color: #962723; /* For the active page */
+    color: white;
+}
+
+.pagination-maroon .page-item.disabled .page-link {
+    background-color: lightgray; /* For disabled pages */
+    color: white;
+}
+
+    /* Status Badge Styles */
+  .badge.rounded-pill {
+    padding: 4px 12px;
+    font-weight: normal;
+    font-size: 12px;
+  }
+
+  .badge.bg-warning {
+    background-color: #FFE0B2 !important; /* Light orange */
+    color: #E65100 !important;
+  }
+  
+  .badge.bg-success {
+    background-color: #C8E6C9 !important; /* Light green */
+    color: #2E7D32 !important;
+  }
+  
+  .badge.bg-danger {
+    background-color: #FFCDD2 !important; /* Light red */
+    color: #C62828 !important;
   }
   
 
