@@ -195,18 +195,7 @@
                                                     <div class="form-floating mb-3">
                                                         <select class="form-select" name="year" id="year_graduated" required>
                                                             <option selected disabled>Choose year...</option>
-                                                            <option>2024-2025</option>
-                                                            <option>2023-2024</option>
-                                                            <option>2022-2023</option>
-                                                            <option>2021-2022</option>
-                                                            <option>2020-2021</option>
-                                                            <option>2019-2020</option>
-                                                            <option>2018-2019</option>
-                                                            <option>2017-2018</option>
-                                                            <option>2016-2017</option>
-                                                            <option>2015-2016</option>
-                                                            <option>2014-2015</option>
-                                                            <option>2013-2014</option>
+                                                            <?php include_once('register_date.php'); ?>
                                                         </select>
                                                         <label for="year_graduated" class="form-label">Year Graduated</label>
                                                     </div>

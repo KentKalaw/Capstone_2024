@@ -50,7 +50,8 @@
                         <textarea id="file" name="file" style="display:none"></textarea>
                     </div>
                     <h4 class="mt-3 mb-1"><?php echo $fname . ' ' . $lname ?></h4>
-                    <p class="text-muted fs-5"><?php echo $occupation ?></p>
+                    <p class="text-muted mb-1"><?php echo $username ?></p>
+                    <p class="text-muted mt-1"><?php echo $occupation ?></p>
                 </div>
 
                 <div class="profile-form mx-2 mb-4">

@@ -43,7 +43,7 @@
       <div class="row justify-content-end align-items-center mb-5">
       <div class="col-auto">
       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#participationVolunteerModal">
-    View All Participation and Volunteer
+    <i class="fas fa-users"></i> View List
 </button>
       </div>
         <!-- Select in the middle -->
@@ -244,10 +244,10 @@ function confirmCancellation(eventName) {
                 </div>
                 <div class="col-md-2 col-12 align-self-center p-2">
                   <div class="d-md-none d-flex justify-content-center">
-                    <a href="#" class="btn btn-secondary px-4 py-2" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>">View</a>
+                  <a href="#" class="btn btn-secondary px-4 py-2" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-eye"></i></a>
                   </div>
                   <div class="d-none d-md-block text-end">
-                    <a href="#" class="btn btn-secondary px-4 py-2 me-4" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>">View</a>
+                    <a href="#" class="btn btn-secondary px-4 py-2 me-4" data-bs-toggle="modal" data-bs-target="#eventModal-<?php echo $row2['event_id']; ?>"><i class="fas fa-eye"></i></a>
                   </div>
                 </div>
               </div>
