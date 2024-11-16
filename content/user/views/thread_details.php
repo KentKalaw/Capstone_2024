@@ -73,7 +73,16 @@
     <div class="col-md-12 mx-auto">
         <div class="replies-section">
             <h4 class="mb-4" style="color:#752738">Replies</h4>
-            <?php echo render_replies($thread_id, $conn); ?>
+            <?php 
+$replies = render_replies($thread_id, $conn);
+if (empty($replies)) {
+    echo '<div class="alert alert-info mt-3">
+            <i class="fas fa-info-circle me-2"></i>There are currently no replies to this thread.
+          </div>';
+} else {
+    echo $replies;
+}
+?>
         </div>
     </div>
 </div>

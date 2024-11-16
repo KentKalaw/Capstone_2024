@@ -32,6 +32,9 @@ function fetch_replies($thread_id, $conn, $parent_id = null) {
 // Function to render replies recursively
 function render_replies($thread_id, $conn, $parent_id = null, $depth = 0) {
     $replies = fetch_replies($thread_id, $conn, $parent_id);
+    if (mysqli_num_rows($replies) == 0) {
+        return '';
+    }
     $output = '<div class="reply-thread">';
     while ($reply = mysqli_fetch_assoc($replies)) {
         $reply_profile = $reply['profile'] ? $reply['profile'] : '../images/ub-logo.png';
