@@ -35,10 +35,17 @@
         }
         ?>
 
+        <div class="back-button-div">
+        <button onclick="window.location.href='message.php'" class="back-button">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+        </div>
+
         <!-- Chat Container -->
         <div class="chat-container">
             <!-- Chat Header -->
             <div class="chat-header">
+           
                 <div class="d-flex align-items-center">
                     <img src="<?php echo $file1 ?>" alt="<?php echo $name1 ?>" class="me-3">
                     <div>

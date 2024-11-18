@@ -9,6 +9,40 @@ body {
 }
 
 
+.back-button {
+    background: transparent;
+    margin-top: 15px;
+    margin-left: 20px;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-button i {
+    color: #666;
+    font-size: 1.7rem;
+    transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+
+    transform: translateY(-1px);
+}
+
+.back-button:hover i {
+    transform: translateX(-2px);
+}
+
+.back-button:active {
+    transform: translateY(0);
+
+}
+
 
 .breadcrumb-item + .breadcrumb-item::before {
     content: ">>";

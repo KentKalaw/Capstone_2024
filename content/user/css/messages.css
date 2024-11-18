@@ -7,6 +7,129 @@
 body {
     background-color: #EBDFD7;
 }
+.hover-row {
+  transition: background-color 0.2s ease;
+}
+
+.hover-row:hover {
+  background-color: #f8f9fa;
+}
+
+.mobile-message-item {
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  background-color: white;
+}
+
+.mobile-message-item:hover,
+.mobile-message-item:active {
+  background-color: #f8f9fa;
+}
+
+.btn-outline-primary {
+  border-color: #752738;
+  color: #752738;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: #752738;
+  border-color: #752738;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+/* Custom Scrollbar for Webkit Browsers */
+.table-responsive::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.pagination {
+    gap: 5px;
+}
+
+.pagination .page-link {
+    border: none;
+    color: #752738;
+    background: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #752738;
+    color: white;
+}
+
+.pagination .page-item:not(.active) .page-link:hover {
+    background-color: #f8f9fa;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: transparent;
+}
+
+/* Hover effect for message rows */
+.hover-row {
+    transition: background-color 0.2s ease;
+}
+
+.hover-row:hover {
+    background-color: #f8f9fa;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .card-header {
+    padding: 1rem;
+  }
+  
+  .mobile-message-item {
+    padding: 0.875rem 1rem;
+  }
+  
+  .fw-500 {
+    font-size: 0.95rem;
+  }
+  
+  .text-muted {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .btn-sm {
+    padding: 0.25rem 1rem;
+  }
+  
+  .table td {
+    padding: 1rem 0.5rem;
+  }
+}
+
 
 
 .breadcrumb-item + .breadcrumb-item::before {
