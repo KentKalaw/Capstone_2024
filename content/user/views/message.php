@@ -38,7 +38,7 @@
     <div class="row mb-3">
     <div class="col-md-4 mx-auto">
         <div class="input-group">
-            <input type="text" id="searchAlumni" class="form-control" autocomplete="off" placeholder="Search alumni by name...">
+            <input type="text" id="searchAlumni" style="outline:none!important; border:0;" class="form-control" autocomplete="off" placeholder="Search alumni by name...">
             <span class="input-group-text"><i class="fas fa-search"></i></span>
         </div>
     </div>
@@ -138,14 +138,14 @@
                         </div>
                       </td>';
                 echo '<td class="text-muted">' . $timeAgo . '</td>';
+                $chat_user = ($user1 == $username) ? $row['user2'] : $user1;
                 echo '<td class="text-end pe-4">
                         <button class="btn btn-outline-primary btn-sm rounded-pill px-4" 
-                                onclick="window.location=\'view_message.php?id=' . $user1 . '\'">
+                                onclick="window.location=\'view_message.php?id=' . $chat_user . '\'">
                           <i class="fas fa-comment-alt me-2"></i>View Chat
                         </button>
                       </td>';
-                echo '</tr>';
-              }
+                              }
               ?>
             </tbody>
           </table>
@@ -197,7 +197,8 @@
               $profile = $row['profile'] ?: '../images/ub-logo.png';
               $timeAgo = time_elapsed_string($row['date']);
               
-              echo '<div class="mobile-message-item p-3 border-bottom" onclick="window.location=\'view_message.php?id=' . $user1 . '\'">';
+              $chat_user = ($user1 == $username) ? $row['user2'] : $user1;
+              echo '<div class="mobile-message-item p-3 border-bottom" onclick="window.location=\'view_message.php?id=' . $chat_user . '\'">';
               echo '  <div class="d-flex justify-content-between align-items-center">';
               echo '    <div class="d-flex align-items-center">';
               echo '      <img src="' . $profile . '" class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">';

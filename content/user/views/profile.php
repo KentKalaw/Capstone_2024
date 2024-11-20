@@ -14,6 +14,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/philippine-location-json-for-geer@latest/philippine-location.json"></script>
   <link rel="stylesheet" type="text/css" href="../css/profiles.css"/>
 </head>
 
@@ -98,44 +99,125 @@
                     <div class="form-group-row mb-4">
                         <div class="mb-3">
                             <label for="region" class="form-label">Region</label>
-                            <select name="region" class="form-select" required onchange="loadProvinces(this.value)">
+                            <select name="region" id="region" class="form-select" required onchange="loadProvinces(this.value)">
                                 <option><?php echo $region; ?></option>
-                                <option>Region I – Ilocos Region</option>
-                                <option>Region II – Cagayan Valley</option>
-                                <option>Region III – Central Luzon</option>
-                                <option>Region IV A – CALABARZON</option>
-                                <option>MIMAROPA Region</option>
-                                <option>Region V – Bicol Region</option>
-                                <option>Region VI – Western Visayas</option>
-                                <option>Region VII – Central Visayas</option>
-                                <option>Region VIII – Eastern Visayas</option>
-                                <option>Region IX – Zamboanga Peninsula</option>
-                                <option>Region X – Northern Mindanao</option>
-                                <option>Region XI – Davao Region</option>
-                                <option>Region XII – SOCCSKSARGEN</option>
-                                <option>Region XIII – Caraga</option>
-                                <option>NCR – National Capital Region</option>
-                                <option>CAR – Cordillera Administrative Region</option>
-                                <option>BARMM – Bangsamoro Autonomous Region in Muslim Mindanao</option>
                             </select>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="province" class="form-label">Province</label>
-                            <select class="form-select" name="province" id="province1" required onchange="loadcity(this.value)">
+                            <select name="province" id="province" class="form-select" required onchange="loadCities(this.value)">
                                 <option><?php echo $province; ?></option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <select name="city" id="city" class="form-select" required>
+                                <option><?php echo $city; ?></option>
                             </select>
                         </div>
                     </div>
 
-                    <?php include_once('profile_location.php'); ?>
+                    <script>
+    // Load Regions
+    async function loadRegions() {
+        try {
+            const response = await fetch('https://psgc.gitlab.io/api/regions/');
+            const regions = await response.json();
 
-                    <div class="mb-3">
-                            <label for="city" class="form-label">City</label>
-                                <select class="form-select" name="city" id="city1" required>
-                                    <option><?php echo $city; ?></option>
-                                </select>
-                            </div>
+            const regionSelect = document.getElementById('region');
+            regionSelect.innerHTML = '<option><?php echo $region ? $region : "Select a Region"; ?></option>';
+            
+            regions.forEach(region => {
+                const option = document.createElement('option');
+                option.value = region.code;
+                option.dataset.name = region.name; // Store full name
+                option.textContent = region.name;
+                regionSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error loading regions:', error);
+        }
+    }
+
+    // Load Provinces by Region Code
+    async function loadProvinces(regionCode) {
+        try {
+            const response = await fetch(`https://psgc.gitlab.io/api/regions/${regionCode}/provinces/`);
+            const provinces = await response.json();
+
+            const provinceSelect = document.getElementById('province');
+            provinceSelect.innerHTML = '<option><?php echo $province ? $province : "Select a Province"; ?></option>';
+            
+            provinces.forEach(province => {
+                const option = document.createElement('option');
+                option.value = province.code;
+                option.dataset.name = province.name; // Store full name
+                option.textContent = province.name;
+                provinceSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error loading provinces:', error);
+        }
+    }
+
+    // Load Cities by Province Code
+    async function loadCities(provinceCode) {
+        try {
+            const response = await fetch(`https://psgc.gitlab.io/api/provinces/${provinceCode}/cities-municipalities/`);
+            const cities = await response.json();
+
+            const citySelect = document.getElementById('city');
+            citySelect.innerHTML = '<option><?php echo $city ? $city : "Select a City"; ?></option>';
+
+            cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city.code;
+                option.dataset.name = city.name; // Store full name
+                option.textContent = city.name;
+                citySelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error loading cities:', error);
+        }
+    }
+
+    // Modified form submission to capture names
+        document.querySelector('form').addEventListener('submit', function(e) {
+        const regionSelect = document.getElementById('region');
+        const provinceSelect = document.getElementById('province');
+        const citySelect = document.getElementById('city');
+
+        // Capture the selected names
+        const regionName = regionSelect.options[regionSelect.selectedIndex].dataset.name || regionSelect.value;
+        const provinceName = provinceSelect.options[provinceSelect.selectedIndex].dataset.name || provinceSelect.value;
+        const cityName = citySelect.options[citySelect.selectedIndex].dataset.name || citySelect.value;
+
+        // Create hidden inputs to send names
+        const regionNameInput = document.createElement('input');
+        regionNameInput.type = 'hidden';
+        regionNameInput.name = 'region_name';
+        regionNameInput.value = regionName;
+        this.appendChild(regionNameInput);
+
+        const provinceNameInput = document.createElement('input');
+        provinceNameInput.type = 'hidden';
+        provinceNameInput.name = 'province_name';
+        provinceNameInput.value = provinceName;
+        this.appendChild(provinceNameInput);
+
+        const cityNameInput = document.createElement('input');
+        cityNameInput.type = 'hidden';
+        cityNameInput.name = 'city_name';
+        cityNameInput.value = cityName;
+        this.appendChild(cityNameInput);
+    });
+
+    // Initialize Regions on Page Load
+    document.addEventListener('DOMContentLoaded', loadRegions);
+</script>
+
                             
                     <input type="hidden" name="program" value="<?php echo $program; ?>">
                     

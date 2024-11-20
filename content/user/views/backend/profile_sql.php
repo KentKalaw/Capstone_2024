@@ -7,9 +7,9 @@
 					$studentnumber =$_POST['studentnumber'];
 					$occupation =$_POST['occupation'];
 					$company =$_POST['company'];
-					$region = $_POST['region'];
-					$province =$_POST['province'];
-					$city =$_POST['city'];
+					$region = $_POST['region_name'];
+					$province =$_POST['province_name'];
+					$city =$_POST['city_name'];
 					$program =$_POST['program'];
 					$file =$_POST['file'];
 					$username = $_SESSION['username'];

@@ -66,27 +66,44 @@
         <div class="card-body">
         <div class="mb-4 d-flex justify-content-center">
         <?php if (!empty($idphoto) && strpos($idphoto, 'data:image') === 0): ?>
-        <div style="width: 200px; height: 200px; border: 2px solid #752738; border-radius: 4px; overflow: hidden;">
-            <img src="<?php echo $idphoto ?>" 
-                 alt="2x2 ID Photo" 
-                 style="width: 100%; 
-                        height: 100%; 
-                        object-fit: cover; 
-                        object-position: center;">
+            <?php if ($status === 'Pending'): ?>
+    <div style="width: 200px; height: 200px; border: 2px solid #752738; border-radius: 4px; position: relative;">
+        <img src="<?php echo $idphoto ?>" 
+             alt="2x2 ID Photo" 
+             style="width: 100%; 
+                    height: 100%; 
+                    object-fit: cover; 
+                    object-position: center;">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); color: white; text-align: center; padding: 5px;">
+            <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#changePhotoModal">
+                <i class="fas fa-edit me-1"></i>Change Photo
+            </button>
         </div>
+    </div>
     <?php else: ?>
-        <div style="width: 200px; 
-                    height: 200px; 
-                    border: 2px solid #752738; 
-                    border-radius: 4px; 
-                    display: flex; 
-                    align-items: center; 
-                    justify-content: center; 
-                    background-color: #f8f9fa;">
-            <i class="fas fa-user fa-4x" style="color: #752738;"></i>
-        </div>
+    <div style="width: 200px; height: 200px; border: 2px solid #752738; border-radius: 4px; overflow: hidden;">
+        <img src="<?php echo $idphoto ?>" 
+             alt="2x2 ID Photo" 
+             style="width: 100%; 
+                    height: 100%; 
+                    object-fit: cover; 
+                    object-position: center;">
+    </div>
     <?php endif; ?>
+<?php else: ?>
+    <div style="width: 200px; 
+                height: 200px; 
+                border: 2px solid #752738; 
+                border-radius: 4px; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                background-color: #f8f9fa;">
+        <i class="fas fa-user fa-4x" style="color: #752738;"></i>
+    </div>
+<?php endif; ?>
 </div>
+
             <div class="row g-3">
                 <!-- Left Column -->
                 <div class="col-md-6 col-12">
@@ -137,6 +154,101 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="changePhotoModal" tabindex="-1" aria-labelledby="changePhotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePhotoModalLabel">Change Profile Photo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="changePhotoForm" method="POST" action="update_alumni_photo.php" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="newPhotoUpload" class="form-label">Upload New Photo</label>
+                        <input type="file" class="form-control" id="newPhotoUpload" name="newPhoto" accept="image/png, image/jpeg, image/jpg" required>
+                        <div class="form-text">Please upload a 2x2 ID photo (PNG or JPEG)</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Photo Preview</label>
+                        <div class="photo-preview-container" style="width: 200px; height: 200px; border: 1px solid #ddd;">
+                            <img id="photoPreview" src="" alt="Photo Preview" style="max-width: 100%; max-height: 100%; display: none;">
+                            <div id="previewPlaceholder" class="text-center text-muted" style="line-height: 200px;">
+                                Preview will appear here
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="alumni_id" value="<?php echo isset($alumni_id) ? $alumni_id : ''; ?>">
+                    <input type="hidden" id="croppedPhotoData" name="croppedPhoto">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="cropAndSaveButton" disabled>Crop and Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const newPhotoUpload = document.getElementById('newPhotoUpload');
+    const photoPreview = document.getElementById('photoPreview');
+    const previewPlaceholder = document.getElementById('previewPlaceholder');
+    const cropAndSaveButton = document.getElementById('cropAndSaveButton');
+    let cropper;
+
+    newPhotoUpload.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            // Clear previous cropper if exists
+            if (cropper) {
+                cropper.destroy();
+            }
+
+            // Show preview
+            photoPreview.src = event.target.result;
+            photoPreview.style.display = 'block';
+            previewPlaceholder.style.display = 'none';
+
+            // Initialize Cropper.js
+            cropper = new Cropper(photoPreview, {
+                aspectRatio: 1, // 1:1 square crop
+                viewMode: 1,
+                minCropBoxWidth: 200,
+                minCropBoxHeight: 200,
+                ready: function() {
+                    cropAndSaveButton.disabled = false;
+                }
+            });
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    cropAndSaveButton.addEventListener('click', function() {
+        if (cropper) {
+            // Get the cropped image data
+            const croppedCanvas = cropper.getCroppedCanvas({
+                width: 600,
+                height: 600
+            });
+
+            // Convert to base64
+            const croppedPhotoData = croppedCanvas.toDataURL('image/jpeg');
+            
+            // Set the hidden input value
+            document.getElementById('croppedPhotoData').value = croppedPhotoData;
+
+            // Submit the form
+            document.getElementById('changePhotoForm').submit();
+        }
+    });
+});
+</script>
 
 <div class="not-container my-5">
       <h3 class="text-center mb-4" style="color:#752738; font-weight: bold;">Alumni Privilege Card Preview</h3>
