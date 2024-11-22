@@ -49,9 +49,9 @@
                     <table class="table vm no-th-brd pro-of-month" style="border-radius:10px" id="example">
                         <thead style="background:#8E8B82;color:#FFF;border-radius:10px">
                             <tr>
-                                <th>No.</th>
-                                <th><center>Name</th>
-                                <th><center>No. of Event Volunteers</th>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>No. of Event Volunteers</th>
                                 <th><center>Action</th>
                             </tr>
                         </thead>
@@ -64,8 +64,8 @@
                         $alumni_id = htmlspecialchars($volunteer['alumni_id']);
                         echo "<tr>
                             <td>{$i}</td>
-                            <td><center>{$name}</center></td>
-                            <td><center>{$count}</center></td>
+                            <td>{$name}</center></td>
+                            <td>{$count}</center></td>
                             <td><center>
                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#eventsModal{$alumni_id}'>
                                     View Events
@@ -224,13 +224,19 @@
                 {
                     extend: 'copyHtml5',
                     className: 'btn btn-primary',
-                    text: '<i class="fas fa-copy"></i> Copy'
+                    text: '<i class="fas fa-copy"></i> Copy',
+                    exportOptions: {
+                    columns: [0,1,2]
+                    }
                 },
                 {
                     extend: 'excelHtml5',
                     className: 'btn btn-success',
                     text: '<i class="fas fa-file-excel"></i> Excel',
                     title: 'Active Event Participation Report - ' + new Date().toLocaleDateString(),
+                    exportOptions: {
+                    columns: [0,1,2]
+                    }
                 },
                 {
                     extend: 'pdfHtml5',
@@ -239,7 +245,13 @@
                     title: 'Active Event Volunteer Report',
                     orientation: 'landscape',
                     pageSize: 'LETTER',
+                    exportOptions: {
+                    columns: [0,1,2]
+                    },
                     customize: function (doc) {
+
+                        doc.content[doc.content.length-1].table.widths = 
+                        ['33%', '33%', '34%'];
                         
                         doc.content.unshift({
                             columns: [
@@ -369,9 +381,6 @@
                             });
                         }
                     },
-                    exportOptions: {
-                        columns: ':visible'
-                    }
                 }
             ]
         });

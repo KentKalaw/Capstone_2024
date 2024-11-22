@@ -47,22 +47,33 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
   }
 
-  .pagination-maroon .page-link {
-    background-color: white; /* White background */
-    color: #6B1500; /* Default text color */
-    border: 1px solid #b3b3b3 !important; /* Border color */
-    border-radius: 0.25rem;
-
+.pagination {
+    gap: 5px;
 }
 
-.pagination-maroon .page-item.active .page-link {
-    background-color: #962723; /* For the active page */
+.pagination .page-link {
+    border: none;
+    color: #752738;
+    background: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #752738;
     color: white;
 }
 
-.pagination-maroon .page-item.disabled .page-link {
-    background-color: lightgray; /* For disabled pages */
-    color: white;
+.pagination .page-item:not(.active) .page-link:hover {
+    background-color: #f8f9fa;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: transparent;
 }
 
   /* Modal and Tab Styles */
