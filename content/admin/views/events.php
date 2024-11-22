@@ -50,7 +50,7 @@
       <!-- Adding new category and new events button -->
   <div class="col-md-12 d-flex justify-content-end">
     <a href="#" class="btn btn-dark px-4 py-2 me-3 open-modal" data-bs-toggle="modal" data-bs-target="#activeModal"><i class="fas fa-users"></i> View active users</a>
-    <button data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="btn btn-secondary me-3"><i class="fas fa-plus-circle me-2"></i>Add New Category</button>
+    <button data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="btn btn-dark me-3"><i class="fas fa-plus-circle me-2"></i>Add New Category</button>
     
     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createEventModal">
   <i class="fas fa-plus-circle"></i> Add New Event

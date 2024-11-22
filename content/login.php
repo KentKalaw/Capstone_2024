@@ -106,8 +106,9 @@
                                         </form>
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="register-link d-flex justify-content-center mt-5">
-                                                    <p class="px-1">Don't have an account? </p> <a href="register.php" class="link-danger text-decoration-none">Register Now</a>
+                                                <div class="d-flex justify-content-between align-items-center mt-5">
+                                                    <a href="register.php" class="link-danger text-decoration-none">Register Now</a>
+                                                    <a href="forgot_password.php" class="link-danger text-decoration-none">Forgot Password?</a>
                                                 </div>
                                             </div>
                                         </div>

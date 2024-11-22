@@ -136,8 +136,8 @@
                         <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
                             <div class="col-12 col-lg-11 col-xl-10">
                                 <div class="card-body p-3 p-md-4 p-xl-5">
-                                    <!-- Scrollable container with no horizontal scroll -->
-                                    <div class="scrollable-content" style="max-height: 468px; overflow-y: auto; overflow-x: hidden; padding-right: 10px;">
+                                    <!-- Scrollable container -->
+                                    <div class="scrollable-content" style="max-height: 453px; overflow-y: auto; overflow-x: hidden; padding-right: 10px;">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="mb-5">
@@ -236,7 +236,7 @@
                                                     What to upload? <i class="bi bi-info-circle"></i>
                                                 </div>
                                             </div>
-                                                    <input type="file" placeholder="File Upload" name="file1" id="upload" accept=".docx,.pdf,image/*" required />
+                                                    <input type="file" placeholder="File Upload" class="form-control" name="file1" id="upload" accept=".docx,.pdf,image/*" required />
                                                     <textarea id="file" name="file" style="display:none"></textarea>
                                                 </div>
                                                 <div class="col-12">

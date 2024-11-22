@@ -140,23 +140,227 @@ $participation_result = $conn->query($participation_sql);
     };
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
+<!-- DataTables Core -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<!-- DataTables Buttons -->
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+<!-- PDF and Excel Export Plugins -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+<!-- DataTables Responsive -->
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
 <script>
-    $(document).ready(function() {
+    var eventName = "<?php echo addslashes(htmlspecialchars($event['eventName'])); ?>";
+</script>
+
+<script>
+    // Convert logo to Base64 before initializing DataTable
+    let base64Logo = '';
+    function getBase64Logo(url) {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                    resolve(reader.result);
+                };
+                reader.readAsDataURL(xhr.response);
+            };
+            xhr.onerror = reject;
+            xhr.open('GET', url);
+            xhr.responseType = 'blob';
+            xhr.send();
+        });
+    }
+
+    $(document).ready(async function () {
+        // Preload the logo
+        try {
+            base64Logo = await getBase64Logo('../images/ub-logo.png');
+        } catch (error) {
+            console.error('Failed to load logo image:', error);
+        }
+
         $('#example').DataTable({
             responsive: true,
-            order: [[0, 'desc']]
+            order: [[0, 'desc']],
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    className: 'btn btn-primary',
+                    text: '<i class="fas fa-copy"></i> Copy'
+                },
+                {
+                    extend: 'excelHtml5',
+                    className: 'btn btn-success',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    title: 'Approved Event Participation Report - ' + eventName
+                },
+                {
+                    extend: 'pdfHtml5',
+                    className: 'btn btn-danger',
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    title: 'Approved Event Participation Report',
+                    orientation: 'landscape',
+                    pageSize: 'LETTER',
+                    customize: function (doc) {
+                        
+                        doc.content.unshift({
+                            columns: [
+                                {
+                                    image: base64Logo,
+                                    width: 60,
+                                    margin: [-5, 0, 10, 10]
+                                },
+                                {
+                                    text: [
+                                            { 
+                                                text: 'Alumnite\n', 
+                                                fontSize: 18, 
+                                                bold: true, 
+                                                alignment: 'left', 
+                                                margin: [40, 10, 0, 0]  
+                                            }, 
+                                            { 
+                                                text: 'Approved Event Participation Report\n', 
+                                                fontSize: 15, 
+                                                alignment: 'left', 
+                                                margin: [40, 5, 0, 0] 
+                                            },
+                                            {
+                                                text: 'Event Name: ' + eventName,
+                                                fontSize: 15,
+                                                alignment: 'left',
+                                                margin: [40, 10, 0, 0]
+                                            }
+                                        ]
+                                }
+                            ],
+                            
+                        });
+
+                         
+                         const pageWidth = doc.internal?.pageSize?.width || 595.28; 
+                         const pageHeight = doc.internal?.pageSize?.height || 841.89; 
+
+                         console.log('Page width:', pageWidth); 
+
+                         doc.content.splice(1, 0, {
+                            canvas: [{
+                                type: 'line',
+                                x1: 40,
+                                y1: 0,
+                                x2: pageWidth - 40,
+                                y2: 0,
+                                lineWidth: 0.5,
+                                lineColor: '#d3d3d3'
+                            }],
+                            margin: [0, 0, 0, 20]
+                        });
+                        // Table Header Styling
+                        doc.styles.tableHeader = {
+                            fillColor: '#752738',
+                            color: '#ffffff',
+                            bold: true,
+                            fontSize: 12,
+                            alignment: 'center'
+                        };
+
+                        
+                        if (doc.content[2]?.table) {
+                            const tableBody = doc.content[2].table.body;
+                            console.log('Table Body:', tableBody);
+                            
+                            tableBody.forEach((row, index) => {
+                                if (index > 0 && index % 2 === 0) {
+                                    row.forEach(cell => {
+                                        if (!cell.fillColor) {
+                                            console.error('Missing fill color for cell at index', index);
+                                        }
+                                        cell.fillColor = '#f9f9f9';
+                                    });
+                                }
+                            });
+                        }
+
+                        // footer
+                        doc.footer = function (currentPage, pageCount) {
+                            return {
+                                columns: [
+                                    {
+                                        text: [
+                                            { text: 'Generated by Alumnite\n', fontSize: 9, bold: true, color: '#666666' },
+                                            { text: '© 2024-2025 All Rights Reserved', fontSize: 8, color: '#999999' }
+                                        ],
+                                        alignment: 'left',
+                                        margin: [40, 10, 0, 0]
+                                    },
+                                    {
+                                        stack: [
+                                        {
+                                            text: `Page ${currentPage} of ${pageCount}`,
+                                            alignment: 'right',
+                                            fontSize: 8,
+                                            color: '#666666',
+                                            margin: [0, 10, 40, 0]
+                                        },
+                                        {
+                                            text: new Date().toLocaleDateString(),
+                                            alignment: 'right',
+                                            fontSize: 8,
+                                            color: '#666666',
+                                            margin: [0, 0, 40, 0]
+                                        }
+                                    ],
+                                    
+                                    }
+                                ],
+                            };
+                        };
+
+                        
+                        doc.styles.tableHeader = {
+                            fillColor: '#752738',
+                            color: '#ffffff',
+                            bold: true,
+                            fontSize: 12,
+                            alignment: 'center'
+                        };
+
+                        
+                        if (doc.content[2]?.table) {
+                            const tableBody = doc.content[2].table.body;
+                            tableBody.forEach((row, index) => {
+                                if (index > 0 && index % 2 === 0) {
+                                    row.forEach(cell => {
+                                        cell.fillColor = '#f9f9f9';
+                                    });
+                                }
+                            });
+                        }
+                    },
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                }
+            ]
         });
-    });
+        });
+    
 </script>
 </body>
 </html>
