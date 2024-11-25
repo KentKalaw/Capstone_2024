@@ -1,3 +1,12 @@
+<?php
+require '../vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+$mail = new PHPMailer(true);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,7 +127,99 @@
 		$conn->query($sql);
 	  $sql1 = "INSERT INTO users (username, password, type,status) VALUES ('$username', '$password', '$type', '$status')";
 		$conn->query($sql1);
-		echo '<script>alert("Alumni account has been created. Please wait until admin notify you for the status of your request.");window.location="index.php"</script>';
+
+        try {
+            // Server settings
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();                                          // Set mailer to use SMTP
+            $mail->Host = 'smtp.gmail.com';                           // Specify main SMTP server
+            $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+            $mail->Username = 'alumnitetest@gmail.com';               // SMTP username
+            $mail->Password = 'gtqr ixub vntg ehld';                  // SMTP password or App Password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;          // Enable TLS encryption; PHPMailer::ENCRYPTION_SMTPS is preferred
+            $mail->Port = 465;                                        // TCP port to connect to
+
+            // Recipients
+            $mail->setFrom('alumnitetest@gmail.com', 'Alumnite');      // Sender's email and name
+            $mail->addAddress($username, $fname.' '.$lname);                      // Add recipient (alumni email)
+
+            // Content
+            $mail->isHTML(true);                                      // Set email format to HTML
+            $mail->Subject = 'Your Alumnite Registration is Pending';
+            $mail->Body = '
+<html>
+<head>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0 0 20px 0;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #2a9d8f;
+        }
+        .footer {
+            font-size: 14px;
+            color: #777;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h1>Hello <span class="highlight">'.$fname.' '.$lname.'</span>,</h1>
+        <p>Thank you for registering with Alumnite! Your registration is currently under review. We will verify your details and notify you once your account status is updated.</p>
+        <p>Here are the details we have received:</p>
+        <ul>
+            <li><strong>Full Name:</strong> <span class="highlight">'.$fname.' '.$lname.'</span></li>
+            <li><strong>Student Number:</strong> <span class="highlight">'.$studentnumber.'</span></li>
+            <li><strong>Department:</strong> <span class="highlight">'.$department.'</span></li>
+            <li><strong>Course:</strong> <span class="highlight">'.$course.'</span></li>
+            <li><strong>Year Graduated:</strong> <span class="highlight">'.$year.'</span></li>
+        </ul>
+        <p>Your registration status is currently <span class="highlight">Pending</span>. We will notify you via email once your account has been approved.</p>
+        <p>If you have any questions or need further assistance, feel free to contact us.</p>
+        <div class="footer">
+            <p>Best regards,<br>The Alumnite Team</p>
+        </div>
+    </div>
+</body>
+</html>
+';
+
+            // Plain text version
+            $mail->AltBody = "Hello $fname.' '.$lname,\n\nThank you for registering with Alumnite! Your registration is currently under review. We will verify your details and notify you once your account status is updated.\n\nHere are the details we have received:\n\nFull Name: $fname.' '.$lname\nStudent Number: $studentnumber\nDepartment: $department\nCourse: $course\nYear Graduated: $year\n\nYour registration status is currently Pending. We will notify you via email once your account has been approved.\n\nBest regards,\nThe Alumnite Team";
+
+            // Send the email
+            $mail->send();
+
+            echo '<script>alert("Registration submitted successfully! A notification email has been sent. Please wait for further details."); window.location="login.php";</script>';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
 	  }
 
   }

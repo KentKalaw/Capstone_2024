@@ -94,10 +94,12 @@
                     echo '<td><center>
                     <form action="update_alumni_privilege_card.php" method="post" style="display:inline;">
                         <input type="hidden" name="card_id" value="'.$card_id.'">
+                        <input type="hidden" name="alumni_id" value="'.$alumni.'">
                         <button type="submit" name="action" value="Approve" class="btn btn-success btn-sm">Approve</button>
                     </form>
                     <form action="update_alumni_privilege_card.php" method="post" style="display:inline;">
                         <input type="hidden" name="card_id" value="'.$card_id.'">
+                        <input type="hidden" name="alumni_id" value="'.$alumni.'">
                         <button type="submit" name="action" value="Decline" class="btn btn-danger btn-sm">Decline</button>
                     </form>
                     </td>';

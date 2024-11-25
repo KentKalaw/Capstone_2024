@@ -110,7 +110,7 @@
             echo '<td>'.$year.'</td>';
             echo '  <td><a href="view_file.php?id='.$id.'" rel="facebox" target="_blank" class="bg-transparent">View File</a></td>';
             echo '  <td>'.$course.'</td>';
-            echo '<td><center><input type="button" value="Approve" class="btn btn-primary" onclick="window.location=\'approve.php?id='.$row['id'].'&email='.$username.'\'">&nbsp;<input type="button" value="Decline" class="btn btn-danger" onclick="window.location=\'decline.php?id='.$row['id'].'&email='.$username.'\'"></td>';
+            echo '<td><center><input type="button" value="Approve" class="btn btn-primary" onclick="window.location=\'approve.php?id='.$row['id'].'&email='.$username.' \'">&nbsp;<input type="button" value="Decline" class="btn btn-danger" onclick="window.location=\'decline.php?id='.$row['id'].'&email='.$username.'&fname='.$fname.'&lname='.$lname.'\'"></td>';
             echo '</tr>';
         }
         $conn->close();

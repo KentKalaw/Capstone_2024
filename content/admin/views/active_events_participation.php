@@ -131,7 +131,7 @@
                             <h5 class="modal-title" id="emailModalLabel">Send Email to <?php echo htmlspecialchars($participant['name']); ?></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form method="post" action="">
+                        <form method="post" action="send_email_active_participants.php">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="recipient_email" class="col-form-label">Recipient:</label>

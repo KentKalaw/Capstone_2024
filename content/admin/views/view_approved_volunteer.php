@@ -56,41 +56,7 @@ $volunteer_result = $conn->query($volunteer_sql);
         <a href="#" class="btn btn-outline-dark me-2 mb-3" data-bs-toggle="modal" data-bs-target="#emailApprovedModal"><i class="fas fa-envelope"></i> Email approved participants</a>
 </div>
 
-<!-- pop up modal for email -->
-<div class="modal fade" id="emailApprovedModal" tabindex="-1" aria-labelledby="emailApprovedModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="emailApprovedModalLabel">Compose Email</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Email Form -->
-        <form id="emailForm">
-          <div class="mb-3">
-            <p><strong>Note:</strong> This email will be sent to all approved volunteer.</p>
-          </div>
-          <div class="mb-3">
-            <label for="emailSubject" class="form-label">Subject:</label>
-            <input type="text" class="form-control" id="emailSubject" placeholder="Enter email subject" required>
-          </div>
-          <div class="mb-3">
-            <label for="emailBody" class="form-label">Message:</label>
-            <textarea class="form-control" id="emailBody" rows="5" placeholder="Write your message here..." required></textarea>
-          </div>
-          <!-- Email Actions -->
-          <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-success">Send Email</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-     
         <div class="table-responsive">
             <div class="col-lg-12 d-flex align-items-stretch" class="card w-100" style="border-radius:10px">
                 <div class="card w-100" style="border-radius:10px;padding:10px">
@@ -109,9 +75,11 @@ $volunteer_result = $conn->query($volunteer_sql);
                         </thead>
                         <tbody>
                             <?php
+                             $approvedEmails = [];
                             // Check if there are any results and populate the table
                             if ($volunteer_result->num_rows > 0) {
                                 while ($row = $volunteer_result->fetch_assoc()) {
+                                    $approvedEmails[] = $row['username']; 
                                     $volunteer_id = $row['volunteer_id'];
                                     echo "<tr>
                                             <td>{$row['volunteer_id']}</td>
@@ -135,6 +103,48 @@ $volunteer_result = $conn->query($volunteer_sql);
         </div>
     </div>
 </div>
+
+<!-- Modal for Email -->
+<div class="modal fade" id="emailApprovedModal" tabindex="-1" aria-labelledby="emailApprovedModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="emailApprovedModalLabel">Compose Email</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form id="emailForm" method="POST" action="send_bulk_email.php">
+      <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
+      <div class="mb-3">
+            <p><strong>Note:</strong> This email will be sent to all approved volunteers.</p>
+          </div>
+        <div class="mb-3">
+            <label for="emailSubject" class="form-label">Subject:</label>
+            <input type="text" class="form-control" id="emailSubject" name="emailSubject" placeholder="Enter email subject" required>
+        </div>
+        <div class="mb-3">
+            <label for="emailBody" class="form-label">Message:</label>
+            <textarea class="form-control" id="emailBody" name="emailBody" rows="5" placeholder="Write your message here..." required></textarea>
+        </div>
+        <input type="hidden" name="emails" id="emails" value="">
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-success">Send Email</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('emailForm').addEventListener('submit', function(e) {
+
+    var emails = <?php echo json_encode($approvedEmails); ?>;
+
+    document.getElementById('emails').value = emails.join(',');
+});
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>

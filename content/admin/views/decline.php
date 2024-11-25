@@ -1,7 +1,16 @@
 <?php
+
+require '../../../vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+$mail = new PHPMailer(true);
+
+
 include('../../connect.php');
 $id =  $_GET['id'];
 $username =  $_GET['email'];
+
 
 $sql = "DELETE FROM users WHERE id = '$id'";
 $conn->query($sql);
@@ -9,127 +18,94 @@ $sql2 = "DELETE FROM alumni WHERE username = '$username'";
 $conn->query($sql2);
 // send email
 $email = $_GET['email'];
- $from = "dontreply.alumnite@gmail.com";
-   $to = $email;
-   $subject = "Alumnite Regitration Confirmation";
-   $message = "
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Invoice Management</title>
+try {
+  // Server settings
+  $mail = new PHPMailer(true);
+  $mail->isSMTP();                                          // Set mailer to use SMTP
+  $mail->Host = 'smtp.gmail.com';                           // Specify main SMTP server
+  $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+  $mail->Username = 'alumnitetest@gmail.com';               // SMTP username
+  $mail->Password = 'gtqr ixub vntg ehld';                  // SMTP password or App Password
+  $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;          // Enable TLS encryption; PHPMailer::ENCRYPTION_SMTPS is preferred
+  $mail->Port = 465;                                        // TCP port to connect to
+
+  // Recipients
+  $mail->setFrom('alumnitetest@gmail.com', 'Alumnite');
+  $mail->addAddress($email, $fname . ' ' . $lname);
+
+  // Content
+  $mail->isHTML(true);                                      // Set email format to HTML
+  $mail->Subject = 'REGISTRATION DECLINED';
+  $mail->Body = '
+  <html>
+  <head>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+  body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
       margin: 0;
-    }
-    h1 {
-      font-family: fantasy;
-      font-size: 70px;
-      text-align: center;
-    }
-    table {
+      padding: 0;
+  }
+  .email-container {
       width: 100%;
-      border-collapse: collapse;
-      border: 1px solid black;
-    }
-    th, td {
-      border: 1px solid black;
-      padding: 5px;
-    }
-    th {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+  }
+  p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0 0 20px 0;
+  }
+  .highlight {
+      font-weight: bold;
+      color: #2a9d8f;
+  }
+  .footer {
+      font-size: 14px;
+      color: #777;
       text-align: center;
-    }
-    table.yellowTable thead {
-      background-color: #FFFF00;
-    }
-    table.yellowTable tbody tr:nth-child(even) {
-      background-color: #FFFFFF;
-    }
-    table.yellowTable tbody tr:nth-child(odd) {
-      background-color: #ecebeb;
-    }
-    img {
-      float: right;
-      width: 200px;
-      height: 200px;
-      transform: translateY(-90px);
-        padding-right: 50px;
-    }
-	
-	@media print {
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-    }
-    h1 {
-      font-family: fantasy;
-      font-size: 70px;
-      text-align: center;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      border: 1px solid black;
-    }
-    th, td {
-      border: 1px solid black;
-      padding: 5px;
-    }
-    th {
-      text-align: center;
-    }
-    table.yellowTable thead {
-      background-color: #FFFF00;
-    }
-    table.yellowTable tbody tr:nth-child(even) {
-      background-color: #FFFFFF;
-    }
-    table.yellowTable tbody tr:nth-child(odd) {
-      background-color: #ecebeb;
-    }
-    img {
-      float: right;
-      width: 200px;
-      height: 200px;
-      transform: translateY(-90px);
-        padding-right: 50px;
-    }
-}
+      margin-top: 20px;
+  }
   </style>
-</head>
-<body>
-Hello,<br>
-Thank you for your interest in joining the University of Batangas alumni network through Alumnite.<br>
-Unfortunately, we are unable to approve your registration at this time due to insufficient proof of records or an unclear picture provided during the sign-up process.<br>
-<br>
-To ensure successful registration, we kindly request that you resubmit your application and upload suggested documents such as your Diploma, Transcript of Records (TOR), Alumni Card, or Certificate of Graduation. Clear and legible documentation will enable us to verify your alumni status accurately.<br>
-<br>
-We apologize for any inconvenience caused and appreciate your cooperation in providing the necessary information. Your commitment to reconnecting with the University of Batangas alumni community is highly valued.<br>
-Should you have any questions or need further assistance, please feel free to contact our support team at facebook.com/ubbcsaep.<br>
-<br>
-Thank you for your understanding and cooperation.<br>
-Best regards,<br>
-Alumnite
-</div>
- 
+  </head>
+  <body>
+  <div class="email-container">
+  <h1>Hello <span class="highlight">' . $fname . ' ' . $lname . '</span>,</h1>
+  <p>We regret to inform you that your alumni account registration has been declined.</p>
+  
+  <p>Unfortunately, we are unable to approve your registration at this time due to insufficient proof of records or an unclear picture provided during the sign-up process. If you believe this decision was made in error, you can reach out to our support team for clarification.</p>
+  <p>We understand this may be disappointing, but we appreciate your understanding and hope to resolve any issues. Feel free to contact us with any questions or concerns.</p>
+  <div class="footer">
+      <p>Best regards,<br>The Alumnite Team</p>
+  </div>
+  </div>
 </body>
-</html>
+  </html>
+  ';
 
+  // Plain text version
+  $mail->AltBody = "Hello $fname $lname,\n\n
+We regret to inform you that your alumni account registration has been declined.\n\n
+Unfortunately, we are unable to approve your registration at this time due to insufficient proof of records or an unclear picture provided during the sign-up process. If you believe this decision was made in error, you can reach out to our support team for clarification.\n\n
+We understand this may be disappointing, but we appreciate your understanding and hope to resolve any issues. Feel free to contact us with any questions or concerns.\n\n
+Best regards,\n
+The Alumnite Team";
+  // Send the email
+  $mail->send();
 
-
-   
-   ";
-   
-  // The content-type header must be set when sending HTML email
- $headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-$headers .= "From: dontreply.alumnite@gmail.com\r\n"."X-Mailer: php";
-   if(mail($to,$subject,$message, $headers)) {
-      echo "Message was sent.";
-   } else {
-      echo "Message was not sent.";
-   }
-//end send email
+} catch (Exception $e) {
+  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
 
 					date_default_timezone_set('Asia/Manila');
 					$message = 'Administrator declined alumni registration request';
