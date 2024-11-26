@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/png" sizes="512x512" href="./assets/img/favicon/logo.png">
     <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -97,19 +98,20 @@
                                         echo 'Order Created';
                                     }
                                     echo '</td>';
+                                    echo '<td class="remarks-display">'.$row2['remarks'].'</td>';
                                     echo '<td>';
                                     echo '<form method="post" action="update_remarks.php" style="display:inline;">
                                         <input type="hidden" name="yearbook_id" value="'.$yearbook_id.'">
-                                        <select name="remarks" class="form-select form-select-sm">
-                                            <option value="'.$row2["remarks"].'" selected>'.$row2["remarks"].'</option>
+                                        <select name="remarks" class="form-select form-select-sm remarks-select">
                                             <option value="Not yet processed"'.($row2['remarks'] == 'Not yet processed' ? ' selected' : '').'>Not yet processed</option>
                                             <option value="Assigning Driver"'.($row2['remarks'] == 'Assigning Driver' ? ' selected' : '').'>Assigning Driver</option>
                                             <option value="Delivering"'.($row2['remarks'] == 'Delivering' ? ' selected' : '').'>Delivering</option>
                                             <option value="Delivered"'.($row2['remarks'] == 'Delivered' ? ' selected' : '').'>Delivered</option>
                                         </select>
-                                    </td>';
-                                    echo '<td>';
-                                    echo '<button type="submit" class="btn btn-primary btn-sm">Add Remarks</button>';
+                                        <button type="submit" class="btn btn-primary btn-sm mt-1">Update</button>
+                                    </form>';
+                                    echo '</td>';
+                                    
                                     echo '</form>';
                                     echo '</td>';
                                     echo '</tr>';
@@ -132,15 +134,41 @@
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable({
-            responsive: true,
-            order: [[0, 'desc']]
-        });
-    });
-</script>
+    <!-- Select2 for enhanced dropdowns -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+$(document).ready(function() {
     
+    var table = $('#example').DataTable({
+        responsive: true,
+        order: [[0, 'desc']],
+        columnDefs: [
+            {
+                targets: 11, 
+                type: 'text',
+                searchable: true
+            }
+        ]
+    });
+
+    $('#example thead tr').clone(true).appendTo('#example thead');
+    $('#example thead tr:eq(1) th').each(function(i) {
+        if (i === 11) {
+            $(this).html('<select class="form-control remarks-filter"><option value="">All Remarks</option><option value="Not yet processed">Not yet processed</option><option value="Assigning Driver">Assigning Driver</option><option value="Delivering">Delivering</option><option value="Delivered">Delivered</option></select>');
+            
+            $('.remarks-filter').on('change', function() {
+                table
+                    .column(11)
+                    .search(this.value)
+                    .draw();
+            });
+        } else {
+            $(this).empty();
+        }
+    });
+});
+</script>
     <script>
         // Menu toggle
         var el = document.getElementById("wrapper");
