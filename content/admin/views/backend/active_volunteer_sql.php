@@ -1,10 +1,10 @@
 <?php
 // Fetch volunteer data for the specific event
 $volunteer_sql = "
-    SELECT ev.alumni_id, ev.fname, ev.lname, ev.username, COUNT(*) AS volunteer_count 
+    SELECT ev.alumni_id, ev.fname, ev.lname, ev.username, ev.batch, COUNT(*) AS volunteer_count 
     FROM events_volunteer ev
     WHERE ev.volunteerStatus = 'Approved'
-    GROUP BY ev.alumni_id, ev.fname, ev.lname, ev.username
+    GROUP BY ev.alumni_id, ev.fname, ev.lname, ev.username, ev.batch
     ORDER BY volunteer_count DESC
 ";
 $volunteer_result = $conn->query($volunteer_sql);

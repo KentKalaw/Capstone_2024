@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $alumni_id = $_POST['alumni_id'];
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
+    $batch = $_POST['batch'];
     $username = $_SESSION['username'];
 
     if (isset($_POST['participate'])) {
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit; // Exit to prevent further processing
         } else {
             // Insert a new record with Pending status
-            $insert_sql = "INSERT INTO events_participation (event_id, alumni_id, fname, lname, username, participationStatus) VALUES ($event_id, $alumni_id, '$fname', '$lname', '$username', 'Pending')";
+            $insert_sql = "INSERT INTO events_participation (event_id, alumni_id, fname, lname, username, batch, participationStatus) VALUES ($event_id, $alumni_id, '$fname', '$lname', '$username', '$batch', 'Pending')";
             if ($conn->query($insert_sql) === TRUE) {
                 try {
                     // Server settings

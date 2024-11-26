@@ -70,6 +70,7 @@ $volunteer_result = $conn->query($volunteer_sql);
                                 <th>Last Name</th>
                                 <th>Role</th>
                                 <th>Email</th>
+                                <th>Batch</th>
                                 <th>Volunteer Status</th>
                             </tr>
                         </thead>
@@ -89,6 +90,7 @@ $volunteer_result = $conn->query($volunteer_sql);
                                             <td>{$row['lname']}</td>
                                             <td>{$row['role']}</td>
                                             <td>{$row['username']}</td>
+                                            <td>{$row['batch']}</td>
                                             <td>{$row['volunteerStatus']}</td>
                                         </tr>";
                                 }

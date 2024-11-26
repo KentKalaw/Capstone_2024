@@ -1,10 +1,10 @@
 <?php
 // Fetch participation data for the specific event
 $participation_sql = "
-    SELECT ep.alumni_id, ep.fname, ep.lname, ep.username, COUNT(*) AS participation_count 
+    SELECT ep.alumni_id, ep.fname, ep.lname, ep.username, ep.batch, COUNT(*) AS participation_count 
     FROM events_participation ep
     WHERE ep.participationStatus = 'Approved'
-    GROUP BY ep.alumni_id, ep.fname, ep.lname, ep.username
+    GROUP BY ep.alumni_id, ep.fname, ep.lname, ep.username, ep.batch
     ORDER BY participation_count DESC
 ";
 $participation_result = $conn->query($participation_sql);

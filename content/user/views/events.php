@@ -331,6 +331,7 @@ function confirmCancellation(eventName) {
     <input type="hidden" name="alumni_id" value="<?php echo $alumni_id; ?>">
     <input type="hidden" name="fname" value="<?php echo $fname; ?>">
     <input type="hidden" name="lname" value="<?php echo $lname; ?>">
+    <input type="hidden" name="batch" value="<?php echo $year; ?>">
     <div class="mb-2 mt-2">
         <label for="role" class="form-label"><strong>Participate Now:</strong></label><br>
         <div class="btn-container">
@@ -350,6 +351,7 @@ function confirmCancellation(eventName) {
             <input type="hidden" name="alumni_id" value="<?php echo $alumni_id; ?>">
             <input type="hidden" name="fname" value="<?php echo $fname; ?>">
             <input type="hidden" name="lname" value="<?php echo $lname; ?>">
+            <input type="hidden" name="batch" value="<?php echo $year; ?>">
             
             <!-- Role Selection -->
             <form onsubmit="return confirmVolunteerSubmission()">

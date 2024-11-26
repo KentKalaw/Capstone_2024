@@ -69,6 +69,7 @@ $participation_result = $conn->query($participation_sql);
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
+                                <th>Batch</th>
                                 <th>Participation Status</th>
                             </tr>
                         </thead>
@@ -87,6 +88,7 @@ $participation_result = $conn->query($participation_sql);
                                             <td>{$row['fname']}</td>
                                             <td>{$row['lname']}</td>
                                             <td>{$row['username']}</td>
+                                            <td>{$row['batch']}</td>
                                             <td>{$row['participationStatus']}</td>
                                         </tr>";
                                 }

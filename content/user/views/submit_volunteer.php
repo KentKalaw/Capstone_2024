@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $role = $_POST['role']; // Capture the selected role
+    $batch = $_POST['batch'];
     $username = $_SESSION['username'];
 
     if (isset($_POST['volunteer'])) {
@@ -32,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit; // Exit to prevent further processing
         } else {
             // Insert a new record with 'Pending' status and the selected role
-            $insert_sql = "INSERT INTO events_volunteer (event_id, alumni_id, fname, lname, username, role, volunteerStatus) 
-                           VALUES ($event_id, $alumni_id, '$fname', '$lname', '$username', '$role', 'Pending')";
+            $insert_sql = "INSERT INTO events_volunteer (event_id, alumni_id, fname, lname, username, role, batch, volunteerStatus) 
+                           VALUES ($event_id, $alumni_id, '$fname', '$lname', '$username', '$role', '$batch', 'Pending')";
             if ($conn->query($insert_sql) === TRUE) {
                 
                 try {

@@ -52,6 +52,7 @@
                                 <th>Rank</th>
                                 <th>Name</th>
                                 <th>No. of Event Participated</th>
+                                <th>Batch</th>
                                 <th><center>Action</th>
                             </tr>
                         </thead>
@@ -61,11 +62,14 @@
                     foreach ($participants as $participant) {
                         $name = htmlspecialchars($participant['name']);
                         $count = htmlspecialchars($participant['participation_count']);
+                        $batch = htmlspecialchars($participant['batch']);
                         $alumni_id = htmlspecialchars($participant['alumni_id']);
+                        
                         echo "<tr>
                             <td>{$i}</td>
                             <td>{$name}</center></td>
                             <td>{$count}</center></td>
+                            <td>{$batch}</center></td>
                             <td><center>
                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#eventsModal{$alumni_id}'>
                                     View Events
@@ -237,7 +241,7 @@
                     text: '<i class="fas fa-file-excel"></i> Excel',
                     title: 'Active Event Participation Report - ' + new Date().toLocaleDateString(),
                     exportOptions: {
-                    columns: [0,1,2]
+                    columns: [0,1,2,3]
                     }
                 },
                 {
@@ -248,12 +252,12 @@
                     orientation: 'landscape',
                     pageSize: 'LETTER',
                     exportOptions: {
-                    columns: [0,1,2]
+                    columns: [0,1,2,3]
                     },
                     customize: function (doc) {
 
                         doc.content[doc.content.length-1].table.widths = 
-                        ['33%', '33%', '34%'];
+                        ['25%', '25%', '25%', '25%'];
                         
                         doc.content.unshift({
                             columns: [

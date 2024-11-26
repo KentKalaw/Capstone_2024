@@ -236,23 +236,48 @@ $count3 = $result3->fetch_assoc()['total_logins'];
 
             <!-- Events Analytics -->
             <div class="row mt-4">
-                <div class="col-12">
-                    <h4 class="section-title">Events Analytics</h4>
-                    <div class="text-center">
-                        <select id="eventSelect" class="form-select">
-                            <option value="">Select an event</option>
-                            <?php foreach ($events as $event): ?>
-                                <option value="<?php echo htmlspecialchars($event['event_id']); ?>">
-                                    <?php echo htmlspecialchars($event['eventName']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="eventParticipationChart"></canvas>
+    <div class="col-12">
+        <h4 class="section-title">Events Analytics</h4>
+        <div class="text-center mb-4">
+            <select id="eventSelect" class="form-select" style="max-width: 300px; margin: 0 auto;">
+                <option value="">Select an event</option>
+                <?php foreach ($events as $event): ?>
+                    <option value="<?php echo htmlspecialchars($event['event_id']); ?>">
+                        <?php echo htmlspecialchars($event['eventName']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        
+        <div class="row">
+            <!-- Participation Chart -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-4">Event Participation and Volunteer Count</h5>
+                        <div class="chart-container" style="position: relative; height: 300px;">
+                            <canvas id="eventParticipationChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Batch Distribution Chart -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-4">Batch Distribution</h5>
+                        <div class="chart-container" style="position: relative; height: 300px;">
+                            <canvas id="batchDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
                         <!-- Active Events Participants Analytics -->
                         <div class="row mt-4">
@@ -295,5 +320,7 @@ $count3 = $result3->fetch_assoc()['total_logins'];
             el.classList.toggle("toggled");
         };
     </script>
+
+    
 </body>
 </html>
