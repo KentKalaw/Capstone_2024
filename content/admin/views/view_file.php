@@ -50,7 +50,7 @@ function cleanup_temp_files($temp_dir = 'temp/', $max_age = 3600) {
 ?>
 
 <?php
-// At the end of view_file.php
+// Cleanup temporary files
 cleanup_temp_files('temp/', 3600); // Delete files older than 1 hour
 ?>
 
