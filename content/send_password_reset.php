@@ -44,4 +44,4 @@ if ($stmt->affected_rows > 0) {
 
 }
 
-echo "Message sent check your email for the reset link";
+echo "<script>alert('Message sent! Please Check your email for the reset link.'); window.location.href='login.php';</script>";

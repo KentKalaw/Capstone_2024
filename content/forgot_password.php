@@ -62,7 +62,7 @@
                                                         </a>
                                                     </div>
                                                     <h5 class="text-center">Reset Your Password</h5>
-                                                    <p class="text-center text-muted">Enter your email to receive a reset code</p>
+                                                    <p class="text-center text-muted">Enter your email to receive a reset link.</p>
                                                 </div>
                                             </div>
                                         </div>

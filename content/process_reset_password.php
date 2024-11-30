@@ -4,7 +4,7 @@ $token = $_POST['token'];
 // Hash the token for verification
 $token_hash = hash('sha256', $token);
 
-require 'connect.php'; // Assuming this initializes the $conn variable for database connection
+require 'connect.php'; 
 
 // Validate the reset token
 $sql = "SELECT * FROM users WHERE reset_token_hash = ?";
@@ -49,8 +49,8 @@ $sql = "UPDATE users
             reset_token_hash = NULL,
             reset_token_expires_at = NULL
         WHERE id = ?";
-$stmt = $conn->prepare($sql); // Use $conn instead of $mysqli
-$stmt->bind_param("si", $password_hash, $users["id"]); // Use "i" for an integer ID
+$stmt = $conn->prepare($sql); 
+$stmt->bind_param("si", $password_hash, $users["id"]); 
 $stmt->execute();
 
 // Redirect to login with an alert
