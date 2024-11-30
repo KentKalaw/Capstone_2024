@@ -20,6 +20,41 @@ while ($row1 = $result1->fetch_assoc()) {
 <hr style="width:500px">
 
 <?php
+/**
+ * Delete unused temporary files older than specified time
+ * @param string $temp_dir Path to temporary directory
+ * @param int $max_age Maximum age in seconds before file is deleted
+ */
+function cleanup_temp_files($temp_dir = 'temp/', $max_age = 3600) {
+    // Check if directory exists
+    if (!is_dir($temp_dir)) {
+        return;
+    }
+
+    // Get all files in temp directory
+    $files = glob($temp_dir . '*');
+    
+    foreach ($files as $file) {
+        // Skip if not a file
+        if (!is_file($file)) {
+            continue;
+        }
+
+        // Delete file if older than max age
+        if (time() - filemtime($file) > $max_age) {
+            unlink($file);
+        }
+    }
+}
+
+?>
+
+<?php
+// At the end of view_file.php
+cleanup_temp_files('temp/', 3600); // Delete files older than 1 hour
+?>
+
+<?php
 // Extract the base64 string and file type
 if (preg_match('/^data:(.*?);base64,(.*)$/', $file, $matches)) {
     $file_type = $matches[1];
