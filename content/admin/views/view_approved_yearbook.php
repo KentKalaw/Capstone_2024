@@ -147,7 +147,8 @@ $(document).ready(function() {
             {
                 targets: 11, 
                 type: 'text',
-                searchable: true
+                searchable: true,
+                
             }
         ]
     });

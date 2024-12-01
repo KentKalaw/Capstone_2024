@@ -105,8 +105,8 @@ $mail = new PHPMailer(true);
 <?php
   if(isset($_POST['submit'])) {
 	  include('./connect.php');
-	  $fname = $_POST['fname'];
-	  $lname = $_POST['lname'];
+	  $fname = ucwords(strtolower($_POST['fname']));
+      $lname = ucfirst(strtolower($_POST['lname']));
       $studentnumber = $_POST['studentnumber'];
 	  $username = $_POST['username'];
 	  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);

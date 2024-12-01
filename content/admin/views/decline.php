@@ -9,15 +9,17 @@ $mail = new PHPMailer(true);
 
 include('../../connect.php');
 $id =  $_GET['id'];
-$username =  $_GET['email'];
-
-
-$sql = "DELETE FROM users WHERE id = '$id'";
-$conn->query($sql);
-$sql2 = "DELETE FROM alumni WHERE username = '$username'";
-$conn->query($sql2);
-// send email
+$username = $_GET['email'];
 $email = $_GET['email'];
+
+$ssql = "SELECT * FROM alumni WHERE username = '$email'";
+$rresult = $conn->query($ssql);
+if ($rresult->num_rows > 0) {
+    $rrow = $rresult->fetch_assoc();
+    $fname = $rrow['fname'];
+    $lname = $rrow['lname'];
+}
+
 try {
   // Server settings
   $mail = new PHPMailer(true);
@@ -106,6 +108,15 @@ The Alumnite Team";
 } catch (Exception $e) {
   echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+
+
+$sql = "DELETE FROM users WHERE id = '$id'";
+$conn->query($sql);
+$sql2 = "DELETE FROM alumni WHERE username = '$username'";
+$conn->query($sql2);
+
+
+
 
 					date_default_timezone_set('Asia/Manila');
 					$message = 'Administrator declined alumni registration request';
