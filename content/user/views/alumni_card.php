@@ -269,7 +269,9 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
-<div class="not-container my-5">
+<!-- Sponsors Tab -->
+
+<!-- <div class="not-container my-5">
       <h3 class="text-center mb-4" style="color:#752738; font-weight: bold;">Sponsors</h3>
       <div class="not-container">
         <div class="row text-center d-flex justify-content-center">
@@ -281,10 +283,10 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
            
             
-            <!-- Add more sponsors later HA-->
+           
         </div>
     </div>
-<div>
+<div> -->
 
 
 
