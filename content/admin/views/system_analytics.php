@@ -7,6 +7,8 @@ $events = $eventsResult->fetch_all(MYSQLI_ASSOC);
 $currentMonth = isset($_GET['month']) ? $_GET['month'] : date('m');
 $currentYear = isset($_GET['year']) ? $_GET['year'] : date('Y');
 
+$monthName = date('F', mktime(0, 0, 0, $currentMonth, 1, $currentYear));
+
 // Query to get distinct years and months from the data
 $distinctDatesSQL = "SELECT DISTINCT 
                       YEAR(STR_TO_DATE(timestamp, '%M %d, %Y %h:%i %p')) as year,
@@ -15,7 +17,7 @@ $distinctDatesSQL = "SELECT DISTINCT
                     ORDER BY year DESC, month DESC";
 $distinctDatesResult = $conn->query($distinctDatesSQL);
 
-$monthName = date('F', mktime(0, 0, 0, $currentMonth, 1, $currentYear));
+
 
 $result1 = $conn->query("SELECT * FROM users WHERE status = 'Approved' AND type = 'alumni'");
 $count1 = $result1->num_rows;

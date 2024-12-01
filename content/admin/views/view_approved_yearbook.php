@@ -47,7 +47,7 @@
                         <table class="table vm no-th-brd pro-of-month" style="border-radius:10px" id="example">
                             <thead style="background:#8E8B82;color:#FFF;border-radius:10px">
                                 <tr>
-                                    <th>Yearbook ID</th>
+                                    <th>ID</th>
                                     <th>Alumni ID</th>
                                     <th>Student Number</th>
                                     <th>Full name</th>

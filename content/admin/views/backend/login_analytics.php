@@ -1,5 +1,11 @@
 <?php
 // Main query for login data
+
+$currentMonth = isset($_GET['month']) ? $_GET['month'] : date('m');
+$currentYear = isset($_GET['year']) ? $_GET['year'] : date('Y');
+
+$monthName = date('F', mktime(0, 0, 0, $currentMonth, 1, $currentYear));
+
 $sql = "SELECT 
           DATE(STR_TO_DATE(timestamp, '%M %d, %Y %h:%i %p')) as login_date,
           COUNT(DISTINCT id) as total_logins
@@ -49,12 +55,12 @@ var chart = new Chart(ctx, {
     },
     options: {
         responsive: true,
-        maintainAspectRatio: false, // Set to false to allow responsive resizing
+        maintainAspectRatio: false, 
         scales: {
             y: {
                 beginAtZero: true,
                 ticks: {
-                    stepSize: 1 // Optional: Ensures small increments for better display
+                    stepSize: 1 
                 }
             }
         },
