@@ -7,7 +7,7 @@ $result1 = $conn->query($sql1);
 while($row1 = $result1->fetch_assoc()) {
 	$type = $row1['type'];
 	if($type != 'admin') {
-		echo '<script>window.location="../logout.php";</script>';
+		echo '<script>window.location="../../logout.php";</script>';
 	}
 
 }
