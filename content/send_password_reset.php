@@ -30,7 +30,7 @@ if ($stmt->affected_rows > 0) {
     $mail->Subject = 'Password Reset Request';
     $mail->Body = <<<END
     
-    Click <a href="http://192.168.18.8:8080/content/reset_password.php?token=$token">here</a>
+    Click <a href="http://46.202.162.236/content/reset_password.php?token=$token">here</a>
     to reset your password. This link will expire in 30 minutes.
     
     END;
