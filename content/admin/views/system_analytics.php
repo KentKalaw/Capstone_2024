@@ -25,6 +25,8 @@ $count1 = $result1->num_rows;
 $result2 = $conn->query("SELECT * FROM events WHERE eventStatus IN ('Scheduled', 'Ongoing')");
 $count2 = $result2->num_rows;
 
+date_default_timezone_set('Asia/Manila');
+
 $result3 = $conn->query("SELECT COUNT(DISTINCT id) as total_logins FROM top_online_visitor WHERE DATE(STR_TO_DATE(timestamp, '%M %d, %Y %h:%i %p')) = CURDATE()");
 $count3 = $result3->fetch_assoc()['total_logins'];
 
@@ -205,7 +207,7 @@ $count3 = $result3->fetch_assoc()['total_logins'];
             <div class="row mt-4">
                 <div class="col-12">
                     <h4 class="section-title">Login Activity</h4>
-                    <div class="chart-container">
+                    <div class="chart-container" id="x">
                         <!-- Add Month/Year Selector Dropdown -->
                             <div class="container-fluid px-4">
                                 <div class="row">

@@ -3,13 +3,13 @@ let participationChart;
 let batchDistributionChart;
 
 function showErrorMessage(message) {
-    // Create or update an error message element
     let errorContainer = document.getElementById('chartErrorContainer');
     if (!errorContainer) {
         errorContainer = document.createElement('div');
         errorContainer.id = 'chartErrorContainer';
-        errorContainer.className = 'alert alert-danger text-center mt-3';
-        document.querySelector('.chart-container').prepend(errorContainer);
+        errorContainer.className = 'alert alert-danger text-center mt-4';
+        const eventSelect = document.getElementById('eventSelect');
+        eventSelect.parentNode.insertBefore(errorContainer, eventSelect.nextSibling);
     }
     errorContainer.textContent = message;
 }
