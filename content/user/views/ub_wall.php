@@ -108,12 +108,7 @@ if ($initialNewsResult && mysqli_num_rows($initialNewsResult) > 0) :
         <button id="loadMoreNews" class="btn btn-outline-secondary px-4">Load More</button>
     </div>
 </div>
-<div id="spacing"> </div>
-<style>
-  #spacing {
-    height: 25px;
-  }
-</style>
+
     
   </div> <!-- End of container -->
 

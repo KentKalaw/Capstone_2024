@@ -424,12 +424,6 @@ function removeRegions(address) {
                 </div>
             </div>
         </div>
-        <div id="spacing"> </div>
-<style>
-  #spacing {
-    height: 10px;
-  }
-</style>
 
 
     <!-- Request Notice -->

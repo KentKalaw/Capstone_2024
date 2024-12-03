@@ -89,12 +89,7 @@ if (!$news_item) {
       </div>
     </div>
 
-    <div id="spacing"> </div>
-<style>
-  #spacing {
-    height: 10px;
-  }
-</style>
+
 
             
   </div> <!-- End of container -->

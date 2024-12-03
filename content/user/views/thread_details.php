@@ -87,12 +87,7 @@ if (empty($replies)) {
     </div>
 </div>
     </div>
-    <div id="spacing"> </div>
-<style>
-  #spacing {
-    height: 25px;
-  }
-</style>
+
   </div> <!-- End of page-content-wrapper -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
